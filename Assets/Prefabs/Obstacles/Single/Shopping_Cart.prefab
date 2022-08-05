@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8973737857139478288}
-  - component: {fileID: 8767353724938258415}
   m_Layer: 0
   m_Name: Shopping_Cart
   m_TagString: Obstacle
@@ -33,19 +32,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &8767353724938258415
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8978996466596423080}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.6772269, y: 1.2723272, z: 1.3508263}
-  m_Center: {x: -0.4882223, y: 0.5943686, z: -0.074495316}
 --- !u!1 &8979023848380721990
 GameObject:
   m_ObjectHideFlags: 0
@@ -60,7 +46,7 @@ GameObject:
   - component: {fileID: 8970269036607470326}
   m_Layer: 0
   m_Name: shopping cart
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
