@@ -44,12 +44,11 @@ public class SpawnManager : MonoBehaviour
         {
             previousRoad = pooledRoad;
         }
-
+        // Get new pooled road, make it active and position it based on last Z position
         pooledRoad = ObjectPooler.SharedInstance.GetPooledRoad();
         pooledRoad.SetActive(true);
-        Vector3 newPosition = new Vector3(0, 0, zOffset);
-        pooledRoad.transform.position = (previousRoad != null) ? previousRoad.transform.position + newPosition
-            : pooledRoad.transform.position + newPosition;
+        pooledRoad.transform.position = (previousRoad != null) ? NewZPosition(previousRoad.transform.position, zOffset)
+            : NewZPosition(pooledRoad.transform.position, zOffset);
     }
 
     void PoolCity(float zOffset)
@@ -61,9 +60,8 @@ public class SpawnManager : MonoBehaviour
 
         pooledCity = ObjectPooler.SharedInstance.GetPooledCity();
         pooledCity.SetActive(true);
-        Vector3 newPosition = new Vector3(0, 0, zOffset);
-        pooledCity.transform.position = (previousCity != null) ? previousCity.transform.position + newPosition
-            : pooledCity.transform.position + newPosition;
+        pooledCity.transform.position = (previousCity != null) ? NewZPosition(previousCity.transform.position, zOffset)
+            : NewZPosition(pooledCity.transform.position, zOffset);
     }
 
     void PoolObstacles(float zOffset)
@@ -76,9 +74,8 @@ public class SpawnManager : MonoBehaviour
         
         pooledObstacles = ObjectPooler.SharedInstance.GetPooledObstacles();
         pooledObstacles.SetActive(true);
-        Vector3 newPosition = new Vector3(0, 0, zOffset);
-        pooledObstacles.transform.position = (previousObstacles != null) ? previousObstacles.transform.position  + newPosition
-            : pooledObstacles.transform.position + newPosition;
+        pooledObstacles.transform.position = (previousObstacles != null) ? NewZPosition(previousObstacles.transform.position, zOffset)
+            : NewZPosition(pooledObstacles.transform.position, zOffset);
     }    
     
     void DeactivateObject(GameObject obj)
@@ -87,5 +84,11 @@ public class SpawnManager : MonoBehaviour
         {
             obj.SetActive(false);
         }
+    }
+
+    Vector3 NewZPosition(Vector3 oldPosition, float zOffset)
+    {
+
+        return oldPosition + new Vector3(0, 0, zOffset);
     }
 }
