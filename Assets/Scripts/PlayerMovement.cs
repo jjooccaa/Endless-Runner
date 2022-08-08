@@ -90,12 +90,12 @@ public class PlayerMovement : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        // Spawn new road
+        // Spawn new map and obstacles
         if (other.gameObject.CompareTag("SpawnTrigger"))
         {
             spawnManager.SpawnTriggerActivated();
         }
-        // Remove old road
+        // Remove old map and obstacles
         if (other.gameObject.CompareTag("RemoveTrigger"))
         {
             spawnManager.RemoveTriggerActivated();
