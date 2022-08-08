@@ -21,8 +21,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject pauseScreen;
     [SerializeField] TextMeshProUGUI scoreText;
 
+    [Header("Gameplay")]
     public bool gameOver = false;
-    private float score;
+    [SerializeField] float score;
 
     // Start is called before the first frame update
     void Start()

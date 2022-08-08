@@ -4,26 +4,25 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    Rigidbody rigidbody;
-    Animator animator;
     
-
     [SerializeField] public float speed = 1;
     [SerializeField] public float turnSpeed = 5.0f;
     [SerializeField] public float jumpForce;
     [SerializeField] float horizontalInput;
     [SerializeField] bool isOnGround;
+    [SerializeField] float leftBoundarie = -4.8f;
+    [SerializeField] float rightBoundarie = 4.8f;
+
+    Rigidbody rigidBody;
+    Animator animator;
 
     GameManager gameManager;
     SpawnManager spawnManager;
 
-    float leftBoundarie = -4.8f;
-    float rightBoundarie = 4.8f;
-
     // Start is called before the first frame update
     void Start()
     {
-        rigidbody = GetComponent<Rigidbody>();
+        rigidBody = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
 
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -36,12 +35,10 @@ public class PlayerMovement : MonoBehaviour
         if (!gameManager.gameOver)
         {
             horizontalInput = Input.GetAxis("Horizontal");
-
-
-            // Move forward
+            // Always move forward
             transform.Translate(Vector3.forward * speed * Time.deltaTime, Space.World);
 
-            // Boundaries, return to prev position
+            // If player hit boundaries, return to prev position
             if (transform.position.x < leftBoundarie)
             {
                 transform.position = new Vector3(leftBoundarie, transform.position.y, transform.position.z);
@@ -51,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
                 transform.position = new Vector3(rightBoundarie, transform.position.y, transform.position.z);
             }
 
-            // Turn to right or left, depending on Input
+            // Turn to right or left, depending on input
             transform.Translate(Vector3.right * turnSpeed * Time.deltaTime * horizontalInput);
 
             // Jump when user presses 'space' and is on ground
@@ -60,19 +57,12 @@ public class PlayerMovement : MonoBehaviour
                 Jump();
             }
 
-            // Slide when user presses 'Control' and is on ground 
-            if (Input.GetKeyDown(KeyCode.LeftControl) && isOnGround)
-            {
-                Slide();
-            }
-
             // Pause game when P has been pressed
             if (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape))
             {
                 gameManager.PauseGame();
 
             }
-
         }
     }
 
@@ -88,6 +78,7 @@ public class PlayerMovement : MonoBehaviour
             gameManager.GameOver();
         }
     }
+
     private void OnTriggerEnter(Collider other)
     {
         // Spawn new map and obstacles
@@ -105,14 +96,8 @@ public class PlayerMovement : MonoBehaviour
     void Jump()
     {
         gameManager.PlayJumpSound();
-        rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        rigidBody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         isOnGround = false;
         animator.SetTrigger("Jump_trig");
     }
-
-    void Slide()
-    {
-
-    }
-
 }

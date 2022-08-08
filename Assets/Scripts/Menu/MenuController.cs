@@ -13,7 +13,7 @@ public class MenuController : MonoBehaviour
 
     public string newGame;
 
-    // When yes has been pressed in main menu. Load new game.
+    // When yes has been pressed in new game dialogue. Load new game.
     public void NewGameDialogueYes()
     {
         SceneManager.LoadScene(newGame);

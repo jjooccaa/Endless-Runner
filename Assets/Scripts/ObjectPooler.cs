@@ -5,17 +5,18 @@ using UnityEngine;
 public class ObjectPooler : MonoBehaviour
 {
     public static ObjectPooler SharedInstance;
+
     [Header("Roads")]
     [SerializeField] GameObject[] roadsToPool;
     [SerializeField] List<GameObject> pooledRoads;
 
     [Header("Cities")]
-    public GameObject[] citiesToPool;
-    public List<GameObject> pooledCities;
+    [SerializeField] GameObject[] citiesToPool;
+    [SerializeField] List<GameObject> pooledCities;
 
     [Header("Obstacles")]
-    public GameObject[] obstaclesToPool;
-    public List<GameObject> pooledObstacles;
+    [SerializeField] GameObject[] obstaclesToPool;
+    [SerializeField] List<GameObject> pooledObstacles;
 
     private void Awake()
     {
@@ -42,6 +43,7 @@ public class ObjectPooler : MonoBehaviour
             obj.transform.SetParent(this.transform); // set as children of Spawn Manager
         }
     }
+
     public GameObject GetPooledRoad()
     {
         int randomIndex;
@@ -52,13 +54,12 @@ public class ObjectPooler : MonoBehaviour
 
             if (!pooledRoads[randomIndex].activeInHierarchy)
             {
+
                 break;
             }
-
         }
 
         return pooledRoads[randomIndex];
-
     }
 
     public GameObject GetPooledCity()
@@ -71,9 +72,9 @@ public class ObjectPooler : MonoBehaviour
 
             if (!pooledCities[randomIndex].activeInHierarchy)
             {
+
                 break;
             }
-
         }
 
         return pooledCities[randomIndex];
@@ -89,12 +90,12 @@ public class ObjectPooler : MonoBehaviour
 
             if (!pooledObstacles[randomIndex].activeInHierarchy)
             {
+
                 break;
             }
 
         }
 
         return pooledObstacles[randomIndex];
-
     }
 }
