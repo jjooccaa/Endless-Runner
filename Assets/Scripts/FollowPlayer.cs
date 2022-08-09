@@ -11,7 +11,7 @@ public class FollowPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // always follow player
+        // always follow player //FIXME Komentar treba da bude zadnja opcija za objasnjavanje koda. Ako smatras da linija ispod nije jasna sama po sebi (meni recimo jeste) izdvojis je u one-liner funkciju cije ce ime da opise sta radi.
         transform.position = player.transform.position + cameraOffset;
     }
 }

@@ -23,22 +23,22 @@ public class ObjectPooler : MonoBehaviour
 
     private void Awake()
     {
-        SharedInstance = this;
+        SharedInstance = this; //FIXME Ovakva implementacija moze da ti napravi problem kad menjas scene. Proguglaj o tome kako se implementira Singleton pattern u Unity za dopunjeno resenje. Mozes da pitas i Filipa, on ga je uradio dobro. Ako ti treba pojasnjenje zasto tako radi cimaj me.
 
-        pooledRoads = new List<GameObject>();
+        pooledRoads = new List<GameObject>(); //FIXME Ovo mozes da uradis inline na liniji 12.
         PoolObjects(roadPrefabs, pooledRoads, numberOfRoadsToPool);
 
-        pooledCities = new List<GameObject>();
+        pooledCities = new List<GameObject>(); //FIXME Ovo mozes da uradis inline na liniji 17.
         PoolObjects(cityPrefabs, pooledCities, numberOfCitiesToPool);
 
-        pooledObstacles = new List<GameObject>();
+        pooledObstacles = new List<GameObject>(); //FIXME Ovo mozes da uradis inline na liniji 22.
         PoolObjects(obstaclesPrefabs, pooledObstacles, numberOfObstaclesToPool);
     }
 
     void PoolObjects(GameObject[] objectPrefabs, List<GameObject> pooledObjects, int numberOfObjectsToPool)
     {
         //Loop through list of pooled objects, deactivating them and adding them to the list
-        int indexOfPrefabs = 0;
+        int indexOfPrefabs = 0; //FIXME Odlicna ideja za resenje, ali ovo moze prostije da se implementira. Iscimaj me kad zavrsis sve ostale komentare pa cemo da popricamo.
         for (int i = 0; i < numberOfObjectsToPool; i++, indexOfPrefabs++)
         {
             if(indexOfPrefabs + 1 > objectPrefabs.Length) // if we reach end of Objects Prefabs, reset index
@@ -88,14 +88,14 @@ public class ObjectPooler : MonoBehaviour
 
     bool CheckForInactiveObjects(List<GameObject> objectsList) 
     {
-        for(int i = 0; i < objectsList.Count; i++)
+        for(int i = 0; i < objectsList.Count; i++) //FIXME Ovo je savrsena prilika za foreach umesto for
         {
-            if(!objectsList[i].activeInHierarchy)
+            if(!objectsList[i].activeInHierarchy) //FIXME Suvisan prazan red u ovom ifu cini funkciju duzom/manje citljivom
             {
-
+                
                 return true;
             }
-        }
+        }//FIXME Suvisan prazan red i ovde ispod
 
         return false;
     }

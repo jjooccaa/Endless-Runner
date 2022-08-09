@@ -18,7 +18,7 @@ public class SpawnManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // Pool road, city and obstacles with zero Z offset
+        // Pool road, city and obstacles with zero Z offset //FIXME Nepotreban komentar
         PoolRoad(0);
         PoolCity(0);
         PoolObstacles(0);
@@ -38,21 +38,21 @@ public class SpawnManager : MonoBehaviour
         DeactivateObject(previousObstacles);
     }
 
-    void PoolRoad(float zOffset)
+    void PoolRoad(float zOffset) //FIXME Ova funkcija i sledece tri pripadaju ispod SpawnTriggerActivated (jer im je to poslednje mesto poziva u fajlu)
     {
         if (pooledRoad != null)
         {
             previousRoad = pooledRoad;
-            pooledRoad = null;
+            pooledRoad = null; //FIXME Nepotrebna naredba, s obzirom da u sledecoj naredbi vec postavljas novu vrednost u pooledRoad
         }
 
-        // Get new pooled road obj, make it active and position it based on last Z position
+        // Get new pooled road obj, make it active and position it based on last Z position //FIXME Nepotreban komentar, sve je ovo jasno iz koda
         pooledRoad = ObjectPooler.SharedInstance.GetPooledRoad();
         pooledRoad.SetActive(true);
         MoveToNewZPosition(pooledRoad, previousRoad, zOffset);
     }
 
-    void PoolCity(float zOffset)
+    void PoolCity(float zOffset) //FIXME Verovatno uocavas i sam da su ove tri funkcije plodne za refaktor jer rade uglavnom istu stvar. Razmisli kako moze da se izdvoji zajednicka logika. Ako se ne snadjes (ili budes hteo sanity check od mene), i o ovome pricamo kad zavrsis ostale komentare.
     {
         if (pooledCity != null)
         {
