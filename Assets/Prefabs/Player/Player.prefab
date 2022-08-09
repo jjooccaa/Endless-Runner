@@ -430,7 +430,7 @@ GameObject:
   - component: {fileID: 2222696791865554456}
   - component: {fileID: 2222696791865554459}
   - component: {fileID: 2222696791865554454}
-  - component: {fileID: 919132148786777626}
+  - component: {fileID: 5774855243980650541}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -521,7 +521,9 @@ MonoBehaviour:
   jumpForce: 4.5
   horizontalInput: 0
   isOnGround: 0
---- !u!82 &919132148786777626
+  leftBoundarie: -4.8
+  rightBoundarie: 4.8
+--- !u!82 &5774855243980650541
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // get audio source from player
+        // get audio source component from player obj
         audioSource = player.GetComponent<AudioSource>();
 
         score = 0;
@@ -58,24 +58,23 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void PauseGame()
-    {
-        Time.timeScale = 0;
-        pauseScreen.SetActive(true);
-    }
-
-    public void ResumeGame()
-    {
-        Time.timeScale = 1;
-        pauseScreen.SetActive(false);
-    }
-
     public void RestartGame()
     {
         gameOver = true;
         score = 0;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         ResumeGame();
+    }
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0;
+        pauseScreen.SetActive(true);
+    }
+    public void ResumeGame()
+    {
+        Time.timeScale = 1;
+        pauseScreen.SetActive(false);
     }
 
     public void ExitGame()

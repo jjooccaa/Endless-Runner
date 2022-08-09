@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    [SerializeField] float zOffset = 230;
+    [SerializeField] float zOffset = 227;
     
     GameObject pooledRoad;
     GameObject previousRoad;
@@ -44,7 +44,7 @@ public class SpawnManager : MonoBehaviour
         {
             previousRoad = pooledRoad;
         }
-        // Get new pooled road, make it active and position it based on last Z position
+        // Get new pooled road obj, make it active and position it based on last Z position
         pooledRoad = ObjectPooler.SharedInstance.GetPooledRoad();
         pooledRoad.SetActive(true);
         pooledRoad.transform.position = (previousRoad != null) ? NewZPosition(previousRoad.transform.position, zOffset)
@@ -57,7 +57,7 @@ public class SpawnManager : MonoBehaviour
         {
             previousCity = pooledCity;
         }
-
+        // Get new pooled city obj, make it active and position it based on last Z position
         pooledCity = ObjectPooler.SharedInstance.GetPooledCity();
         pooledCity.SetActive(true);
         pooledCity.transform.position = (previousCity != null) ? NewZPosition(previousCity.transform.position, zOffset)
@@ -71,7 +71,7 @@ public class SpawnManager : MonoBehaviour
             previousObstacles = pooledObstacles;
             pooledObstacles = null;
         }
-        
+        // Get new pooled obstacles obj, make it active and position it based on last Z position
         pooledObstacles = ObjectPooler.SharedInstance.GetPooledObstacles();
         pooledObstacles.SetActive(true);
         pooledObstacles.transform.position = (previousObstacles != null) ? NewZPosition(previousObstacles.transform.position, zOffset)

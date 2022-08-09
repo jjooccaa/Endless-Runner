@@ -51,7 +51,6 @@ public class ObjectPooler : MonoBehaviour
         while (true)
         {
             randomIndex = Random.Range(0, pooledRoads.Count);
-
             if (!pooledRoads[randomIndex].activeInHierarchy)
             {
 
@@ -69,7 +68,6 @@ public class ObjectPooler : MonoBehaviour
         while (true)
         {
             randomIndex = Random.Range(0, pooledCities.Count);
-
             if (!pooledCities[randomIndex].activeInHierarchy)
             {
 
@@ -87,7 +85,6 @@ public class ObjectPooler : MonoBehaviour
         while (true)
         {
             randomIndex = Random.Range(0, pooledObstacles.Count);
-
             if (!pooledObstacles[randomIndex].activeInHierarchy)
             {
 

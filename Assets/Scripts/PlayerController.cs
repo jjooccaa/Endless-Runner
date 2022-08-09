@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     
     [SerializeField] public float speed = 1;
@@ -57,11 +57,10 @@ public class PlayerMovement : MonoBehaviour
                 Jump();
             }
 
-            // Pause game when P has been pressed
+            // Pause game when user pressed P or Escape button
             if (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape))
             {
                 gameManager.PauseGame();
-
             }
         }
     }

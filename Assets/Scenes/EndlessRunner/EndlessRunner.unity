@@ -247,7 +247,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2cf151c59535b544aad9a67d2cbed20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zOffset: 230
+  zOffset: 227
 --- !u!114 &184160780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1029,10 +1029,6 @@ PrefabInstance:
     - target: {fileID: 1824559874176978111, guid: cd8744f5d72b44747a5f4ca476b4ac6b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2222696791865554454, guid: cd8744f5d72b44747a5f4ca476b4ac6b, type: 3}
-      propertyPath: speed
-      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd8744f5d72b44747a5f4ca476b4ac6b, type: 3}
@@ -2030,13 +2026,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ded8b0370ffb3654f8276b82ddba829b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1304340909377213957, guid: cd8744f5d72b44747a5f4ca476b4ac6b, type: 3}
+  player: {fileID: 1563604945}
   jumpSound: {fileID: 8300000, guid: 777febe7c39431040b007ae437e76cff, type: 3}
   crashSound: {fileID: 8300000, guid: cdc8c2bebf6f25449be30f2161c7162b, type: 3}
   gameOverScreen: {fileID: 173521005}
   pauseScreen: {fileID: 708512984}
   scoreText: {fileID: 1796812755}
   gameOver: 0
+  score: 0
 --- !u!4 &1910391142
 Transform:
   m_ObjectHideFlags: 0
