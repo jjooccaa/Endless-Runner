@@ -260,23 +260,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d94df08f4d7af014d947c84bc8a9f1ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roadsToPool:
-  - {fileID: 5229640286991721807, guid: 46599e28f1d58504d916ea634ca7bf77, type: 3}
+  numberOfRoadsToPool: 3
+  roadPrefabs:
   - {fileID: 5229640286991721807, guid: 46599e28f1d58504d916ea634ca7bf77, type: 3}
   - {fileID: 5229640286991721807, guid: 46599e28f1d58504d916ea634ca7bf77, type: 3}
   - {fileID: 5229640286991721807, guid: 46599e28f1d58504d916ea634ca7bf77, type: 3}
   pooledRoads: []
-  citiesToPool:
-  - {fileID: 9139381314584291678, guid: cbfb99104774a824894cde66ff9d30e2, type: 3}
+  numberOfCitiesToPool: 3
+  cityPrefabs:
   - {fileID: 9139381314584291678, guid: cbfb99104774a824894cde66ff9d30e2, type: 3}
   - {fileID: 9139381314584291678, guid: cbfb99104774a824894cde66ff9d30e2, type: 3}
   - {fileID: 9139381314584291678, guid: cbfb99104774a824894cde66ff9d30e2, type: 3}
   pooledCities: []
-  obstaclesToPool:
+  numberOfObstaclesToPool: 4
+  obstaclesPrefabs:
   - {fileID: 2748097760827865731, guid: e98c85f6d19654144ab910fe9f7df283, type: 3}
   - {fileID: 2748097760827865731, guid: 0796ef97b30bf494fb1cb1f8cc5be06b, type: 3}
   - {fileID: 2748097760827865731, guid: 3787933be353669429bd32bc79f234cb, type: 3}
-  - {fileID: 2748097760827865731, guid: 3787933be353669429bd32bc79f234cb, type: 3}
+  - {fileID: 2748097760827865731, guid: 73a66b6c9219d2b46942542bb49814aa, type: 3}
   pooledObstacles: []
 --- !u!1 &705507993
 GameObject:
@@ -1240,6 +1241,63 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1304340909377213957, guid: cd8744f5d72b44747a5f4ca476b4ac6b, type: 3}
   m_PrefabInstance: {fileID: 1021258030}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1619789466
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2388664436794499195, guid: c64ff7f0542c49b45929328bc30e7452, type: 3}
+      propertyPath: m_Name
+      value: City 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3636343285409172680, guid: c64ff7f0542c49b45929328bc30e7452, type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3636343285409172680, guid: c64ff7f0542c49b45929328bc30e7452, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 8.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3636343285409172680, guid: c64ff7f0542c49b45929328bc30e7452, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3636343285409172680, guid: c64ff7f0542c49b45929328bc30e7452, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 3636343285409172680, guid: c64ff7f0542c49b45929328bc30e7452, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 3636343285409172680, guid: c64ff7f0542c49b45929328bc30e7452, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3636343285409172680, guid: c64ff7f0542c49b45929328bc30e7452, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 3636343285409172680, guid: c64ff7f0542c49b45929328bc30e7452, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3636343285409172680, guid: c64ff7f0542c49b45929328bc30e7452, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3636343285409172680, guid: c64ff7f0542c49b45929328bc30e7452, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 270
+      objectReference: {fileID: 0}
+    - target: {fileID: 3636343285409172680, guid: c64ff7f0542c49b45929328bc30e7452, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c64ff7f0542c49b45929328bc30e7452, type: 3}
 --- !u!1 &1670204308
 GameObject:
   m_ObjectHideFlags: 0
