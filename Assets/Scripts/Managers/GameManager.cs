@@ -9,12 +9,15 @@ public class GameManager : MonoBehaviour
 {
     [Header("Player")]
     [SerializeField] GameObject player;
-    
+
     [Header("UI")]
     [SerializeField] GameObject gameOverScreen;
     [SerializeField] GameObject pauseScreen;
     [SerializeField] TextMeshProUGUI scoreText;
+    [SerializeField] GameObject[] countDownUI;
 
+    [Header("Gameplay")]
+    public float movementSpeed = 10;
     bool gameOver = false;
     bool isGamePaused = false;
     float score;
@@ -22,6 +25,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        StartCoroutine(DelayStart());
+
         score = 0;
         StartCoroutine(UpdateScore());
     }
@@ -31,19 +36,25 @@ public class GameManager : MonoBehaviour
     {
         scoreText.SetText("Score: " + score);
 
-        if (!isGamePaused && (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape)))
+        PauseOrUnpauseGame();
+    }
+
+    IEnumerator DelayStart()
+    {
+        PauseMovement();
+        countDownUI[0].SetActive(true);
+        for (int i = 1; i < countDownUI.Length; i++)
         {
-            PauseGame();
-        } 
-        else if (Input.anyKeyDown)
-        {
-            UnpauseGame();
+            yield return new WaitForSecondsRealtime(1);
+            countDownUI[i - 1].SetActive(false);
+            countDownUI[i].SetActive(true);
         }
+        ResumeMovement();
     }
 
     IEnumerator UpdateScore()
     {
-        while(!gameOver)
+        while (!gameOver)
         {
             score += 1;
             yield return new WaitForSeconds(1);
@@ -55,33 +66,57 @@ public class GameManager : MonoBehaviour
         gameOver = true;
         score = 0;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        UnpauseGame(); 
+        UnpauseGame();
     }
 
+    void PauseOrUnpauseGame()
+    {
+        if (!isGamePaused && (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape)))
+        {
+            PauseGame();
+        }
+        else if (isGamePaused && Input.anyKeyDown && !Input.GetMouseButtonDown(0))
+        {
+            UnpauseGame();
+        }
+    }
     public void PauseGame()
     {
         isGamePaused = true;
-        Time.timeScale = 0;
+        PauseMovement();
         pauseScreen.SetActive(true);
     }
 
     public void UnpauseGame()
     {
         isGamePaused = false;
-        Time.timeScale = 1;
+        ResumeMovement();
         pauseScreen.SetActive(false);
+    }
+
+    void PauseMovement()
+    {
+        Time.timeScale = 0;
+    }
+
+    void ResumeMovement()
+    {
+        Time.timeScale = 1;
     }
 
     public void ExitGame()
     {
         gameOver = true;
         SceneManager.LoadScene(SceneName.Main_Menu);
+
     }
 
     public void GameOver()
     {
         player.GetComponent<PlayerController>().DisableMovement();
+        movementSpeed = 0;
         gameOver = true;
         gameOverScreen.SetActive(true);
+
     }
 }
