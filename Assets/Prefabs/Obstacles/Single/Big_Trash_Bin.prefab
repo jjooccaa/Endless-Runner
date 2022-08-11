@@ -93,7 +93,7 @@ MeshCollider:
   m_GameObject: {fileID: 3574008089092019695}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
@@ -223,7 +223,7 @@ MeshCollider:
   m_GameObject: {fileID: 3574164794585838015}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
@@ -240,6 +240,8 @@ GameObject:
   - component: {fileID: 3596847341385018965}
   - component: {fileID: 3589100219851438147}
   - component: {fileID: 3566648106782640935}
+  - component: {fileID: 1994344010539954688}
+  - component: {fileID: 5137367672192559184}
   m_Layer: 0
   m_Name: Big_trash_bin
   m_TagString: Obstacle
@@ -323,8 +325,37 @@ MeshCollider:
   m_GameObject: {fileID: 3574394256934744605}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 221422f7266ae3249b686bbfb5989c70, type: 3}
+--- !u!65 &1994344010539954688
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3574394256934744605}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.013222637, y: 0.020614253, z: 0.017293766}
+  m_Center: {x: 0.0035344288, y: -0.0011525893, z: 0.0063901367}
+--- !u!54 &5137367672192559184
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3574394256934744605}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0

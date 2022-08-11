@@ -44,6 +44,8 @@ GameObject:
   - component: {fileID: 8998260219588180164}
   - component: {fileID: 8992375870342245364}
   - component: {fileID: 8970269036607470326}
+  - component: {fileID: 497044667208743205}
+  - component: {fileID: 7091209588306528917}
   m_Layer: 0
   m_Name: shopping cart
   m_TagString: Obstacle
@@ -126,8 +128,37 @@ MeshCollider:
   m_GameObject: {fileID: 8979023848380721990}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 668f78c22fd621541bed6c90815f36f5, type: 3}
+--- !u!65 &497044667208743205
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8979023848380721990}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.0071855085, y: 0.014057722, z: 0.013062049}
+  m_Center: {x: -0.004963607, y: 0.0008746112, z: 0.0052645137}
+--- !u!54 &7091209588306528917
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8979023848380721990}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
