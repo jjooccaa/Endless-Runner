@@ -106,6 +106,7 @@ GameObject:
   - component: {fileID: 33605661506549380}
   - component: {fileID: 23556876736857538}
   - component: {fileID: 64336747843363168}
+  - component: {fileID: 3259961556382065520}
   m_Layer: 0
   m_Name: street lamp 2
   m_TagString: Obstacle
@@ -122,7 +123,7 @@ Transform:
   m_GameObject: {fileID: 1637200520728134}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 67.52645, y: 67.52643, z: 67.52643}
+  m_LocalScale: {x: 110, y: 67.52643, z: 80}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4711787316519028}
@@ -189,11 +190,24 @@ MeshCollider:
   m_GameObject: {fileID: 1637200520728134}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: c676bc2cbcce204439e758464c03bcc1, type: 3}
+--- !u!65 &3259961556382065520
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1637200520728134}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.007324918, y: 0.007092967, z: 0.050896164}
+  m_Center: {x: -0.00011598804, y: 0.0000000021509627, z: 0.025448082}
 --- !u!1 &1879644038180034
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,7 +6,7 @@ public class FollowPlayer : MonoBehaviour
 {
 
     [SerializeField] GameObject player;
-    [SerializeField] Vector3 cameraOffset = new Vector3(0,4,-6);
+    [SerializeField] Vector3 cameraOffset;
 
     // Update is called once per frame
     void Update()

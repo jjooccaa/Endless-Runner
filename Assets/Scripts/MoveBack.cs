@@ -4,24 +4,17 @@ using UnityEngine;
 
 public class MoveBack : MonoBehaviour
 {
-
-    float playerSpeed;
-
-    PlayerController playerController;
+    GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
-        playerSpeed = playerController.speed;
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
     void Update()
-    {
-        if (!playerController.movementDisabled)
-        {
-            transform.Translate(Vector3.back * playerSpeed * Time.deltaTime, Space.World);
-        }
+    { 
+        transform.Translate(Vector3.back * gameManager.movementSpeed * Time.deltaTime, Space.World);
     }
 }

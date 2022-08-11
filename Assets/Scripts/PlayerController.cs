@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     
-    [SerializeField] public float speed;
     [SerializeField] public float turnSpeed;
     [SerializeField] public float jumpForce;
     [SerializeField] float horizontalInput;
@@ -112,7 +111,6 @@ public class PlayerController : MonoBehaviour
     public void DisableMovement()
     {
         movementDisabled = true;
-        speed = 0;
         turnSpeed = 0;
         jumpForce = 0;
     }
