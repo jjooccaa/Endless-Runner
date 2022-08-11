@@ -8,10 +8,8 @@ public enum ObjectType{
     City = 2,
     Obstacles = 3
 }
-public class ObjectPooler : MonoBehaviour
+public class ObjectPooler : Singleton<ObjectPooler>
 {
-    public static ObjectPooler SharedInstance;
-
     [Header("Roads")]
     [SerializeField] int numberOfRoadsToPool;
     [SerializeField] GameObject[] roadPrefabs;
@@ -27,16 +25,9 @@ public class ObjectPooler : MonoBehaviour
     [SerializeField] GameObject[] obstaclesPrefabs;
     [SerializeField] List<GameObject> pooledObstacles = new List<GameObject>();
 
-    private void Awake()
+    protected override void Awake()
     {
-        if (SharedInstance != null && SharedInstance != this)
-        {
-            Destroy(this);
-        }
-        else
-        {
-            SharedInstance = this;
-        }
+        base.Awake();
 
         PoolObjects(roadPrefabs, pooledRoads, numberOfRoadsToPool);
         PoolObjects(cityPrefabs, pooledCities, numberOfCitiesToPool);

@@ -48,7 +48,7 @@ public class SpawnManager : MonoBehaviour
     void PoolObject(ObjectType objType, ref GameObject pooledObject, ref GameObject previousObject, float zOffset)
     {
         AssignPreviousObject(ref pooledObject, ref previousObject);
-        pooledObject = ObjectPooler.SharedInstance.GetPooledObject(objType);
+        pooledObject = ObjectPooler.Instance.GetPooledObject(objType);
         ActivateAndPositionPooledObject(pooledObject, previousObject, zOffset);
     }
 

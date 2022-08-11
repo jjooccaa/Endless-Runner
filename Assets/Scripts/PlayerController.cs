@@ -16,7 +16,6 @@ public class PlayerController : MonoBehaviour
     Rigidbody rigidBody;
     Animator animator;
 
-    GameManager gameManager;
     SpawnManager spawnManager;
     SoundManager soundManager;
 
@@ -27,7 +26,6 @@ public class PlayerController : MonoBehaviour
         rigidBody = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
 
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>(); //FIXME U idealnom slucaju PlayerController ne treba ni da zna za GameManager, vec obrnuto. Vidi komentare nanize.
         spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
     }
@@ -55,7 +53,7 @@ public class PlayerController : MonoBehaviour
         {
             soundManager.PlayCrashSound();
             animator.SetTrigger("Stumble_trig");
-            gameManager.GameOver(); //FIXME Ovde su eventi pravo resenje, radije nego referenca na GameManager. Za sada ga ostavi ovako pa cemo u kasnijoj fazi prakse kad stignemo do eventova da ga ispravimo.
+            GameManager.Instance.GameOver(); //FIXME Ovde su eventi pravo resenje, radije nego referenca na GameManager. Za sada ga ostavi ovako pa cemo u kasnijoj fazi prakse kad stignemo do eventova da ga ispravimo.
         }
     }
 

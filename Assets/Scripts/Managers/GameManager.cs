@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine.SceneManagement;
 
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
     [Header("Player")]
     [SerializeField] GameObject player;
@@ -13,28 +13,25 @@ public class GameManager : MonoBehaviour
     [Header("UI")]
     [SerializeField] GameObject gameOverScreen;
     [SerializeField] GameObject pauseScreen;
-    [SerializeField] TextMeshProUGUI scoreText;
     [SerializeField] GameObject[] countDownUI;
 
-    [Header("Gameplay")]
+    //Gameplay
     public float movementSpeed = 10;
     bool gameOver = false;
     bool isGamePaused = false;
-    float score;
+    float difficultyIncreaser = 1;
+    float increaseDifficultyAfter = 10;
 
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(DelayStart());
-
-        score = 0;
-        StartCoroutine(UpdateScore());
     }
 
     // Update is called once per frame
     void Update()
     {
-        scoreText.SetText("Score: " + score);
+        IncreaseDifficultyOverTime();
 
         PauseOrUnpauseGame();
     }
@@ -49,22 +46,23 @@ public class GameManager : MonoBehaviour
             countDownUI[i - 1].SetActive(false);
             countDownUI[i].SetActive(true);
         }
-        ResumeMovement();
+        UnpauseMovement();
     }
 
-    IEnumerator UpdateScore()
+    void IncreaseDifficultyOverTime()
     {
-        while (!gameOver)
+        // Increase difficulty after 10 score points
+        if (ScoreManager.Instance.Score > increaseDifficultyAfter)
         {
-            score += 1;
-            yield return new WaitForSeconds(1);
+            movementSpeed += difficultyIncreaser;
+            increaseDifficultyAfter += 10;
         }
     }
 
     public void RestartGame()
     {
         gameOver = true;
-        score = 0;
+        ScoreManager.Instance.RestartScore();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         UnpauseGame();
     }
@@ -90,7 +88,7 @@ public class GameManager : MonoBehaviour
     public void UnpauseGame()
     {
         isGamePaused = false;
-        ResumeMovement();
+        UnpauseMovement();
         pauseScreen.SetActive(false);
     }
 
@@ -99,7 +97,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0;
     }
 
-    void ResumeMovement()
+    void UnpauseMovement()
     {
         Time.timeScale = 1;
     }
@@ -108,7 +106,6 @@ public class GameManager : MonoBehaviour
     {
         gameOver = true;
         SceneManager.LoadScene(SceneName.Main_Menu);
-
     }
 
     public void GameOver()
@@ -117,6 +114,20 @@ public class GameManager : MonoBehaviour
         movementSpeed = 0;
         gameOver = true;
         gameOverScreen.SetActive(true);
+    }
 
+    public float MovementSpeed
+    {
+        get
+        {
+            return movementSpeed;
+        }
+    }
+    public bool IsGameOver
+    {
+        get
+        {
+            return gameOver;
+        }
     }
 }

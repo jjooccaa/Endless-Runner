@@ -267,7 +267,6 @@ MonoBehaviour:
   numberOfCitiesToPool: 4
   cityPrefabs:
   - {fileID: 9139381314584291678, guid: cbfb99104774a824894cde66ff9d30e2, type: 3}
-  - {fileID: 2388664436794499195, guid: c64ff7f0542c49b45929328bc30e7452, type: 3}
   pooledCities: []
   numberOfObstaclesToPool: 6
   obstaclesPrefabs:
@@ -1397,6 +1396,51 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd8744f5d72b44747a5f4ca476b4ac6b, type: 3}
+--- !u!1 &1056922540
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1056922542}
+  - component: {fileID: 1056922541}
+  m_Layer: 0
+  m_Name: ScoreManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1056922541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1056922540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2b247140d3754a478678b45a88b8047, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreText: {fileID: 1796812755}
+--- !u!4 &1056922542
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1056922540}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1068180058
 GameObject:
   m_ObjectHideFlags: 0
@@ -2684,13 +2728,13 @@ MonoBehaviour:
   player: {fileID: 1563604945}
   gameOverScreen: {fileID: 173521005}
   pauseScreen: {fileID: 708512984}
-  scoreText: {fileID: 1796812755}
   countDownUI:
   - {fileID: 1068180058}
   - {fileID: 2036221060}
   - {fileID: 306180584}
   - {fileID: 389002940}
   movementSpeed: 10
+  gameOver: 0
 --- !u!4 &1910391142
 Transform:
   m_ObjectHideFlags: 0

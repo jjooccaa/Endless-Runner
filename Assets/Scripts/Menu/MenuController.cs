@@ -11,7 +11,22 @@ public class MenuController : MonoBehaviour
     [SerializeField] TextMeshProUGUI volumeLabel;
     [SerializeField] Slider volumeSlider;
 
+    [SerializeField] TextMeshProUGUI highScoreText;
+
     public string newGame;
+
+    private void Start()
+    {
+        DisplayHighScore();
+    }
+
+    void DisplayHighScore()
+    {
+        if(PlayerPrefs.HasKey("highScore")) //temporary solution
+        {
+           highScoreText.text = "High Score: " + PlayerPrefs.GetFloat("highScore");
+        }
+    }
 
     // When yes has been pressed in new game dialogue. Load new game.
     public void NewGameDialogueYes()
