@@ -2,6 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum ObjectType{
+    None = 0,
+    Road = 1,
+    City = 2,
+    Obstacles = 3
+}
 public class ObjectPooler : MonoBehaviour
 {
     public static ObjectPooler SharedInstance;
@@ -9,68 +15,96 @@ public class ObjectPooler : MonoBehaviour
     [Header("Roads")]
     [SerializeField] int numberOfRoadsToPool;
     [SerializeField] GameObject[] roadPrefabs;
-    [SerializeField] List<GameObject> pooledRoads;
+    [SerializeField] List<GameObject> pooledRoads = new List<GameObject>();
 
     [Header("Cities")]
     [SerializeField] int numberOfCitiesToPool;
     [SerializeField] GameObject[] cityPrefabs;
-    [SerializeField] List<GameObject> pooledCities;
+    [SerializeField] List<GameObject> pooledCities = new List<GameObject>();
 
     [Header("Obstacles")]
     [SerializeField] int numberOfObstaclesToPool;
     [SerializeField] GameObject[] obstaclesPrefabs;
-    [SerializeField] List<GameObject> pooledObstacles;
+    [SerializeField] List<GameObject> pooledObstacles = new List<GameObject>();
 
     private void Awake()
     {
-        SharedInstance = this; //FIXME Ovakva implementacija moze da ti napravi problem kad menjas scene. Proguglaj o tome kako se implementira Singleton pattern u Unity za dopunjeno resenje. Mozes da pitas i Filipa, on ga je uradio dobro. Ako ti treba pojasnjenje zasto tako radi cimaj me.
+        if (SharedInstance != null && SharedInstance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            SharedInstance = this;
+        }
 
-        pooledRoads = new List<GameObject>(); //FIXME Ovo mozes da uradis inline na liniji 12.
         PoolObjects(roadPrefabs, pooledRoads, numberOfRoadsToPool);
-
-        pooledCities = new List<GameObject>(); //FIXME Ovo mozes da uradis inline na liniji 17.
         PoolObjects(cityPrefabs, pooledCities, numberOfCitiesToPool);
-
-        pooledObstacles = new List<GameObject>(); //FIXME Ovo mozes da uradis inline na liniji 22.
         PoolObjects(obstaclesPrefabs, pooledObstacles, numberOfObstaclesToPool);
     }
 
     void PoolObjects(GameObject[] objectPrefabs, List<GameObject> pooledObjects, int numberOfObjectsToPool)
     {
         //Loop through list of pooled objects, deactivating them and adding them to the list
-        int indexOfPrefabs = 0; //FIXME Odlicna ideja za resenje, ali ovo moze prostije da se implementira. Iscimaj me kad zavrsis sve ostale komentare pa cemo da popricamo.
-        for (int i = 0; i < numberOfObjectsToPool; i++, indexOfPrefabs++)
+        for (int i = 0; i < numberOfObjectsToPool; i++)
         {
-            if(indexOfPrefabs + 1 > objectPrefabs.Length) // if we reach end of Objects Prefabs, reset index
+            GameObject obj;
+            if (i < objectPrefabs.Length)
             {
-                indexOfPrefabs = 0;
+                obj = Instantiate(objectPrefabs[i], objectPrefabs[i].transform.position, objectPrefabs[i].transform.rotation);
             }
-            GameObject obj = Instantiate(objectPrefabs[indexOfPrefabs], objectPrefabs[indexOfPrefabs].transform.position, objectPrefabs[indexOfPrefabs].transform.rotation);
+            else
+            {
+                int objectindex = Random.Range(0, objectPrefabs.Length);
+                obj = Instantiate(objectPrefabs[objectindex], objectPrefabs[objectindex].transform.position, objectPrefabs[objectindex].transform.rotation);
+            }
+
             obj.SetActive(false);
             pooledObjects.Add(obj);
             obj.transform.SetParent(this.transform); // set as children of Spawn Manager 
         }
     }
 
+    public GameObject GetPooledObject(ObjectType objType)
+    {
+        if(objType == ObjectType.Road)
+        {
+
+            return GetPooledRoad();
+        } 
+        else if (objType == ObjectType.City)
+        {
+
+            return GetPooledCity();
+        } 
+        else if (objType == ObjectType.Obstacles)
+        {
+
+            return GetPooledObstacles();
+        }
+
+        return null;
+    }
+
     public GameObject GetPooledRoad()
     {
 
-        return GetRandomPoolOjbect(pooledRoads);
+        return GetRandomPoolObject(pooledRoads);
     }
 
     public GameObject GetPooledCity()
     {
 
-       return GetRandomPoolOjbect(pooledCities);
+       return GetRandomPoolObject(pooledCities);
     }
 
     public GameObject GetPooledObstacles()
     {
 
-        return GetRandomPoolOjbect(pooledObstacles);
+        return GetRandomPoolObject(pooledObstacles);
     }
 
-    GameObject GetRandomPoolOjbect(List<GameObject> pooledObjects)
+    GameObject GetRandomPoolObject(List<GameObject> pooledObjects)
     {
         while (CheckForInactiveObjects(pooledObjects))
         {
@@ -88,15 +122,13 @@ public class ObjectPooler : MonoBehaviour
 
     bool CheckForInactiveObjects(List<GameObject> objectsList) 
     {
-        for(int i = 0; i < objectsList.Count; i++) //FIXME Ovo je savrsena prilika za foreach umesto for
+        foreach(GameObject obj in objectsList)
         {
-            if(!objectsList[i].activeInHierarchy) //FIXME Suvisan prazan red u ovom ifu cini funkciju duzom/manje citljivom
+            if(!obj.activeInHierarchy)
             {
-                
                 return true;
             }
-        }//FIXME Suvisan prazan red i ovde ispod
-
+        }
         return false;
     }
 }

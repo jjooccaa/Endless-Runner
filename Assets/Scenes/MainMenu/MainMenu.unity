@@ -1868,15 +1868,15 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1500390907}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
-  m_WholeNumbers: 0
-  m_Value: 0.5
+  m_MaxValue: 10
+  m_WholeNumbers: 1
+  m_Value: 5
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1757618478}
         m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
-        m_MethodName: SetVolume
+        m_MethodName: ApplyVolume
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2897,9 +2897,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '0.5
-
-'
+  m_text: 5
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3053,7 +3051,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1757618478}
         m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
-        m_MethodName: ApplyVolume
+        m_MethodName: SaveVolume
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4084,7 +4082,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c1c3ce335b408d4591358ad629e842c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volumeTextValue: {fileID: 1209073783}
+  volumeLabel: {fileID: 1209073783}
   volumeSlider: {fileID: 769445933}
   newGame: EndlessRunner
 --- !u!4 &1757618479

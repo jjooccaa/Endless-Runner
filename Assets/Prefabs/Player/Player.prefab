@@ -470,7 +470,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!65 &2222696791865554456
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -521,8 +521,9 @@ MonoBehaviour:
   jumpForce: 4.5
   horizontalInput: 0
   isOnGround: 0
-  leftBoundarie: -4.8
-  rightBoundarie: 4.8
+  leftBoundary: -4.8
+  rightBoundary: 4.8
+  movementDisabled: 0
 --- !u!82 &5774855243980650541
 AudioSource:
   m_ObjectHideFlags: 0
