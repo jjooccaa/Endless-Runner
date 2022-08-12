@@ -13,12 +13,14 @@ public class GameManager : Singleton<GameManager>
     [Header("UI")]
     [SerializeField] GameObject gameOverScreen;
     [SerializeField] GameObject pauseScreen;
-    [SerializeField] GameObject[] countDownUI;
+    [SerializeField] GameObject countDownText;
 
     //Gameplay
     float movementSpeed = 10;
     bool gameOver = false;
     bool isGamePaused = false;
+    int startDelayer = 3;
+
     float difficultyIncreaser = 1;
     float increaseDifficultyAfter = 10;
     float scoreCounter = 0;
@@ -26,7 +28,7 @@ public class GameManager : Singleton<GameManager>
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(DelayStart());
+        StartCoroutine(DelayStart(startDelayer));
     }
 
     // Update is called once per frame
@@ -37,16 +39,25 @@ public class GameManager : Singleton<GameManager>
         PauseOrUnpauseGame();
     }
 
-    IEnumerator DelayStart()
+    IEnumerator DelayStart(int startDelayer)
     {
         PauseMovement();
-        countDownUI[0].SetActive(true);
-        for (int i = 1; i < countDownUI.Length; i++)
+
+        countDownText.SetActive(true);
+        for (int i = startDelayer; i >= 0; i--)
         {
             yield return new WaitForSecondsRealtime(1);
-            countDownUI[i - 1].SetActive(false);
-            countDownUI[i].SetActive(true);
+
+            if (i == 0)
+            {
+                countDownText.GetComponent<TextMeshProUGUI>().text = "GO!!!";
+            }
+            else
+            {
+                countDownText.GetComponent<TextMeshProUGUI>().text = i + "";
+            }
         }
+
         UnpauseMovement();
     }
 
@@ -79,6 +90,7 @@ public class GameManager : Singleton<GameManager>
             UnpauseGame();
         }
     }
+
     public void PauseGame()
     {
         isGamePaused = true;
