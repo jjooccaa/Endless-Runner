@@ -267,8 +267,9 @@ MonoBehaviour:
   numberOfCitiesToPool: 4
   cityPrefabs:
   - {fileID: 9139381314584291678, guid: cbfb99104774a824894cde66ff9d30e2, type: 3}
+  - {fileID: 2388664436794499195, guid: c64ff7f0542c49b45929328bc30e7452, type: 3}
   pooledCities: []
-  numberOfObstaclesToPool: 6
+  numberOfObstaclesToPool: 5
   obstaclesPrefabs:
   - {fileID: 2748097760827865731, guid: e98c85f6d19654144ab910fe9f7df283, type: 3}
   - {fileID: 2748097760827865731, guid: 0796ef97b30bf494fb1cb1f8cc5be06b, type: 3}
@@ -2733,8 +2734,6 @@ MonoBehaviour:
   - {fileID: 2036221060}
   - {fileID: 306180584}
   - {fileID: 389002940}
-  movementSpeed: 10
-  gameOver: 0
 --- !u!4 &1910391142
 Transform:
   m_ObjectHideFlags: 0
