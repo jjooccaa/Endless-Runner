@@ -8,9 +8,10 @@ public class ScoreManager : Singleton<ScoreManager>
 {
     [SerializeField] TextMeshProUGUI scoreText;
 
+    public const string High_Score = "highScore";
+
     float score = 0;
     float highScore;
-    const string High_Score = "highScore";
 
     // Start is called before the first frame update
     private void Start()

@@ -13,8 +13,6 @@ public class MenuController : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI highScoreText;
 
-    public string newGame;
-
     private void Start()
     {
         DisplayHighScore();
@@ -22,16 +20,16 @@ public class MenuController : MonoBehaviour
 
     void DisplayHighScore()
     {
-        if(PlayerPrefs.HasKey("highScore")) //temporary solution
+        if(PlayerPrefs.HasKey(ScoreManager.High_Score)) //temporary solution
         {
-           highScoreText.text = "High Score: " + PlayerPrefs.GetFloat("highScore");
+           highScoreText.text = "High Score: " + PlayerPrefs.GetFloat(ScoreManager.High_Score);
         }
     }
 
     // When yes has been pressed in new game dialogue. Load new game.
     public void NewGameDialogueYes()
     {
-        SceneManager.LoadScene(newGame);
+        SceneManager.LoadScene(SceneName.Endless_Runner_Game);
     }
 
     public void ExitButton()

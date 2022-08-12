@@ -16,18 +16,11 @@ public class PlayerController : MonoBehaviour
     Rigidbody rigidBody;
     Animator animator;
 
-    SpawnManager spawnManager;
-    SoundManager soundManager;
-
-
     // Start is called before the first frame update
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
-
-        spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
-        soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
     }
 
     // Update is called once per frame
@@ -51,7 +44,7 @@ public class PlayerController : MonoBehaviour
         } 
         else if(collision.gameObject.CompareTag("Obstacle"))
         {
-            soundManager.PlayCrashSound();
+            SoundManager.Instance.PlayCrashSound();
             animator.SetTrigger("Stumble_trig");
             GameManager.Instance.GameOver(); //FIXME Ovde su eventi pravo resenje, radije nego referenca na GameManager. Za sada ga ostavi ovako pa cemo u kasnijoj fazi prakse kad stignemo do eventova da ga ispravimo.
         }
@@ -62,12 +55,12 @@ public class PlayerController : MonoBehaviour
         // Spawn new map and obstacles
         if (other.gameObject.CompareTag("SpawnTrigger"))
         {
-            spawnManager.SpawnNextMapAndObstacles();
+            SpawnManager.Instance.SpawnNextMapAndObstacles();
         }
         // Remove old map and obstacles
         if (other.gameObject.CompareTag("RemoveTrigger"))
         {
-            spawnManager.DeactivatePreviousMapAndObstacles();
+            SpawnManager.Instance.DeactivatePreviousMapAndObstacles();
         }
     }
     
@@ -100,7 +93,7 @@ public class PlayerController : MonoBehaviour
 
     void Jump()
     {
-        soundManager.PlayJumpSound();
+        SoundManager.Instance.PlayJumpSound();
         rigidBody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         isOnGround = false;
         animator.SetTrigger("Jump_trig");

@@ -16,11 +16,12 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] GameObject[] countDownUI;
 
     //Gameplay
-    public float movementSpeed = 10;
+    float movementSpeed = 10;
     bool gameOver = false;
     bool isGamePaused = false;
     float difficultyIncreaser = 1;
     float increaseDifficultyAfter = 10;
+    float scoreCounter = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -31,7 +32,7 @@ public class GameManager : Singleton<GameManager>
     // Update is called once per frame
     void Update()
     {
-        IncreaseDifficultyOverTime();
+        IncreaseDifficultyOverTime(increaseDifficultyAfter);
 
         PauseOrUnpauseGame();
     }
@@ -49,13 +50,13 @@ public class GameManager : Singleton<GameManager>
         UnpauseMovement();
     }
 
-    void IncreaseDifficultyOverTime()
+    void IncreaseDifficultyOverTime(float increaseDifficultyAfter)
     {
-        // Increase difficulty after 10 score points
-        if (ScoreManager.Instance.Score > increaseDifficultyAfter)
+        // Increase difficulty for every value of increaseDifficultyAter
+        if (ScoreManager.Instance.Score > scoreCounter)
         {
             movementSpeed += difficultyIncreaser;
-            increaseDifficultyAfter += 10;
+            scoreCounter += increaseDifficultyAfter;
         }
     }
 
