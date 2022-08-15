@@ -8,7 +8,6 @@ public class PowerUp : MonoBehaviour
     [Tooltip("Invisibility = 1, Extra Life = 2, Fly = 3")]
     [SerializeField] int powerUpID;
 
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))

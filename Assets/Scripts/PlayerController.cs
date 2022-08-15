@@ -16,6 +16,11 @@ public class PlayerController : MonoBehaviour
     Rigidbody rigidBody;
     Animator animator;
 
+    private void OnEnable()
+    {
+        EventManager.Instance.onGameOver += DisableMovement;
+    }
+
     // Start is called before the first frame update
     void Start()
     {

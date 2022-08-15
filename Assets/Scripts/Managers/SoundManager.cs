@@ -8,6 +8,10 @@ public class SoundManager : Singleton<SoundManager>
     [SerializeField] AudioClip crashSound;
 
     AudioSource audioSource;
+    private void OnEnable()
+    {
+        EventManager.Instance.onPlayerCrash += PlayCrashSound;
+    }
 
     // Start is called before the first frame update
     void Start()

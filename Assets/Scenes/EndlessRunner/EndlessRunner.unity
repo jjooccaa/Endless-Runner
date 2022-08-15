@@ -279,9 +279,10 @@ MonoBehaviour:
   - {fileID: 2748097760827865731, guid: 73a66b6c9219d2b46942542bb49814aa, type: 3}
   - {fileID: 2748097760827865731, guid: 979a8f7ec4914774ca46d44c12959c64, type: 3}
   pooledObstacles: []
-  numberOfPowerUpsToPool: 3
+  numberOfPowerUpsToPool: 4
   powerUpPrefabs:
   - {fileID: 129879372846360404, guid: 424a5d3eb9da67b48b4f2a85f37b3262, type: 3}
+  - {fileID: 5672416593029594367, guid: 8d4654aafcf82eb4e83321e0727e2f65, type: 3}
   pooledPowerUps: []
 --- !u!1 &526689542
 GameObject:

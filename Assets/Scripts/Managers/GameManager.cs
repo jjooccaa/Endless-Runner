@@ -26,6 +26,12 @@ public class GameManager : Singleton<GameManager>
     float increaseDifficultyAfter = 10;
     float scoreCounter = 0;
 
+    private void OnEnable()
+    {
+        EventManager.Instance.onPlayerCrash += Death;
+        EventManager.Instance.onGameOver += GameOver;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -55,7 +61,7 @@ public class GameManager : Singleton<GameManager>
             }
             else
             {
-                countDownText.GetComponent<TextMeshProUGUI>().text = i + ""; //FIXME Umesto ovog postoji metoda i.ToString()
+                countDownText.GetComponent<TextMeshProUGUI>().text = i + "";  //FIXME Umesto ovog postoji metoda i.ToString()
             }
         }
 
@@ -74,7 +80,6 @@ public class GameManager : Singleton<GameManager>
 
     public void RestartGame()
     {
-        gameOver = true; //FIXME ovo je visak
         ScoreManager.Instance.RestartScore();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         UnpauseGame();
@@ -122,19 +127,24 @@ public class GameManager : Singleton<GameManager>
         SceneManager.LoadScene(SceneName.Main_Menu);
     }
 
-    public void GameOver()
+    void GameOver()
     {
         movementSpeed = 0;
         gameOver = true;
         gameOverScreen.SetActive(true);
     }
 
-    public void Death()
+    public void Death() //FIXME mislim da ova meetoda treba da se poziva samo kada je plaey stv death a ne tu da ponovo proveravas da li ima zivote, trebalo bi mozda pre toga da izdvojis u neku metodu oduzimanje zivota a death da pozoves kad si sig da je death
     {
         numberOfLifes--;
         if (numberOfLifes < 1)
         {
             EventManager.Instance.onGameOver?.Invoke();
+        }
+        else
+        {
+            ResetPositionOfPlayer();
+            ActivateInvisibility(3);
         }
     }
 
@@ -144,10 +154,10 @@ public class GameManager : Singleton<GameManager>
         switch (powerUpID)
         {
             case 1:
-                ActivateInvisibilityPowerUp(5);
+                ActivateInvisibility(5);
                 break;
             case 2:
-                ActivateExtraLifePowerUp();
+                ActivateExtraLife();
                 break;
             case 3:
                 break;
@@ -156,12 +166,17 @@ public class GameManager : Singleton<GameManager>
         powerUp.SetActive(false);
     }
 
-    void ActivateExtraLifePowerUp()
+    void ActivateExtraLife()
     {
         numberOfLifes++;
     }
 
-    void ActivateInvisibilityPowerUp(int duration)
+    void ActivateFlyPowerUp()  //FIXME Ukoliko je ova kalsaa zastarela i ne korsitis je obrisi je, ukoliko tek treba nesto da radi mozda je zgodno da stavis neki ToDo com
+    {
+
+    }
+
+    void ActivateInvisibility(int duration)
     {
         Debug.Log("Invisibility activated");
         StartCoroutine(InvisibilityTimer(duration));
@@ -179,7 +194,12 @@ public class GameManager : Singleton<GameManager>
         Debug.Log("Invisibility deactivated");
     }
 
-    public float MovementSpeed
+    void ResetPositionOfPlayer()
+    {
+        player.transform.position = Vector3.zero;
+    }
+
+    public float MovementSpeed //FIXME mozda bi bilo preglednije da ovi property budu gore medju promeljivama na pocetku klassee
     {
         get
         {
@@ -193,4 +213,5 @@ public class GameManager : Singleton<GameManager>
             return gameOver;
         }
     }
+
 }
