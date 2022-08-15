@@ -20,7 +20,7 @@ public class MenuController : MonoBehaviour
 
     void DisplayHighScore()
     {
-        if(PlayerPrefs.HasKey(ScoreManager.High_Score)) //temporary solution
+        if(PlayerPrefs.HasKey(ScoreManager.High_Score))
         {
            highScoreText.text = "High Score: " + PlayerPrefs.GetFloat(ScoreManager.High_Score);
         }
