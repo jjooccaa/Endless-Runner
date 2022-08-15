@@ -26,6 +26,12 @@ public class GameManager : Singleton<GameManager>
     float increaseDifficultyAfter = 10;
     float scoreCounter = 0;
 
+    private void OnEnable()
+    {
+        EventManager.Instance.onPlayerCrash += Death;
+        EventManager.Instance.onGameOver += GameOver;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -74,7 +80,6 @@ public class GameManager : Singleton<GameManager>
 
     public void RestartGame()
     {
-        gameOver = true;
         ScoreManager.Instance.RestartScore();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         UnpauseGame();
@@ -122,7 +127,7 @@ public class GameManager : Singleton<GameManager>
         SceneManager.LoadScene(SceneName.Main_Menu);
     }
 
-    public void GameOver()
+    void GameOver()
     {
         movementSpeed = 0;
         gameOver = true;
@@ -161,6 +166,11 @@ public class GameManager : Singleton<GameManager>
         numberOfLifes++;
     }
 
+    void ActivateFlyPowerUp()
+    {
+
+    }
+
     void ActivateInvisibilityPowerUp(int duration)
     {
         Debug.Log("Invisibility activated");
@@ -192,5 +202,11 @@ public class GameManager : Singleton<GameManager>
         {
             return gameOver;
         }
+    }
+
+    void OnDisable()
+    {
+        EventManager.Instance.onPlayerCrash -= Death;
+        EventManager.Instance.onGameOver -= GameOver;
     }
 }

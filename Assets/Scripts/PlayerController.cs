@@ -16,6 +16,11 @@ public class PlayerController : MonoBehaviour
     Rigidbody rigidBody;
     Animator animator;
 
+    private void OnEnable()
+    {
+        EventManager.Instance.onGameOver += DisableMovement;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -103,5 +108,9 @@ public class PlayerController : MonoBehaviour
         movementDisabled = true;
         turnSpeed = 0;
         jumpForce = 0;
+    }
+    private void OnDisable()
+    {
+        EventManager.Instance.onGameOver -= DisableMovement;
     }
 }
