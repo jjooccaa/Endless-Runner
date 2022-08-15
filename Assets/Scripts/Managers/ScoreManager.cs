@@ -8,12 +8,12 @@ public class ScoreManager : Singleton<ScoreManager>
 {
     [SerializeField] TextMeshProUGUI scoreText;
 
-    public const string High_Score = "highScore";
+    public const string High_Score = "highScore"; //FIXME obico komentare pisemo velikim slovima HIGH_SCORE
 
     float score = 0;
     float highScore;
 
-    // Start is called before the first frame update
+    // Start is called before the first frame update  //FIXME nije nista strasno ali nema potrebe da stoje ovi automatski komentari svi znamo kad se poziva sstart i update
     private void Start()
     {
         StartCoroutine(UpdateScore());

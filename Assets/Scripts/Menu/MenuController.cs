@@ -20,9 +20,9 @@ public class MenuController : MonoBehaviour
 
     void DisplayHighScore()
     {
-        if(PlayerPrefs.HasKey(ScoreManager.High_Score))
+        if (PlayerPrefs.HasKey(ScoreManager.High_Score))
         {
-           highScoreText.text = "High Score: " + PlayerPrefs.GetFloat(ScoreManager.High_Score);
+            highScoreText.text = "High Score: " + PlayerPrefs.GetFloat(ScoreManager.High_Score);
         }
     }
 
@@ -45,6 +45,6 @@ public class MenuController : MonoBehaviour
 
     public void SaveVolume()
     {
-        PlayerPrefs.SetFloat("masterVolume", AudioListener.volume);
+        PlayerPrefs.SetFloat("masterVolume", AudioListener.volume); //FIXME mozes ovaj string da sacuvas kao const jer ces kasnije koristiti i za Get i vec postaje veca sansa za neki bug koji se tesko otkriva
     }
 }

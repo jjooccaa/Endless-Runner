@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    
+
     [SerializeField] public float turnSpeed;
     [SerializeField] public float jumpForce;
     [SerializeField] float horizontalInput;
@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision collision) //FIXME opet je mozda bolje sve stingove napisati kao konstante i tako ih koristiti
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
@@ -60,9 +60,9 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("RemoveTrigger"))
         {
             SpawnManager.Instance.DeactivatePreviousMapAndObstacles();
-        } 
+        }
     }
-    
+
     void ReturnWhenReachBoundaries()
     {
         if (transform.position.x < leftBoundary)
@@ -95,7 +95,7 @@ public class PlayerController : MonoBehaviour
         SoundManager.Instance.PlayJumpSound();
         rigidBody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         isOnGround = false;
-        animator.SetTrigger("Jump_trig");
+        animator.SetTrigger("Jump_trig"); //FIXME opet tring koji je bolje biti const
     }
 
     public void DisableMovement()

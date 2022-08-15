@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class EventManager : Singleton<EventManager>
+public class EventManager : Singleton<EventManager> //FIXME kao sto smo pricali, ova kalsa ce samo sadrzati spisak eventova
 {
-    public Action onPlayerCrash;
+    public Action onPlayerCrash; //FIXME Pisi prvo pocetno velikim ako je public
 
     public Action onGameOver;
 

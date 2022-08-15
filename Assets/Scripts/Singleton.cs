@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Singleton<T> : MonoBehaviour where T : Component
+public class Singleton<T> : MonoBehaviour where T : Component //FIXME ova kalsa je slicna onoj koju mi koristimo, dobar pristup, da ne kucas svuda kod za Sinleton, ali poslacu ti nasu da je pogledas i zamenis :) 
 {
     private static T instance;
     public static T Instance
@@ -12,7 +12,7 @@ public class Singleton<T> : MonoBehaviour where T : Component
             if (instance == null)
             {
                 instance = FindObjectOfType<T>();
-                if(instance == null)
+                if (instance == null)
                 {
                     GameObject newGameObject = new GameObject();
                     instance = newGameObject.AddComponent<T>();

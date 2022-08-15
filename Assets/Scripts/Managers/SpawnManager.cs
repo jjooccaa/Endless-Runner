@@ -10,7 +10,7 @@ public class SpawnManager : Singleton<SpawnManager>
 
     float zLength = 227;
 
-    float powerUXMinSpawnPos = -4;
+    float powerUXMinSpawnPos = -4; //FIXME Mozda je za buducnost bolje da to budu prazni objekti kojima ces uzimati vector, samo iz razloga ako hoces da promenis poziciju mozda je lakse da samo pomeris taj obj i ona automatski iscita vrednost
     float powerUpXMaxSpawnPos = 4;
     float powerUpYMinSpawnPos = 0.5f;
     float powerUpYMaxSpawnPos = 3;
@@ -46,12 +46,12 @@ public class SpawnManager : Singleton<SpawnManager>
         PoolPowerUp(GetRandomPosition(powerUXMinSpawnPos, powerUpXMaxSpawnPos, powerUpYMinSpawnPos, powerUpYMaxSpawnPos, powerUpZMinSpawnPos, powerUpZMaxSpawnPos));
     }
 
-    void PoolRoad(Vector3 newPos) 
+    void PoolRoad(Vector3 newPos)
     {
         PoolObject(ObjectType.Road, ref pooledRoad, ref previousRoad, newPos);
     }
 
-    void PoolCity(Vector3 newPos) 
+    void PoolCity(Vector3 newPos)
     {
         PoolObject(ObjectType.City, ref pooledCity, ref previousCity, newPos);
     }
@@ -86,10 +86,11 @@ public class SpawnManager : Singleton<SpawnManager>
     {
         if (objType == ObjectType.PowerUp)
         {
-            if(previousObj != null)
+            if (previousObj != null)
             {
                 pooledObj.transform.position = new Vector3(newPos.x, newPos.y, zLength + newPos.z);
-            } else
+            }
+            else
             {
                 pooledObj.transform.position += newPos;
             }
@@ -108,7 +109,7 @@ public class SpawnManager : Singleton<SpawnManager>
         float yPos = Random.Range(minYPos, maxYpos);
         float zPos = Random.Range(minZPos, maxZPos);
 
-        return new Vector3(xPos,yPos,zPos);
+        return new Vector3(xPos, yPos, zPos);
     }
 
     public void DeactivatePreviousMapAndObstacles()
@@ -121,7 +122,7 @@ public class SpawnManager : Singleton<SpawnManager>
 
     void DeactivateObject(GameObject obj)
     {
-        if(obj != null)
+        if (obj != null)
         {
             obj.SetActive(false);
         }

@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum ObjectType{
+public enum ObjectType
+{
     None = 0,
     Road = 1,
     City = 2,
@@ -65,16 +66,16 @@ public class ObjectPooler : Singleton<ObjectPooler>
 
     public GameObject GetPooledObject(ObjectType objType)
     {
-        if(objType == ObjectType.Road)
+        if (objType == ObjectType.Road) //FIXME mozda je malo bolja opcija da iskoristis switch case
         {
 
             return GetPooledRoad();
-        } 
+        }
         else if (objType == ObjectType.City)
         {
 
             return GetPooledCity();
-        } 
+        }
         else if (objType == ObjectType.Obstacles)
         {
 
@@ -89,7 +90,7 @@ public class ObjectPooler : Singleton<ObjectPooler>
         return null;
     }
 
-    GameObject GetPooledRoad()
+    GameObject GetPooledRoad() //FIXME mislim da nema potrebe za ovim metodama dovoljna je ova GetRandomPoolObject koja ima parametar 
     {
 
         return GetRandomPoolObject(pooledRoads);
@@ -98,7 +99,7 @@ public class ObjectPooler : Singleton<ObjectPooler>
     GameObject GetPooledCity()
     {
 
-       return GetRandomPoolObject(pooledCities);
+        return GetRandomPoolObject(pooledCities);
     }
 
     GameObject GetPooledObstacles()
@@ -119,21 +120,21 @@ public class ObjectPooler : Singleton<ObjectPooler>
         {
             int randomIndex = Random.Range(0, pooledObjects.Count);
 
-            if (!pooledObjects[randomIndex].activeInHierarchy) 
-            { 
+            if (!pooledObjects[randomIndex].activeInHierarchy)
+            {
 
                 return pooledObjects[randomIndex];
             }
         }
-        
+
         return null;
     }
 
-    bool CheckForInactiveObjects(List<GameObject> objectsList) 
+    bool CheckForInactiveObjects(List<GameObject> objectsList)
     {
-        foreach(GameObject obj in objectsList)
+        foreach (GameObject obj in objectsList)
         {
-            if(!obj.activeInHierarchy)
+            if (!obj.activeInHierarchy)
             {
                 return true;
             }

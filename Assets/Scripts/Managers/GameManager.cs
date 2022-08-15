@@ -29,7 +29,7 @@ public class GameManager : Singleton<GameManager>
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(DelayStart(startDelayer));
+        StartCoroutine(DelayStart(startDelayer)); //FIXME nema potrebe da stavljas ovu promenljivu kao parametar, cak moze da bude i SerializeField pa da se podesvaa iz editora startDelayer
     }
 
     // Update is called once per frame
@@ -55,7 +55,7 @@ public class GameManager : Singleton<GameManager>
             }
             else
             {
-                countDownText.GetComponent<TextMeshProUGUI>().text = i + "";
+                countDownText.GetComponent<TextMeshProUGUI>().text = i + ""; //FIXME Umesto ovog postoji metoda i.ToString()
             }
         }
 
@@ -74,7 +74,7 @@ public class GameManager : Singleton<GameManager>
 
     public void RestartGame()
     {
-        gameOver = true;
+        gameOver = true; //FIXME ovo je visak
         ScoreManager.Instance.RestartScore();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         UnpauseGame();
@@ -132,7 +132,7 @@ public class GameManager : Singleton<GameManager>
     public void Death()
     {
         numberOfLifes--;
-        if(numberOfLifes < 1)
+        if (numberOfLifes < 1)
         {
             EventManager.Instance.onGameOver?.Invoke();
         }
@@ -141,7 +141,7 @@ public class GameManager : Singleton<GameManager>
     //Power Ups
     public void ActivatePowerUp(GameObject powerUp, int powerUpID)
     {
-        switch(powerUpID)
+        switch (powerUpID)
         {
             case 1:
                 ActivateInvisibilityPowerUp(5);
