@@ -28,9 +28,4 @@ public class SoundManager : Singleton<SoundManager>
     {
         audioSource.PlayOneShot(crashSound);
     }
-
-    private void OnDisable()
-    {
-        EventManager.Instance.onPlayerCrash -= PlayCrashSound;
-    }
 }

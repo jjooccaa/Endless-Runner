@@ -109,8 +109,4 @@ public class PlayerController : MonoBehaviour
         turnSpeed = 0;
         jumpForce = 0;
     }
-    private void OnDisable()
-    {
-        EventManager.Instance.onGameOver -= DisableMovement;
-    }
 }

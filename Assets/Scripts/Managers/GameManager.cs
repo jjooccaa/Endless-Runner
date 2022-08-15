@@ -204,9 +204,4 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    void OnDisable()
-    {
-        EventManager.Instance.onPlayerCrash -= Death;
-        EventManager.Instance.onGameOver -= GameOver;
-    }
 }
