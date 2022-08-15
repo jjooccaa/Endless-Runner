@@ -140,6 +140,10 @@ public class GameManager : Singleton<GameManager>
         if(numberOfLifes < 1)
         {
             EventManager.Instance.onGameOver?.Invoke();
+        } else
+        {
+            ResetPositionOfPlayer();
+            ActivateInvisibility(3);
         }
     }
 
@@ -149,10 +153,10 @@ public class GameManager : Singleton<GameManager>
         switch(powerUpID)
         {
             case 1:
-                ActivateInvisibilityPowerUp(5);
+                ActivateInvisibility(5);
                 break;
             case 2:
-                ActivateExtraLifePowerUp();
+                ActivateExtraLife();
                 break;
             case 3:
                 break;
@@ -161,7 +165,7 @@ public class GameManager : Singleton<GameManager>
         powerUp.SetActive(false);
     }
 
-    void ActivateExtraLifePowerUp()
+    void ActivateExtraLife()
     {
         numberOfLifes++;
     }
@@ -171,7 +175,7 @@ public class GameManager : Singleton<GameManager>
 
     }
 
-    void ActivateInvisibilityPowerUp(int duration)
+    void ActivateInvisibility(int duration)
     {
         Debug.Log("Invisibility activated");
         StartCoroutine(InvisibilityTimer(duration));
@@ -187,6 +191,11 @@ public class GameManager : Singleton<GameManager>
 
         Physics.IgnoreLayerCollision(6, 7, false);
         Debug.Log("Invisibility deactivated");
+    }
+
+    void ResetPositionOfPlayer()
+    {
+        player.transform.position = Vector3.zero;
     }
 
     public float MovementSpeed
