@@ -8,6 +8,7 @@ TagManager:
   - SpawnTrigger
   - RemoveTrigger
   - Obstacle
+  - PowerUp
   layers:
   - Default
   - TransparentFX
@@ -15,8 +16,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Player
+  - Obstacles
   - 
   - 
   - 

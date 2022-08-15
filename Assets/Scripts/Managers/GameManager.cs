@@ -20,6 +20,7 @@ public class GameManager : Singleton<GameManager>
     bool gameOver = false;
     bool isGamePaused = false;
     int startDelayer = 3;
+    int numberOfLifes = 1;
 
     float difficultyIncreaser = 1;
     float increaseDifficultyAfter = 10;
@@ -34,6 +35,8 @@ public class GameManager : Singleton<GameManager>
     // Update is called once per frame
     void Update()
     {
+        CheckForGameOver();
+
         IncreaseDifficultyOverTime(increaseDifficultyAfter);
 
         PauseOrUnpauseGame();
@@ -59,6 +62,14 @@ public class GameManager : Singleton<GameManager>
         }
 
         UnpauseMovement();
+    }
+
+    void CheckForGameOver()
+    {
+        if (numberOfLifes < 1)
+        {
+            EventManager.Instance.onGameOver?.Invoke();
+        }
     }
 
     void IncreaseDifficultyOverTime(float increaseDifficultyAfter)
@@ -123,10 +134,55 @@ public class GameManager : Singleton<GameManager>
 
     public void GameOver()
     {
-        player.GetComponent<PlayerController>().DisableMovement();
         movementSpeed = 0;
         gameOver = true;
         gameOverScreen.SetActive(true);
+    }
+
+    public void Death()
+    {
+        numberOfLifes--;
+    }
+
+    //Power Ups
+    public void ActivatePowerUp(GameObject powerUp, int powerUpID)
+    {
+        switch(powerUpID)
+        {
+            case 1:
+                ActivateInvisibilityPowerUp(5);
+                break;
+            case 2:
+                ActivateExtraLifePowerUp();
+                break;
+            case 3:
+                break;
+        }
+
+        powerUp.SetActive(false);
+    }
+
+    void ActivateExtraLifePowerUp()
+    {
+        numberOfLifes++;
+    }
+
+    void ActivateInvisibilityPowerUp(int duration)
+    {
+        Debug.Log("Invisibility activated");
+        StartCoroutine(InvisibilityTimer(duration));
+    }
+
+    IEnumerator InvisibilityTimer(float time)
+    {
+        //Ignore collision between player and obstacles
+        Physics.IgnoreLayerCollision(6, 7, true);
+
+        yield return new WaitForSeconds(time);
+        countDownText.SetActive(true);
+
+        Physics.IgnoreLayerCollision(6, 7, false);
+        Debug.Log("Invisibility deactivated");
     }
 
     public float MovementSpeed

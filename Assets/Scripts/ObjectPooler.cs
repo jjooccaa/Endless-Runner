@@ -6,7 +6,8 @@ public enum ObjectType{
     None = 0,
     Road = 1,
     City = 2,
-    Obstacles = 3
+    Obstacles = 3,
+    PowerUp = 4
 }
 public class ObjectPooler : Singleton<ObjectPooler>
 {
@@ -25,6 +26,11 @@ public class ObjectPooler : Singleton<ObjectPooler>
     [SerializeField] GameObject[] obstaclesPrefabs;
     [SerializeField] List<GameObject> pooledObstacles = new List<GameObject>();
 
+    [Header("Power Ups")]
+    [SerializeField] int numberOfPowerUpsToPool;
+    [SerializeField] GameObject[] powerUpPrefabs;
+    [SerializeField] List<GameObject> pooledPowerUps = new List<GameObject>();
+
     protected override void Awake()
     {
         base.Awake();
@@ -32,6 +38,7 @@ public class ObjectPooler : Singleton<ObjectPooler>
         PoolObjects(roadPrefabs, pooledRoads, numberOfRoadsToPool);
         PoolObjects(cityPrefabs, pooledCities, numberOfCitiesToPool);
         PoolObjects(obstaclesPrefabs, pooledObstacles, numberOfObstaclesToPool);
+        PoolObjects(powerUpPrefabs, pooledPowerUps, numberOfPowerUpsToPool);
     }
 
     void PoolObjects(GameObject[] objectPrefabs, List<GameObject> pooledObjects, int numberOfObjectsToPool)
@@ -73,26 +80,37 @@ public class ObjectPooler : Singleton<ObjectPooler>
 
             return GetPooledObstacles();
         }
+        else if (objType == ObjectType.PowerUp)
+        {
+
+            return GetPooledPowerUp();
+        }
 
         return null;
     }
 
-    public GameObject GetPooledRoad()
+    GameObject GetPooledRoad()
     {
 
         return GetRandomPoolObject(pooledRoads);
     }
 
-    public GameObject GetPooledCity()
+    GameObject GetPooledCity()
     {
 
        return GetRandomPoolObject(pooledCities);
     }
 
-    public GameObject GetPooledObstacles()
+    GameObject GetPooledObstacles()
     {
 
         return GetRandomPoolObject(pooledObstacles);
+    }
+
+    GameObject GetPooledPowerUp()
+    {
+
+        return GetRandomPoolObject(pooledPowerUps);
     }
 
     GameObject GetRandomPoolObject(List<GameObject> pooledObjects)

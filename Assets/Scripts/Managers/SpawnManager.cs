@@ -4,8 +4,19 @@ using UnityEngine;
 
 public class SpawnManager : Singleton<SpawnManager>
 {
-    [SerializeField] float zOffset = 227;
-    
+    [SerializeField] Vector3 roadSpawnPos;
+    [SerializeField] Vector3 citySpawnPos;
+    [SerializeField] Vector3 obstaclesSpawnPos;
+
+    float zLength = 227;
+
+    float powerUXMinSpawnPos = -4;
+    float powerUpXMaxSpawnPos = 4;
+    float powerUpYMinSpawnPos = 0.5f;
+    float powerUpYMaxSpawnPos = 3;
+    float powerUpZMinSpawnPos = 20;
+    float powerUpZMaxSpawnPos = 150;
+
     GameObject pooledRoad;
     GameObject previousRoad;
 
@@ -15,41 +26,52 @@ public class SpawnManager : Singleton<SpawnManager>
     GameObject pooledObstacles;
     GameObject previousObstacles;
 
+    GameObject pooledPowerUp;
+    GameObject previousPowerUp;
+
     // Start is called before the first frame update
     void Start()
     {
-        PoolRoad(0);
-        PoolCity(0);
-        PoolObstacles(0);
+        PoolRoad(Vector3.zero);
+        PoolCity(Vector3.zero);
+        PoolObstacles(Vector3.zero);
+        PoolPowerUp(GetRandomPosition(powerUXMinSpawnPos, powerUpXMaxSpawnPos, powerUpYMinSpawnPos, powerUpYMaxSpawnPos, powerUpZMinSpawnPos, powerUpZMaxSpawnPos));
     }
 
-    public void SpawnNextMapAndObstacles()
+    public void SpawnNextMapObstaclesAndPowerUps()
     {
-        PoolRoad(zOffset);
-        PoolCity(zOffset);
-        PoolObstacles(zOffset);
+        PoolRoad(roadSpawnPos);
+        PoolCity(citySpawnPos);
+        PoolObstacles(obstaclesSpawnPos);
+        PoolPowerUp(GetRandomPosition(powerUXMinSpawnPos, powerUpXMaxSpawnPos, powerUpYMinSpawnPos, powerUpYMaxSpawnPos, powerUpZMinSpawnPos, powerUpZMaxSpawnPos));
     }
 
-    void PoolRoad(float zOffset) 
+    void PoolRoad(Vector3 newPos) 
     {
-        PoolObject(ObjectType.Road, ref pooledRoad, ref previousRoad, zOffset);
+        PoolObject(ObjectType.Road, ref pooledRoad, ref previousRoad, newPos);
     }
 
-    void PoolCity(float zOffset) 
+    void PoolCity(Vector3 newPos) 
     {
-        PoolObject(ObjectType.City, ref pooledCity, ref previousCity, zOffset);
+        PoolObject(ObjectType.City, ref pooledCity, ref previousCity, newPos);
     }
 
-    void PoolObstacles(float zOffset)
+    void PoolObstacles(Vector3 newPos)
     {
-        PoolObject(ObjectType.Obstacles, ref pooledObstacles, ref previousObstacles, zOffset);
+        PoolObject(ObjectType.Obstacles, ref pooledObstacles, ref previousObstacles, newPos);
     }
 
-    void PoolObject(ObjectType objType, ref GameObject pooledObject, ref GameObject previousObject, float zOffset)
+    void PoolPowerUp(Vector3 newPos)
+    {
+        PoolObject(ObjectType.PowerUp, ref pooledPowerUp, ref previousPowerUp, newPos);
+    }
+
+    void PoolObject(ObjectType objType, ref GameObject pooledObject, ref GameObject previousObject, Vector3 newPos)
     {
         AssignPreviousObject(ref pooledObject, ref previousObject);
         pooledObject = ObjectPooler.Instance.GetPooledObject(objType);
-        ActivateAndPositionPooledObject(pooledObject, previousObject, zOffset);
+        pooledObject.SetActive(true);
+        PositionPooledObject(objType, pooledObject, previousObject, newPos);
     }
 
     void AssignPreviousObject(ref GameObject pooledObj, ref GameObject previousObj)
@@ -60,19 +82,33 @@ public class SpawnManager : Singleton<SpawnManager>
         }
     }
 
-    void ActivateAndPositionPooledObject(GameObject pooledObj, GameObject previousObj, float zOffset)
+    void PositionPooledObject(ObjectType objType, GameObject pooledObj, GameObject previousObj, Vector3 newPos)
     {
-        pooledObj.SetActive(true);
-        MoveToNewZPosition(pooledObj, previousObj, zOffset);
+        if (objType == ObjectType.PowerUp)
+        {
+            if(previousObj != null)
+            {
+                pooledObj.transform.position = new Vector3(newPos.x, newPos.y, zLength + newPos.z);
+            } else
+            {
+                pooledObj.transform.position += newPos;
+            }
+        }
+        else
+        {
+            // If we have previous object, add newPos vector to that object's position and if we don't, add it to current object position
+            pooledObj.transform.position = (previousObj != null) ? previousObj.transform.position + newPos
+                : pooledObj.transform.position + newPos;
+        }
     }
 
-    void MoveToNewZPosition(GameObject pooledObj, GameObject previousPooledObj, float zOffset)
+    Vector3 GetRandomPosition(float minXPos, float maxXPos, float minYPos, float maxYpos, float minZPos, float maxZPos)
     {
-        Vector3 newZPos = new(0, 0, zOffset);
+        float xPos = Random.Range(minXPos, maxXPos);
+        float yPos = Random.Range(minYPos, maxYpos);
+        float zPos = Random.Range(minZPos, maxZPos);
 
-        // If we have previous object, add z offset to that object's position and if we don't, add it to current object position
-        pooledObj.transform.position = (previousPooledObj != null) ? previousPooledObj.transform.position + newZPos
-            : pooledObj.transform.position + newZPos;
+        return new Vector3(xPos,yPos,zPos);
     }
 
     public void DeactivatePreviousMapAndObstacles()
@@ -80,6 +116,7 @@ public class SpawnManager : Singleton<SpawnManager>
         DeactivateObject(previousRoad);
         DeactivateObject(previousCity);
         DeactivateObject(previousObstacles);
+        DeactivateObject(previousPowerUp);
     }
 
     void DeactivateObject(GameObject obj)

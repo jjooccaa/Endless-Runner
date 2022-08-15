@@ -38,15 +38,14 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.CompareTag("Ground"))
         {
             isOnGround = true;
-        } 
-        else if(collision.gameObject.CompareTag("Obstacle"))
+        }
+        else if (collision.gameObject.CompareTag("Obstacle"))
         {
-            SoundManager.Instance.PlayCrashSound();
             animator.SetTrigger("Stumble_trig");
-            GameManager.Instance.GameOver(); //FIXME Ovde su eventi pravo resenje, radije nego referenca na GameManager. Za sada ga ostavi ovako pa cemo u kasnijoj fazi prakse kad stignemo do eventova da ga ispravimo.
+            EventManager.Instance.onPlayerCrash?.Invoke();
         }
     }
 
@@ -55,13 +54,13 @@ public class PlayerController : MonoBehaviour
         // Spawn new map and obstacles
         if (other.gameObject.CompareTag("SpawnTrigger"))
         {
-            SpawnManager.Instance.SpawnNextMapAndObstacles();
+            SpawnManager.Instance.SpawnNextMapObstaclesAndPowerUps();
         }
         // Remove old map and obstacles
         if (other.gameObject.CompareTag("RemoveTrigger"))
         {
             SpawnManager.Instance.DeactivatePreviousMapAndObstacles();
-        }
+        } 
     }
     
     void ReturnWhenReachBoundaries()
