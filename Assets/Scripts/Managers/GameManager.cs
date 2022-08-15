@@ -35,8 +35,6 @@ public class GameManager : Singleton<GameManager>
     // Update is called once per frame
     void Update()
     {
-        CheckForGameOver();
-
         IncreaseDifficultyOverTime(increaseDifficultyAfter);
 
         PauseOrUnpauseGame();
@@ -62,14 +60,6 @@ public class GameManager : Singleton<GameManager>
         }
 
         UnpauseMovement();
-    }
-
-    void CheckForGameOver()
-    {
-        if (numberOfLifes < 1)
-        {
-            EventManager.Instance.onGameOver?.Invoke();
-        }
     }
 
     void IncreaseDifficultyOverTime(float increaseDifficultyAfter)
@@ -142,6 +132,10 @@ public class GameManager : Singleton<GameManager>
     public void Death()
     {
         numberOfLifes--;
+        if(numberOfLifes < 1)
+        {
+            EventManager.Instance.onGameOver?.Invoke();
+        }
     }
 
     //Power Ups
