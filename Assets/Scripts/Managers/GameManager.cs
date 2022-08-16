@@ -189,6 +189,7 @@ public class GameManager : Singleton<GameManager>
 
     void ActivateExtraLife()
     {
+        Debug.Log("Extra life power up activated");
         numberOfLifes++;
     }
 
