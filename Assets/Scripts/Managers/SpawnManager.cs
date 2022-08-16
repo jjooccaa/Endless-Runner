@@ -8,14 +8,10 @@ public class SpawnManager : Singleton<SpawnManager>
     [SerializeField] Vector3 citySpawnPos;
     [SerializeField] Vector3 obstaclesSpawnPos;
 
-    float zLength = 227;
+    [SerializeField] Vector3 powerUpMinSpawnPos = new(-4, 0.5f, 20);
+    [SerializeField] Vector3 powerUpMaxSpawnPos = new(4, 3, 150);
 
-    float powerUXMinSpawnPos = -4; //FIXME Mozda je za buducnost bolje da to budu prazni objekti kojima ces uzimati vector, samo iz razloga ako hoces da promenis poziciju mozda je lakse da samo pomeris taj obj i ona automatski iscita vrednost
-    float powerUpXMaxSpawnPos = 4;
-    float powerUpYMinSpawnPos = 0.5f;
-    float powerUpYMaxSpawnPos = 3;
-    float powerUpZMinSpawnPos = 20;
-    float powerUpZMaxSpawnPos = 150;
+    float zLength = 227;
 
     GameObject pooledRoad;
     GameObject previousRoad;
@@ -29,13 +25,12 @@ public class SpawnManager : Singleton<SpawnManager>
     GameObject pooledPowerUp;
     GameObject previousPowerUp;
 
-    // Start is called before the first frame update
     void Start()
     {
         PoolRoad(Vector3.zero);
         PoolCity(Vector3.zero);
         PoolObstacles(Vector3.zero);
-        PoolPowerUp(GetRandomPosition(powerUXMinSpawnPos, powerUpXMaxSpawnPos, powerUpYMinSpawnPos, powerUpYMaxSpawnPos, powerUpZMinSpawnPos, powerUpZMaxSpawnPos));
+        PoolPowerUp(GetRandomPosition(powerUpMinSpawnPos, powerUpMaxSpawnPos));
     }
 
     public void SpawnNextMapObstaclesAndPowerUps()
@@ -43,7 +38,7 @@ public class SpawnManager : Singleton<SpawnManager>
         PoolRoad(roadSpawnPos);
         PoolCity(citySpawnPos);
         PoolObstacles(obstaclesSpawnPos);
-        PoolPowerUp(GetRandomPosition(powerUXMinSpawnPos, powerUpXMaxSpawnPos, powerUpYMinSpawnPos, powerUpYMaxSpawnPos, powerUpZMinSpawnPos, powerUpZMaxSpawnPos));
+        PoolPowerUp(GetRandomPosition(powerUpMinSpawnPos, powerUpMaxSpawnPos));
     }
 
     void PoolRoad(Vector3 newPos)
@@ -103,11 +98,11 @@ public class SpawnManager : Singleton<SpawnManager>
         }
     }
 
-    Vector3 GetRandomPosition(float minXPos, float maxXPos, float minYPos, float maxYpos, float minZPos, float maxZPos)
+    Vector3 GetRandomPosition(Vector3 minSpawnPos, Vector3 maxSpawnPos)
     {
-        float xPos = Random.Range(minXPos, maxXPos);
-        float yPos = Random.Range(minYPos, maxYpos);
-        float zPos = Random.Range(minZPos, maxZPos);
+        float xPos = Random.Range(minSpawnPos.x, maxSpawnPos.x);
+        float yPos = Random.Range(minSpawnPos.y, maxSpawnPos.y);
+        float zPos = Random.Range(minSpawnPos.z, maxSpawnPos.z);
 
         return new Vector3(xPos, yPos, zPos);
     }

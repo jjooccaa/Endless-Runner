@@ -13,6 +13,8 @@ public class MenuController : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI highScoreText;
 
+    public const string MASTER_VOLUME = "masterVolume";
+
     private void Start()
     {
         DisplayHighScore();
@@ -20,16 +22,16 @@ public class MenuController : MonoBehaviour
 
     void DisplayHighScore()
     {
-        if (PlayerPrefs.HasKey(ScoreManager.High_Score))
+        if (PlayerPrefs.HasKey(ScoreManager.HIGH_SCORE))
         {
-            highScoreText.text = "High Score: " + PlayerPrefs.GetFloat(ScoreManager.High_Score);
+            highScoreText.text = "High Score: " + PlayerPrefs.GetFloat(ScoreManager.HIGH_SCORE);
         }
     }
 
     // When yes has been pressed in new game dialogue. Load new game.
     public void NewGameDialogueYes()
     {
-        SceneManager.LoadScene(SceneName.Endless_Runner_Game);
+        SceneManager.LoadScene(SceneName.ENDLESS_RUNNER_GAME);
     }
 
     public void ExitButton()
@@ -45,6 +47,6 @@ public class MenuController : MonoBehaviour
 
     public void SaveVolume()
     {
-        PlayerPrefs.SetFloat("masterVolume", AudioListener.volume); //FIXME mozes ovaj string da sacuvas kao const jer ces kasnije koristiti i za Get i vec postaje veca sansa za neki bug koji se tesko otkriva
+        PlayerPrefs.SetFloat(MASTER_VOLUME, AudioListener.volume);
     }
 }

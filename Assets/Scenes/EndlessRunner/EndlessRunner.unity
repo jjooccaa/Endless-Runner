@@ -250,6 +250,8 @@ MonoBehaviour:
   roadSpawnPos: {x: 0, y: 0, z: 227}
   citySpawnPos: {x: 0, y: 0, z: 227}
   obstaclesSpawnPos: {x: 0, y: 0, z: 227}
+  powerUpMinSpawnPos: {x: -4, y: 0.5, z: 20}
+  powerUpMaxSpawnPos: {x: 4, y: 3, z: 150}
 --- !u!114 &184160780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2412,6 +2414,7 @@ MonoBehaviour:
   gameOverScreen: {fileID: 173521005}
   pauseScreen: {fileID: 708512984}
   countDownText: {fileID: 1068180058}
+  startDelayer: 3
 --- !u!4 &1910391142
 Transform:
   m_ObjectHideFlags: 0

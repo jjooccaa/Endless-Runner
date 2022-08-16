@@ -8,18 +8,16 @@ public class ScoreManager : Singleton<ScoreManager>
 {
     [SerializeField] TextMeshProUGUI scoreText;
 
-    public const string High_Score = "highScore"; //FIXME obico komentare pisemo velikim slovima HIGH_SCORE
+    public const string HIGH_SCORE = "highScore";
 
     float score = 0;
     float highScore;
 
-    // Start is called before the first frame update  //FIXME nije nista strasno ali nema potrebe da stoje ovi automatski komentari svi znamo kad se poziva sstart i update
     private void Start()
     {
         StartCoroutine(UpdateScore());
     }
 
-    // Update is called once per frame
     void Update()
     {
         DisplayScore();
@@ -43,10 +41,10 @@ public class ScoreManager : Singleton<ScoreManager>
 
     void SaveHighScore()
     {
-        if (score > PlayerPrefs.GetFloat(High_Score))
+        if (score > PlayerPrefs.GetFloat(HIGH_SCORE))
         {
             highScore = score;
-            PlayerPrefs.SetFloat(High_Score, highScore);
+            PlayerPrefs.SetFloat(HIGH_SCORE, highScore);
         }
     }
 

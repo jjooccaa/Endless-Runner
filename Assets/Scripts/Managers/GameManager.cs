@@ -14,12 +14,23 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] GameObject gameOverScreen;
     [SerializeField] GameObject pauseScreen;
     [SerializeField] GameObject countDownText;
+    
+    [SerializeField] int startDelayer = 3;
 
     //Gameplay
     float movementSpeed = 10;
+    public float MovementSpeed 
+    { 
+        get { return movementSpeed; } 
+    }
+
     bool gameOver = false;
+    public bool IsGameOver 
+    { 
+        get { return gameOver; } 
+    }
+
     bool isGamePaused = false;
-    int startDelayer = 3;
     int numberOfLifes = 1;
 
     float difficultyIncreaser = 1;
@@ -28,17 +39,16 @@ public class GameManager : Singleton<GameManager>
 
     private void OnEnable()
     {
-        EventManager.Instance.onPlayerCrash += Death;
+        EventManager.Instance.onPlayerCrash += TakeLife;
         EventManager.Instance.onGameOver += GameOver;
+        EventManager.Instance.onPowerUpPickUp += ActivatePowerUp;
     }
 
-    // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(DelayStart(startDelayer)); //FIXME nema potrebe da stavljas ovu promenljivu kao parametar, cak moze da bude i SerializeField pa da se podesvaa iz editora startDelayer
+        StartCoroutine(DelayStart());
     }
 
-    // Update is called once per frame
     void Update()
     {
         IncreaseDifficultyOverTime(increaseDifficultyAfter);
@@ -46,7 +56,7 @@ public class GameManager : Singleton<GameManager>
         PauseOrUnpauseGame();
     }
 
-    IEnumerator DelayStart(int startDelayer)
+    IEnumerator DelayStart()
     {
         PauseMovement();
 
@@ -61,7 +71,7 @@ public class GameManager : Singleton<GameManager>
             }
             else
             {
-                countDownText.GetComponent<TextMeshProUGUI>().text = i + "";  //FIXME Umesto ovog postoji metoda i.ToString()
+                countDownText.GetComponent<TextMeshProUGUI>().text = i.ToString();
             }
         }
 
@@ -124,7 +134,7 @@ public class GameManager : Singleton<GameManager>
     public void ExitGame()
     {
         gameOver = true;
-        SceneManager.LoadScene(SceneName.Main_Menu);
+        SceneManager.LoadScene(SceneName.MAIN_MENU);
     }
 
     void GameOver()
@@ -134,18 +144,29 @@ public class GameManager : Singleton<GameManager>
         gameOverScreen.SetActive(true);
     }
 
-    public void Death() //FIXME mislim da ova meetoda treba da se poziva samo kada je plaey stv death a ne tu da ponovo proveravas da li ima zivote, trebalo bi mozda pre toga da izdvojis u neku metodu oduzimanje zivota a death da pozoves kad si sig da je death
+    void TakeLife()
     {
-        numberOfLifes--;
-        if (numberOfLifes < 1)
+        numberOfLifes --;
+
+        if(numberOfLifes < 1)
         {
-            EventManager.Instance.onGameOver?.Invoke();
-        }
-        else
+            Death();
+        } 
+        else 
         {
             ResetPositionOfPlayer();
             ActivateInvisibility(3);
         }
+    }
+
+    void Death()
+    {
+        EventManager.Instance.onGameOver?.Invoke();
+    }
+
+    void ResetPositionOfPlayer()
+    {
+        player.transform.position = Vector3.zero;
     }
 
     //Power Ups
@@ -171,9 +192,9 @@ public class GameManager : Singleton<GameManager>
         numberOfLifes++;
     }
 
-    void ActivateFlyPowerUp()  //FIXME Ukoliko je ova kalsaa zastarela i ne korsitis je obrisi je, ukoliko tek treba nesto da radi mozda je zgodno da stavis neki ToDo com
+    void ActivateFlyPowerUp()
     {
-
+        // Third power up. In progress
     }
 
     void ActivateInvisibility(int duration)
@@ -192,26 +213,6 @@ public class GameManager : Singleton<GameManager>
 
         Physics.IgnoreLayerCollision(6, 7, false);
         Debug.Log("Invisibility deactivated");
-    }
-
-    void ResetPositionOfPlayer()
-    {
-        player.transform.position = Vector3.zero;
-    }
-
-    public float MovementSpeed //FIXME mozda bi bilo preglednije da ovi property budu gore medju promeljivama na pocetku klassee
-    {
-        get
-        {
-            return movementSpeed;
-        }
-    }
-    public bool IsGameOver
-    {
-        get
-        {
-            return gameOver;
-        }
     }
 
 }

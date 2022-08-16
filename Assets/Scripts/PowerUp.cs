@@ -12,7 +12,7 @@ public class PowerUp : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            GameManager.Instance.ActivatePowerUp(this.gameObject, powerUpID); //FIXME ovde se verv moze iskoristiti event
+            EventManager.Instance.onPowerUpPickUp?.Invoke(this.gameObject, powerUpID);
         }
     }
 

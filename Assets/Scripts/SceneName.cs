@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class SceneName
 {
-    public const string Main_Menu = "MainMenu";
-    public const string Endless_Runner_Game = "EndlessRunner";
+    public const string MAIN_MENU = "MainMenu";
+    public const string ENDLESS_RUNNER_GAME = "EndlessRunner";
 }

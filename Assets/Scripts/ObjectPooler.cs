@@ -66,52 +66,25 @@ public class ObjectPooler : Singleton<ObjectPooler>
 
     public GameObject GetPooledObject(ObjectType objType)
     {
-        if (objType == ObjectType.Road) //FIXME mozda je malo bolja opcija da iskoristis switch case
+        switch (objType)
         {
+            case ObjectType.Road:
+                return GetRandomPoolObject(pooledRoads);
 
-            return GetPooledRoad();
-        }
-        else if (objType == ObjectType.City)
-        {
+            case ObjectType.City:
+                return GetRandomPoolObject(pooledCities);
 
-            return GetPooledCity();
-        }
-        else if (objType == ObjectType.Obstacles)
-        {
+            case ObjectType.Obstacles:
+                return GetRandomPoolObject(pooledObstacles);
 
-            return GetPooledObstacles();
-        }
-        else if (objType == ObjectType.PowerUp)
-        {
+            case ObjectType.PowerUp:
+                return GetRandomPoolObject(pooledPowerUps);
 
-            return GetPooledPowerUp();
+            case ObjectType.None:
+                break;
         }
 
         return null;
-    }
-
-    GameObject GetPooledRoad() //FIXME mislim da nema potrebe za ovim metodama dovoljna je ova GetRandomPoolObject koja ima parametar 
-    {
-
-        return GetRandomPoolObject(pooledRoads);
-    }
-
-    GameObject GetPooledCity()
-    {
-
-        return GetRandomPoolObject(pooledCities);
-    }
-
-    GameObject GetPooledObstacles()
-    {
-
-        return GetRandomPoolObject(pooledObstacles);
-    }
-
-    GameObject GetPooledPowerUp()
-    {
-
-        return GetRandomPoolObject(pooledPowerUps);
     }
 
     GameObject GetRandomPoolObject(List<GameObject> pooledObjects)

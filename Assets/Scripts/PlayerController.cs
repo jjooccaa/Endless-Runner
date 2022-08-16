@@ -16,19 +16,21 @@ public class PlayerController : MonoBehaviour
     Rigidbody rigidBody;
     Animator animator;
 
+    private const string HORIZONTAL = "Horizontal";
+    private const string JUMP_ANIM_TRIG = "Jump_trig";
+    private const string STUMBLE_ANIM_TRIG = "Stumble_trig";
+
     private void OnEnable()
     {
         EventManager.Instance.onGameOver += DisableMovement;
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         if (!movementDisabled)
@@ -41,15 +43,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision) //FIXME opet je mozda bolje sve stingove napisati kao konstante i tako ih koristiti
+    private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.CompareTag(TagName.GROUND_TAG))
         {
             isOnGround = true;
         }
-        else if (collision.gameObject.CompareTag("Obstacle"))
+        else if (collision.gameObject.CompareTag(TagName.OBSTACLE_TAG))
         {
-            animator.SetTrigger("Stumble_trig");
+            animator.SetTrigger(STUMBLE_ANIM_TRIG);
             EventManager.Instance.onPlayerCrash?.Invoke();
         }
     }
@@ -57,12 +59,12 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // Spawn new map and obstacles
-        if (other.gameObject.CompareTag("SpawnTrigger"))
+        if (other.gameObject.CompareTag(TagName.SPAWN_TRIGGER_TAG))
         {
             SpawnManager.Instance.SpawnNextMapObstaclesAndPowerUps();
         }
         // Remove old map and obstacles
-        if (other.gameObject.CompareTag("RemoveTrigger"))
+        if (other.gameObject.CompareTag(TagName.REMOVE_TRIGGER_TAG))
         {
             SpawnManager.Instance.DeactivatePreviousMapAndObstacles();
         }
@@ -82,7 +84,7 @@ public class PlayerController : MonoBehaviour
 
     void TurnOnHorizontalInput()
     {
-        horizontalInput = Input.GetAxis("Horizontal");
+        horizontalInput = Input.GetAxis(HORIZONTAL);
 
         transform.Translate(Vector3.right * turnSpeed * Time.deltaTime * horizontalInput);
     }
@@ -100,7 +102,7 @@ public class PlayerController : MonoBehaviour
         SoundManager.Instance.PlayJumpSound();
         rigidBody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         isOnGround = false;
-        animator.SetTrigger("Jump_trig"); //FIXME opet tring koji je bolje biti const
+        animator.SetTrigger(JUMP_ANIM_TRIG);
     }
 
     public void DisableMovement()

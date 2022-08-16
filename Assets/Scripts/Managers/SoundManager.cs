@@ -13,7 +13,6 @@ public class SoundManager : Singleton<SoundManager>
         EventManager.Instance.onPlayerCrash += PlayCrashSound;
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         audioSource = GameObject.Find("AudioSource").GetComponent<AudioSource>();
