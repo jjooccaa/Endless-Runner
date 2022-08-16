@@ -7,9 +7,9 @@ public class SpawnManager : Singleton<SpawnManager>
     [SerializeField] Vector3 roadSpawnPos;
     [SerializeField] Vector3 citySpawnPos;
     [SerializeField] Vector3 obstaclesSpawnPos;
-
     [SerializeField] Vector3 powerUpMinSpawnPos = new(-4, 0.5f, 20);
     [SerializeField] Vector3 powerUpMaxSpawnPos = new(4, 3, 150);
+    [SerializeField] Vector3 enemySpawnPos;
 
     float zLength = 227;
 
@@ -25,12 +25,25 @@ public class SpawnManager : Singleton<SpawnManager>
     GameObject pooledPowerUp;
     GameObject previousPowerUp;
 
+    GameObject pooledEnemy;
+    GameObject previousEnemy;
+
+    private void OnEnable()
+    {
+        EventManager.Instance.onIncreasedDifficulty += SpawnNextEnemy;
+    }
+
     void Start()
     {
         PoolRoad(Vector3.zero);
         PoolCity(Vector3.zero);
         PoolObstacles(Vector3.zero);
         PoolPowerUp(GetRandomPosition(powerUpMinSpawnPos, powerUpMaxSpawnPos));
+    }
+
+    public void SpawnNextEnemy()
+    {
+        PoolEnemy(enemySpawnPos);
     }
 
     public void SpawnNextMapObstaclesAndPowerUps()
@@ -61,6 +74,11 @@ public class SpawnManager : Singleton<SpawnManager>
         PoolObject(ObjectType.PowerUp, ref pooledPowerUp, ref previousPowerUp, newPos);
     }
 
+    void PoolEnemy(Vector3 newPos)
+    {
+        PoolObject(ObjectType.Enemy, ref pooledEnemy, ref previousEnemy, newPos);
+    }
+
     void PoolObject(ObjectType objType, ref GameObject pooledObject, ref GameObject previousObject, Vector3 newPos)
     {
         AssignPreviousObject(ref pooledObject, ref previousObject);
@@ -89,6 +107,10 @@ public class SpawnManager : Singleton<SpawnManager>
             {
                 pooledObj.transform.position += newPos;
             }
+        }
+        else if (objType == ObjectType.Enemy)
+        {
+            pooledObj.transform.position = newPos;
         }
         else
         {

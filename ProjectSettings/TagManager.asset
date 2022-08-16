@@ -9,6 +9,7 @@ TagManager:
   - RemoveTrigger
   - Obstacle
   - PowerUp
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - UI
   - Player
   - Obstacles
-  - 
+  - Enemy
   - 
   - 
   - 

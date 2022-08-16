@@ -11,6 +11,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] GameObject player;
 
     [Header("UI")]
+    [SerializeField] GameObject numberOfLivesText;
     [SerializeField] GameObject gameOverScreen;
     [SerializeField] GameObject pauseScreen;
     [SerializeField] GameObject countDownText;
@@ -31,7 +32,7 @@ public class GameManager : Singleton<GameManager>
     }
 
     bool isGamePaused = false;
-    int numberOfLifes = 1;
+    int numberOfLives = 1;
 
     float difficultyIncreaser = 1;
     float increaseDifficultyAfter = 10;
@@ -46,6 +47,7 @@ public class GameManager : Singleton<GameManager>
 
     void Start()
     {
+        DisplayNumberOfLives();
         StartCoroutine(DelayStart());
     }
 
@@ -85,6 +87,7 @@ public class GameManager : Singleton<GameManager>
         {
             movementSpeed += difficultyIncreaser;
             scoreCounter += increaseDifficultyAfter;
+            EventManager.Instance.onIncreasedDifficulty?.Invoke();
         }
     }
 
@@ -146,9 +149,10 @@ public class GameManager : Singleton<GameManager>
 
     void TakeLife()
     {
-        numberOfLifes --;
+        numberOfLives --;
+        DisplayNumberOfLives();
 
-        if(numberOfLifes < 1)
+        if(numberOfLives < 1)
         {
             Death();
         } 
@@ -167,6 +171,11 @@ public class GameManager : Singleton<GameManager>
     void ResetPositionOfPlayer()
     {
         player.transform.position = Vector3.zero;
+    }
+
+    void DisplayNumberOfLives()
+    {
+        numberOfLivesText.GetComponent<TextMeshProUGUI>().text = "Lives: " + numberOfLives;
     }
 
     //Power Ups
@@ -190,7 +199,8 @@ public class GameManager : Singleton<GameManager>
     void ActivateExtraLife()
     {
         Debug.Log("Extra life power up activated");
-        numberOfLifes++;
+        numberOfLives++;
+        DisplayNumberOfLives();
     }
 
     void ActivateFlyPowerUp()

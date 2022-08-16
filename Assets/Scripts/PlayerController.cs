@@ -5,14 +5,14 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
-    [SerializeField] public float turnSpeed;
-    [SerializeField] public float jumpForce;
+    [SerializeField] float turnSpeed;
+    [SerializeField] float jumpForce;
     [SerializeField] float horizontalInput;
-    [SerializeField] bool isOnGround;
     [SerializeField] float leftBoundary = -4.8f;
     [SerializeField] float rightBoundary = 4.8f;
-    [SerializeField] public bool movementDisabled = false;
-    [SerializeField] bool canJump = true;
+    bool isOnGround;
+    bool movementDisabled = false;
+    bool canJump = true;
     float jumpWaiter = 1.2f;
 
     Rigidbody rigidBody;
@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
         {
             isOnGround = true;
         }
-        else if (collision.gameObject.CompareTag(TagName.OBSTACLE_TAG))
+        else if (collision.gameObject.CompareTag(TagName.OBSTACLE_TAG) || collision.gameObject.CompareTag(TagName.ENEMY_TAG))
         {
             animator.SetTrigger(STUMBLE_ANIM_TRIG);
             EventManager.Instance.onPlayerCrash?.Invoke();

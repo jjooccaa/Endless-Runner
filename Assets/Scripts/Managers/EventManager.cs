@@ -9,4 +9,5 @@ public class EventManager : Singleton<EventManager>
     public UnityAction onPlayerCrash;
     public UnityAction onGameOver;
     public UnityAction<GameObject, int> onPowerUpPickUp;
+    public UnityAction onIncreasedDifficulty;
 }

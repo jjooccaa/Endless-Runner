@@ -8,7 +8,8 @@ public enum ObjectType
     Road = 1,
     City = 2,
     Obstacles = 3,
-    PowerUp = 4
+    PowerUp = 4,
+    Enemy = 5
 }
 public class ObjectPooler : Singleton<ObjectPooler>
 {
@@ -32,6 +33,11 @@ public class ObjectPooler : Singleton<ObjectPooler>
     [SerializeField] GameObject[] powerUpPrefabs;
     [SerializeField] List<GameObject> pooledPowerUps = new List<GameObject>();
 
+    [Header("Enemies")]
+    [SerializeField] int numberOfEnemiesToPool;
+    [SerializeField] GameObject[] enemyPrefabs;
+    [SerializeField] List<GameObject> pooledEnemies = new List<GameObject>();
+
     protected override void Awake()
     {
         base.Awake();
@@ -40,6 +46,7 @@ public class ObjectPooler : Singleton<ObjectPooler>
         PoolObjects(cityPrefabs, pooledCities, numberOfCitiesToPool);
         PoolObjects(obstaclesPrefabs, pooledObstacles, numberOfObstaclesToPool);
         PoolObjects(powerUpPrefabs, pooledPowerUps, numberOfPowerUpsToPool);
+        PoolObjects(enemyPrefabs, pooledEnemies, numberOfEnemiesToPool);
     }
 
     void PoolObjects(GameObject[] objectPrefabs, List<GameObject> pooledObjects, int numberOfObjectsToPool)
@@ -79,6 +86,9 @@ public class ObjectPooler : Singleton<ObjectPooler>
 
             case ObjectType.PowerUp:
                 return GetRandomPoolObject(pooledPowerUps);
+
+            case ObjectType.Enemy:
+                return GetRandomPoolObject(pooledEnemies);
 
             case ObjectType.None:
                 break;
