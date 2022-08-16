@@ -9,7 +9,8 @@ public class SpawnManager : Singleton<SpawnManager>
     [SerializeField] Vector3 obstaclesSpawnPos;
     [SerializeField] Vector3 powerUpMinSpawnPos = new(-4, 0.5f, 20);
     [SerializeField] Vector3 powerUpMaxSpawnPos = new(4, 3, 150);
-    [SerializeField] Vector3 enemySpawnPos;
+    [SerializeField] Vector3 enemyLeftSpawnPos;
+    [SerializeField] Vector3 enemyRightSpawnPos;
 
     float zLength = 227;
 
@@ -43,7 +44,7 @@ public class SpawnManager : Singleton<SpawnManager>
 
     public void SpawnNextEnemy()
     {
-        PoolEnemy(enemySpawnPos);
+        PoolEnemy(GetRandomPosition(enemyLeftSpawnPos,enemyRightSpawnPos));
     }
 
     public void SpawnNextMapObstaclesAndPowerUps()
