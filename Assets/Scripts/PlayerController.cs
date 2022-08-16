@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float leftBoundary = -4.8f;
     [SerializeField] float rightBoundary = 4.8f;
     [SerializeField] public bool movementDisabled = false;
+    [SerializeField] bool canJump = true;
+    float jumpWaiter = 1.2f;
 
     Rigidbody rigidBody;
     Animator animator;
@@ -19,10 +21,12 @@ public class PlayerController : MonoBehaviour
     private const string HORIZONTAL = "Horizontal";
     private const string JUMP_ANIM_TRIG = "Jump_trig";
     private const string STUMBLE_ANIM_TRIG = "Stumble_trig";
+    private const string DEATH_ANIM_BOOL = "IsGameOver";
 
     private void OnEnable()
     {
         EventManager.Instance.onGameOver += DisableMovement;
+        EventManager.Instance.onGameOver += DeathAnimation;
     }
 
     void Start()
@@ -99,10 +103,21 @@ public class PlayerController : MonoBehaviour
 
     void Jump()
     {
-        SoundManager.Instance.PlayJumpSound();
-        rigidBody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-        isOnGround = false;
-        animator.SetTrigger(JUMP_ANIM_TRIG);
+        if (canJump)
+        {
+            SoundManager.Instance.PlayJumpSound();
+            rigidBody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            isOnGround = false;
+            animator.SetTrigger(JUMP_ANIM_TRIG);
+            StartCoroutine(JumpDelay());
+        }
+    }
+
+    IEnumerator JumpDelay()
+    {
+        canJump = false;
+        yield return new WaitForSeconds(jumpWaiter);
+        canJump = true;
     }
 
     public void DisableMovement()
@@ -110,5 +125,10 @@ public class PlayerController : MonoBehaviour
         movementDisabled = true;
         turnSpeed = 0;
         jumpForce = 0;
+    }
+
+    void DeathAnimation()
+    {
+        animator.SetBool(DEATH_ANIM_BOOL, true);
     }
 }
