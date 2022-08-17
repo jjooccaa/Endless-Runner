@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3247387479745469448}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Street_lamp_Down_2
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3246636016051665326}
   - component: {fileID: 3206817294021203414}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 3307105254317456860}
   - component: {fileID: 6527565913086929848}
   - component: {fileID: 9191297029999730486}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: street_lamp 1
   m_TagString: Obstacle
   m_Icon: {fileID: 0}

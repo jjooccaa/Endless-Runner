@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4694681849799265396}
   - component: {fileID: 8806557120587242193}
   - component: {fileID: 2175277849960126605}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Water tank
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -139,7 +139,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4741553916541488198}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Water_Tank
   m_TagString: Obstacle
   m_Icon: {fileID: 0}

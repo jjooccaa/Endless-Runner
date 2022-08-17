@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2376939366839994228}
   - component: {fileID: 2324232893603041182}
   - component: {fileID: 2749283227575854196}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: bench
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -123,7 +123,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2352896495113364030}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bench
   m_TagString: Obstacle
   m_Icon: {fileID: 0}

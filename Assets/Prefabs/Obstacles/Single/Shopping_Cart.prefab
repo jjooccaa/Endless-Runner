@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8973737857139478288}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Shopping_Cart
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 8970269036607470326}
   - component: {fileID: 497044667208743205}
   - component: {fileID: 7091209588306528917}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: shopping cart
   m_TagString: Obstacle
   m_Icon: {fileID: 0}

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3596848050403229171}
   - component: {fileID: 3588822013311599773}
   - component: {fileID: 3565047430854280079}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: door 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,7 +107,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3570786448875010145}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Big_Trash_Bin
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -142,7 +142,7 @@ GameObject:
   - component: {fileID: 3597078657472795981}
   - component: {fileID: 3589156679145508751}
   - component: {fileID: 3564627440338904217}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: door 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -241,7 +241,7 @@ GameObject:
   - component: {fileID: 3589100219851438147}
   - component: {fileID: 1994344010539954688}
   - component: {fileID: 5137367672192559184}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Big_trash_bin
   m_TagString: Obstacle
   m_Icon: {fileID: 0}

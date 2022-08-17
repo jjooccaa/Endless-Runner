@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4711787316519028}
   - component: {fileID: 108546760131175710}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: baked light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 64336747843363168}
   - component: {fileID: 3259961556382065520}
   - component: {fileID: 375964005696771757}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: street lamp 2
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -234,7 +234,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4088839632586982}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Street_Lamp_Down_1
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
