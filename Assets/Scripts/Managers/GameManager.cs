@@ -224,8 +224,8 @@ public class GameManager : Singleton<GameManager>
         yield return new WaitForSeconds(time);
 
         Physics.IgnoreLayerCollision(6, 7, false);
-        Physics.IgnoreLayerCollision(6, 8, true);
-        player.GetComponent<PlayerController>().PlaySmokeParticle();
+        Physics.IgnoreLayerCollision(6, 8, false);
+        player.GetComponent<PlayerController>().StopSmokeParticle();
 
         Debug.Log("Invisibility deactivated");
     }

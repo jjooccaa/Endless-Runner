@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     bool isOnGround;
     bool movementDisabled = false;
     bool canJump = true;
-    float jumpWaiter = 1;
+    float jumpWaiter = 0.7f;
 
     [SerializeField] ParticleSystem smokeParticle;
     Rigidbody rigidBody;
