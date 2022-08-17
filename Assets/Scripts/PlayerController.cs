@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     bool isOnGround;
     bool movementDisabled = false;
     bool canJump = true;
-    float jumpWaiter = 1.2f;
+    float jumpWaiter = 1;
 
     Rigidbody rigidBody;
     Animator animator;

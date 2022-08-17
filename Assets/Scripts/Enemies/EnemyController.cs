@@ -43,7 +43,6 @@ public class EnemyController : MonoBehaviour
         else
         {
             transform.Translate(Vector3.back * Time.deltaTime * enemy.speed);
-            Debug.Log("Move");
         }
     }
 
