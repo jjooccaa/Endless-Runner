@@ -658,6 +658,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9094980963270739617, guid: 0fea9307829d6f949a7d90102f63bed1, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 175
+      objectReference: {fileID: 0}
+    - target: {fileID: 9094980963270739617, guid: 0fea9307829d6f949a7d90102f63bed1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 9094980963270739617, guid: 0fea9307829d6f949a7d90102f63bed1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0fea9307829d6f949a7d90102f63bed1, type: 3}
 --- !u!4 &9044163066395852799 stripped
@@ -12636,6 +12648,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Street Line 1 (66)
       objectReference: {fileID: 0}
+    - target: {fileID: 2322691486356794617, guid: b77ee422a43542048843559e4c04d8ee, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 175
+      objectReference: {fileID: 0}
+    - target: {fileID: 2322691486356794617, guid: b77ee422a43542048843559e4c04d8ee, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.36
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b77ee422a43542048843559e4c04d8ee, type: 3}
 --- !u!4 &7913219512593525793 stripped
@@ -13717,6 +13737,14 @@ PrefabInstance:
     - target: {fileID: 5788837660565992697, guid: fb4fe5465ad81e941bb59e0ed13b9afe, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5791023801912970429, guid: fb4fe5465ad81e941bb59e0ed13b9afe, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 175
+      objectReference: {fileID: 0}
+    - target: {fileID: 5791023801912970429, guid: fb4fe5465ad81e941bb59e0ed13b9afe, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.36
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb4fe5465ad81e941bb59e0ed13b9afe, type: 3}
