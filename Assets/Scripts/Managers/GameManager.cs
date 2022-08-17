@@ -87,6 +87,7 @@ public class GameManager : Singleton<GameManager>
         {
             movementSpeed += difficultyIncreaser;
             scoreCounter += increaseDifficultyAfter;
+            EventManager.Instance.onMovementSpeedChange?.Invoke(movementSpeed);
             EventManager.Instance.onIncreasedDifficulty?.Invoke();
         }
     }
@@ -226,8 +227,6 @@ public class GameManager : Singleton<GameManager>
         Physics.IgnoreLayerCollision(6, 7, false);
         Physics.IgnoreLayerCollision(6, 8, false);
         player.GetComponent<PlayerController>().StopSmokeParticle();
-
-        Debug.Log("Invisibility deactivated");
     }
 
 }

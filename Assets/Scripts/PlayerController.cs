@@ -23,11 +23,15 @@ public class PlayerController : MonoBehaviour
     private const string JUMP_ANIM_TRIG = "Jump_trig";
     private const string STUMBLE_ANIM_TRIG = "Stumble_trig";
     private const string DEATH_ANIM_BOOL = "IsGameOver";
+    private const string RUN_SPEED_F = "Run_Speed_f";
+    private const string JUMP_SPEED_F = "Jump_Speed_f";
 
     private void OnEnable()
     {
         EventManager.Instance.onGameOver += DisableMovement;
         EventManager.Instance.onGameOver += DeathAnimation;
+        EventManager.Instance.onMovementSpeedChange += SetMoveAnimationSpeed;
+        EventManager.Instance.onMovementSpeedChange += SetJumpAnimationSpeed;
     }
 
     void Start()
@@ -131,6 +135,18 @@ public class PlayerController : MonoBehaviour
     void DeathAnimation()
     {
         animator.SetBool(DEATH_ANIM_BOOL, true);
+    }
+
+    void SetMoveAnimationSpeed(float movementSpeed)
+    {
+        float runSpeed = movementSpeed * 0.08f;
+        animator.SetFloat(RUN_SPEED_F, runSpeed);
+    }
+
+    void SetJumpAnimationSpeed(float movementSpeed)
+    {
+        float jumpSpeed = movementSpeed * 0.09f;
+        animator.SetFloat(JUMP_SPEED_F, jumpSpeed);
     }
 
     public void PlaySmokeParticle()

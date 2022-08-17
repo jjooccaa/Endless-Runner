@@ -45,16 +45,16 @@ AnimatorState:
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
   m_Mirror: 0
-  m_SpeedParameterActive: 0
+  m_SpeedParameterActive: 1
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 7400000, guid: cadc48f8e7bcc1647a4a9677dc9af90f, type: 2}
   m_Tag: 
-  m_SpeedParameter: 
+  m_SpeedParameter: Run_Speed_f
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
-  m_TimeParameter: 
+  m_TimeParameter: Run_Speed_f
 --- !u!1102 &-5427693965566478310
 AnimatorState:
   serializedVersion: 6
@@ -72,16 +72,16 @@ AnimatorState:
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
   m_Mirror: 0
-  m_SpeedParameterActive: 0
+  m_SpeedParameterActive: 1
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 7400000, guid: 6215d85ea2d5b0940a98ae3e470e7c49, type: 2}
   m_Tag: 
-  m_SpeedParameter: Speed_f
+  m_SpeedParameter: Jump_Speed_f
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
-  m_TimeParameter: Speed_f
+  m_TimeParameter: Run_Speed_f
 --- !u!1101 &-2180795249717057829
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -121,9 +121,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.5
+  m_TransitionDuration: 0
   m_TransitionOffset: 0
-  m_ExitTime: 0.2
+  m_ExitTime: 0
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -138,30 +138,36 @@ AnimatorController:
   m_Name: Player
   serializedVersion: 5
   m_AnimatorParameters:
+  - m_Name: Run_Speed_f
+    m_Type: 1
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: Jump_Speed_f
+    m_Type: 1
+    m_DefaultFloat: 1
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
   - m_Name: Jump_trig
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
-  - m_Name: Speed_f
-    m_Type: 1
-    m_DefaultFloat: 0.5
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: Stumble_trig
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: IsGameOver
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -209,7 +215,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 3
-    m_ConditionEvent: Speed_f
+    m_ConditionEvent: Run_Speed_f
     m_EventTreshold: 0.1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -7705531629476721540}
@@ -234,7 +240,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 4
-    m_ConditionEvent: Speed_f
+    m_ConditionEvent: Run_Speed_f
     m_EventTreshold: 0.1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -8140055491035342601}
@@ -267,7 +273,7 @@ AnimatorStateMachine:
     m_Position: {x: 560, y: -30, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8530865974146893588}
-    m_Position: {x: 810, y: -80, z: 0}
+    m_Position: {x: 560, y: -110, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8140055491035342601}
     m_Position: {x: 300, y: 110, z: 0}
@@ -277,7 +283,7 @@ AnimatorStateMachine:
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: 790, y: -150, z: 0}
+  m_AnyStatePosition: {x: 580, y: -180, z: 0}
   m_EntryPosition: {x: 50, y: 120, z: 0}
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
@@ -291,7 +297,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 3
-    m_ConditionEvent: Speed_f
+    m_ConditionEvent: Run_Speed_f
     m_EventTreshold: 0.2
   - m_ConditionMode: 2
     m_ConditionEvent: IsGameOver

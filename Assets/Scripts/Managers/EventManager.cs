@@ -10,4 +10,5 @@ public class EventManager : Singleton<EventManager>
     public UnityAction onGameOver;
     public UnityAction<GameObject, int> onPowerUpPickUp;
     public UnityAction onIncreasedDifficulty;
+    public UnityAction<float> onMovementSpeedChange;
 }
