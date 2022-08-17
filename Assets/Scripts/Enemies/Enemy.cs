@@ -14,7 +14,6 @@ public class Enemy : ScriptableObject
     public static Enemy GetRandomEnemy()
     {
         List<Enemy> allEnemies = new List<Enemy>(Resources.LoadAll<Enemy>("Enemies"));
-
         Enemy randomEnemy = allEnemies[Random.Range(0, allEnemies.Count)];
 
         return randomEnemy;

@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
     private const string HORIZONTAL = "Horizontal";
     private const string JUMP_ANIM_TRIG = "Jump_trig";
     private const string STUMBLE_ANIM_TRIG = "Stumble_trig";
-    private const string DEATH_ANIM_BOOL = "IsGameOver";
+    private const string DEATH_ANIM_BOOL = "Is_Game_Over";
     private const string RUN_SPEED_F = "Run_Speed_f";
     private const string JUMP_SPEED_F = "Jump_Speed_f";
 
