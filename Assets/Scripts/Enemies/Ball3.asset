@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2817bb721bbd24b4fb37ebdc942ef145, type: 3}
   m_Name: Ball3
   m_EditorClassIdentifier: 
-  name: BallHard
+  name: BallThree
   speed: 15
   sidewaysSpeed: 2.5
   canMoveSideways: 1

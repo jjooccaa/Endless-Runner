@@ -252,8 +252,8 @@ MonoBehaviour:
   obstaclesSpawnPos: {x: 0, y: 0, z: 227}
   powerUpMinSpawnPos: {x: -4, y: 0.5, z: 20}
   powerUpMaxSpawnPos: {x: 4, y: 3, z: 150}
-  enemyLeftSpawnPos: {x: -4, y: 1, z: 100}
-  enemyRightSpawnPos: {x: 4, y: 1, z: 100}
+  enemyLeftSpawnPos: {x: -3, y: 1.5, z: 130}
+  enemyRightSpawnPos: {x: 3, y: 1.5, z: 130}
 --- !u!114 &184160780
 MonoBehaviour:
   m_ObjectHideFlags: 0
