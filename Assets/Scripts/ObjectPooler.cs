@@ -47,6 +47,7 @@ public class ObjectPooler : Singleton<ObjectPooler>
         PoolObjects(obstaclesPrefabs, pooledObstacles, numberOfObstaclesToPool);
         PoolObjects(powerUpPrefabs, pooledPowerUps, numberOfPowerUpsToPool);
         PoolObjects(enemyPrefabs, pooledEnemies, numberOfEnemiesToPool);
+        AssignEnemyAttributes();
     }
 
     void PoolObjects(GameObject[] objectPrefabs, List<GameObject> pooledObjects, int numberOfObjectsToPool)
@@ -68,6 +69,14 @@ public class ObjectPooler : Singleton<ObjectPooler>
             obj.SetActive(false);
             pooledObjects.Add(obj);
             obj.transform.SetParent(this.transform); // set as children of Spawn Manager 
+        }
+    }
+
+    void AssignEnemyAttributes()
+    {
+        foreach (GameObject enemy in pooledEnemies)
+        {
+            enemy.GetComponent<EnemyController>().enemy = Enemy.GetRandomEnemy();
         }
     }
 

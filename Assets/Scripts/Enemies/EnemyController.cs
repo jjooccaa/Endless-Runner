@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    [SerializeField] Enemy enemy;
+    [HideInInspector]public Enemy enemy;
 
     bool movementDisabled = false;
     float magnitude = 4.0f; // Size of sine movement
