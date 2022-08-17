@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Ball3
   m_EditorClassIdentifier: 
   name: BallThree
-  speed: 15
-  sidewaysSpeed: 2.5
+  scale: 0
+  speed: 1.5
   canMoveSideways: 1
+  sidewaysSpeed: 2.5

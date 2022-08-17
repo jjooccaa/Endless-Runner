@@ -8,7 +8,7 @@ public class EnemyController : MonoBehaviour
 
     bool movementDisabled = false;
     float magnitude = 4.0f; // Size of sine movement
-    Vector3 pos;
+    Vector3 currentPosition;
     Vector3 axis;
 
     private void OnEnable()
@@ -18,10 +18,11 @@ public class EnemyController : MonoBehaviour
 
     void Start()
     {
-        Physics.IgnoreLayerCollision(7, 8); // Ignore collision with obstacles
-
-        pos = transform.position;
+        transform.localScale *= enemy.scale;
+        currentPosition = transform.position;
         axis = transform.right;
+
+        Physics.IgnoreLayerCollision(7, 8); // Ignore collision with obstacles
     }
 
     void Update()
@@ -42,14 +43,14 @@ public class EnemyController : MonoBehaviour
         } 
         else
         {
-            transform.Translate(Vector3.back * Time.deltaTime * enemy.speed);
+            transform.Translate(Vector3.back * Time.deltaTime * (enemy.speed * GameManager.Instance.MovementSpeed));
         }
     }
 
     void MoveZigZag()
     {
-        pos += Vector3.back * Time.deltaTime * enemy.speed;
-        transform.position = pos + axis * Mathf.Sin(Time.time * enemy.sidewaysSpeed) * magnitude;
+        currentPosition += Vector3.back * Time.deltaTime * (enemy.speed * GameManager.Instance.MovementSpeed);
+        transform.position = currentPosition + axis * Mathf.Sin(Time.time * enemy.sidewaysSpeed) * magnitude;
     }
 
     void Deactivate()
