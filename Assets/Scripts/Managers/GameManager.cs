@@ -216,13 +216,17 @@ public class GameManager : Singleton<GameManager>
 
     IEnumerator InvisibilityTimer(float time)
     {
-        //Ignore collision between player and obstacles
+        //Ignore collision between player and obstacles and between player and enemies
         Physics.IgnoreLayerCollision(6, 7, true);
+        Physics.IgnoreLayerCollision(6, 8, true);
+        player.GetComponent<PlayerController>().PlaySmokeParticle();
 
         yield return new WaitForSeconds(time);
-        countDownText.SetActive(true);
 
         Physics.IgnoreLayerCollision(6, 7, false);
+        Physics.IgnoreLayerCollision(6, 8, true);
+        player.GetComponent<PlayerController>().PlaySmokeParticle();
+
         Debug.Log("Invisibility deactivated");
     }
 

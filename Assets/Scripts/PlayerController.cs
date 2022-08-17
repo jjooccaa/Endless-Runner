@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     bool canJump = true;
     float jumpWaiter = 1;
 
+    [SerializeField] ParticleSystem smokeParticle;
     Rigidbody rigidBody;
     Animator animator;
 
@@ -130,5 +131,15 @@ public class PlayerController : MonoBehaviour
     void DeathAnimation()
     {
         animator.SetBool(DEATH_ANIM_BOOL, true);
+    }
+
+    public void PlaySmokeParticle()
+    {
+        smokeParticle.Play();
+    }
+
+    public void StopSmokeParticle()
+    {
+        smokeParticle.Stop();
     }
 }

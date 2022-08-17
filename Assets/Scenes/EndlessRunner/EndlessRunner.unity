@@ -980,6 +980,11 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!198 &988619328 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1142355983925647518, guid: cd8744f5d72b44747a5f4ca476b4ac6b, type: 3}
+  m_PrefabInstance: {fileID: 1021258030}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &989046885
 GameObject:
   m_ObjectHideFlags: 0
@@ -1179,6 +1184,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1127982681421689246, guid: cd8744f5d72b44747a5f4ca476b4ac6b, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1142355983925647518, guid: cd8744f5d72b44747a5f4ca476b4ac6b, type: 3}
+      propertyPath: looping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1142355983925647518, guid: cd8744f5d72b44747a5f4ca476b4ac6b, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1304340909377213957, guid: cd8744f5d72b44747a5f4ca476b4ac6b, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1228,9 +1245,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2222696791865554454, guid: cd8744f5d72b44747a5f4ca476b4ac6b, type: 3}
-      propertyPath: canJump
-      value: 1
-      objectReference: {fileID: 0}
+      propertyPath: smokeParticle
+      value: 
+      objectReference: {fileID: 988619328}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd8744f5d72b44747a5f4ca476b4ac6b, type: 3}
 --- !u!1 &1056922540
