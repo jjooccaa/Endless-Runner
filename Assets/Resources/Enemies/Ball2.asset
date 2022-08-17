@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Ball2
   m_EditorClassIdentifier: 
   name: BallTwo
-  scale: 0
+  scale: 3
   speed: 3.9
   canMoveSideways: 0
   sidewaysSpeed: 0
