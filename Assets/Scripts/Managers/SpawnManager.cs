@@ -36,46 +36,46 @@ public class SpawnManager : Singleton<SpawnManager>
 
     void Start()
     {
-        PoolRoad(Vector3.zero);
-        PoolCity(Vector3.zero);
-        PoolObstacles(Vector3.zero);
-        PoolPowerUp(GetRandomPosition(powerUpMinSpawnPos, powerUpMaxSpawnPos));
+        GetPooledRoad(Vector3.zero);
+        GetPooledCity(Vector3.zero);
+        GetPooledObstacles(Vector3.zero);
+        GetPooledPowerUp(GetRandomPosition(powerUpMinSpawnPos, powerUpMaxSpawnPos));
     }
 
     public void SpawnNextEnemy()
     {
-        PoolEnemy(GetRandomPosition(enemyLeftSpawnPos,enemyRightSpawnPos));
+        GetPooledEnemy(GetRandomPosition(enemyLeftSpawnPos,enemyRightSpawnPos));
     }
 
     public void SpawnNextMapObstaclesAndPowerUps()
     {
-        PoolRoad(roadSpawnPos);
-        PoolCity(citySpawnPos);
-        PoolObstacles(obstaclesSpawnPos);
-        PoolPowerUp(GetRandomPosition(powerUpMinSpawnPos, powerUpMaxSpawnPos));
+        GetPooledRoad(roadSpawnPos);
+        GetPooledCity(citySpawnPos);
+        GetPooledObstacles(obstaclesSpawnPos);
+        GetPooledPowerUp(GetRandomPosition(powerUpMinSpawnPos, powerUpMaxSpawnPos));
     }
 
-    void PoolRoad(Vector3 newPos)
+    void GetPooledRoad(Vector3 newPos)
     {
         PoolObject(ObjectType.Road, ref pooledRoad, ref previousRoad, newPos);
     }
 
-    void PoolCity(Vector3 newPos)
+    void GetPooledCity(Vector3 newPos)
     {
         PoolObject(ObjectType.City, ref pooledCity, ref previousCity, newPos);
     }
 
-    void PoolObstacles(Vector3 newPos)
+    void GetPooledObstacles(Vector3 newPos)
     {
         PoolObject(ObjectType.Obstacles, ref pooledObstacles, ref previousObstacles, newPos);
     }
 
-    void PoolPowerUp(Vector3 newPos)
+    void GetPooledPowerUp(Vector3 newPos)
     {
         PoolObject(ObjectType.PowerUp, ref pooledPowerUp, ref previousPowerUp, newPos);
     }
 
-    void PoolEnemy(Vector3 newPos)
+    void GetPooledEnemy(Vector3 newPos)
     {
         PoolObject(ObjectType.Enemy, ref pooledEnemy, ref previousEnemy, newPos);
     }
