@@ -23,6 +23,7 @@ public class EnemyController : MonoBehaviour
         axis = transform.right;
 
         Physics.IgnoreLayerCollision(7, 8); // Ignore collision with obstacles
+        Physics.IgnoreLayerCollision(8, 9); // Ignore collision with pick up arrows
     }
 
     void Update()
@@ -31,8 +32,7 @@ public class EnemyController : MonoBehaviour
         {
             Move();
         }
-
-        Deactivate();
+        DeactivateOnOutOfBounds();
     }
 
     void Move()
@@ -53,7 +53,7 @@ public class EnemyController : MonoBehaviour
         transform.position = currentPosition + axis * Mathf.Sin(Time.time * enemy.sidewaysSpeed) * magnitude;
     }
 
-    void Deactivate()
+    void DeactivateOnOutOfBounds()
     {
         if (transform.position.z < -20)
         {
