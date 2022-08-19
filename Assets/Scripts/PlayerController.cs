@@ -12,8 +12,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float rightBoundary = 4.8f;
     bool isOnGround;
     bool movementDisabled = false;
+
     bool canJump = true;
     float jumpWaiter = 0.7f;
+
+    bool canShoot = true;
+    float shootWaiter = 0.5f;
 
     [SerializeField] ParticleSystem smokeParticle;
     Rigidbody rigidBody;
@@ -25,6 +29,7 @@ public class PlayerController : MonoBehaviour
     private const string DEATH_ANIM_BOOL = "Is_Game_Over";
     private const string RUN_SPEED_F = "Run_Speed_f";
     private const string JUMP_SPEED_F = "Jump_Speed_f";
+    private const string SHOOT_ANIM_TRIG = "Shoot_trig";
 
     private void OnEnable()
     {
@@ -48,7 +53,9 @@ public class PlayerController : MonoBehaviour
 
             TurnOnHorizontalInput();
 
-            JumpOnSpace();
+            JumpOnPressedKey(KeyCode.Space);
+
+            ShootOnPressedKey(KeyCode.F);
         }
     }
 
@@ -70,12 +77,12 @@ public class PlayerController : MonoBehaviour
         // Spawn new map and obstacles
         if (other.gameObject.CompareTag(TagName.SPAWN_TRIGGER_TAG))
         {
-            SpawnManager.Instance.SpawnNextMapObstaclesAndPowerUps();
+            EventManager.Instance.onSpawnTrigger?.Invoke();
         }
         // Remove old map and obstacles
         if (other.gameObject.CompareTag(TagName.REMOVE_TRIGGER_TAG))
         {
-            SpawnManager.Instance.DeactivatePreviousMapAndObstacles();
+            EventManager.Instance.onRemoveTrigger?.Invoke();
         }
     }
 
@@ -98,7 +105,7 @@ public class PlayerController : MonoBehaviour
         transform.Translate(Vector3.right * turnSpeed * Time.deltaTime * horizontalInput);
     }
 
-    void JumpOnSpace()
+    void JumpOnPressedKey(KeyCode key)
     {
         if (Input.GetKeyDown(KeyCode.Space) && isOnGround)
         {
@@ -123,6 +130,32 @@ public class PlayerController : MonoBehaviour
         canJump = false;
         yield return new WaitForSeconds(jumpWaiter);
         canJump = true;
+    }
+
+    void ShootOnPressedKey(KeyCode key)
+    {
+        if(Input.GetKeyDown(key))
+        {
+            Shoot();
+        }
+    }
+
+    void Shoot()
+    {
+        if (canShoot && GameManager.Instance.NumberOfArrows > 0)
+        {
+            animator.SetTrigger(SHOOT_ANIM_TRIG);
+            EventManager.Instance.onSpawnShootingArrow?.Invoke(transform.position); //Spawn and shoot arrow from player current position
+            EventManager.Instance.onArrowShoot?.Invoke();
+            StartCoroutine(ShootDelay());
+        }
+    }
+
+    IEnumerator ShootDelay()
+    {
+        canShoot = false;
+        yield return new WaitForSeconds(shootWaiter);
+        canShoot = true;
     }
 
     public void DisableMovement()

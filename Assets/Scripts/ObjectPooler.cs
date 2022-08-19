@@ -9,7 +9,10 @@ public enum ObjectType
     City = 2,
     Obstacles = 3,
     PowerUp = 4,
-    Enemy = 5
+    Enemy = 5,
+    Coin = 6,
+    ShootingArrow = 7,
+    PickUpArrow = 8
 }
 public class ObjectPooler : Singleton<ObjectPooler>
 {
@@ -38,6 +41,21 @@ public class ObjectPooler : Singleton<ObjectPooler>
     [SerializeField] GameObject[] enemyPrefabs;
     [SerializeField] List<GameObject> pooledEnemies = new List<GameObject>();
 
+    [Header("Coins")]
+    [SerializeField] int numberOfCoinsToPool;
+    [SerializeField] GameObject[] coinPrefabs;
+    [SerializeField] List<GameObject> pooledCoins = new List<GameObject>();
+
+    [Header("Arrows")]
+    [SerializeField] int numberOfShootingArrowsToPool;
+    [SerializeField] GameObject[] shootingArrowPrefabs;
+    [SerializeField] List<GameObject> pooledShootingArrows = new List<GameObject>();
+
+    [SerializeField] int numberOfPickUpArrowsToPool;
+    [SerializeField] GameObject[] pickUpArrowPrefabs;
+    [SerializeField] List<GameObject> pooledPickUpArrows = new List<GameObject>();
+
+
     protected override void Awake()
     {
         base.Awake();
@@ -48,6 +66,8 @@ public class ObjectPooler : Singleton<ObjectPooler>
         PoolObjects(powerUpPrefabs, pooledPowerUps, numberOfPowerUpsToPool);
         PoolObjects(enemyPrefabs, pooledEnemies, numberOfEnemiesToPool);
         AssignEnemyAttributes();
+        PoolObjects(shootingArrowPrefabs, pooledShootingArrows, numberOfShootingArrowsToPool);
+        PoolObjects(pickUpArrowPrefabs, pooledPickUpArrows, numberOfPickUpArrowsToPool);
     }
 
     void PoolObjects(GameObject[] objectPrefabs, List<GameObject> pooledObjects, int numberOfObjectsToPool)
@@ -98,6 +118,15 @@ public class ObjectPooler : Singleton<ObjectPooler>
 
             case ObjectType.Enemy:
                 return GetRandomPoolObject(pooledEnemies);
+
+            case ObjectType.Coin:
+                return GetRandomPoolObject(pooledCoins);
+
+            case ObjectType.ShootingArrow:
+                return GetRandomPoolObject(pooledShootingArrows);
+
+            case ObjectType.PickUpArrow:
+                return GetRandomPoolObject(pooledPickUpArrows);
 
             case ObjectType.None:
                 break;

@@ -10,6 +10,8 @@ TagManager:
   - Obstacle
   - PowerUp
   - Enemy
+  - Coin
+  - Arrow
   layers:
   - Default
   - TransparentFX
@@ -20,7 +22,7 @@ TagManager:
   - Player
   - Obstacles
   - Enemy
-  - 
+  - Arrow
   - 
   - 
   - 

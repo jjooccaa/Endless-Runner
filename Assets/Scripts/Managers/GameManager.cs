@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
-
+using System;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -11,7 +11,8 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] GameObject player;
 
     [Header("UI")]
-    [SerializeField] GameObject numberOfLivesText;
+    [SerializeField] TextMeshProUGUI numberOfLivesText;
+    [SerializeField] TextMeshProUGUI numberOfArrowsText;
     [SerializeField] GameObject gameOverScreen;
     [SerializeField] GameObject pauseScreen;
     [SerializeField] GameObject countDownText;
@@ -34,6 +35,12 @@ public class GameManager : Singleton<GameManager>
     bool isGamePaused = false;
     int numberOfLives = 1;
 
+    int numberOfArrows = 0;
+    public int NumberOfArrows
+    {
+        get { return numberOfArrows; }
+    }
+
     float difficultyIncreaser = 1;
     float increaseDifficultyAfter = 10;
     float scoreCounter = 0;
@@ -43,11 +50,16 @@ public class GameManager : Singleton<GameManager>
         EventManager.Instance.onPlayerCrash += TakeLife;
         EventManager.Instance.onGameOver += GameOver;
         EventManager.Instance.onPowerUpPickUp += ActivatePowerUp;
+        EventManager.Instance.onArrowPickUp += IncreaseNumberOfArrows;
+        EventManager.Instance.onArrowPickUp += DisplayNumberOfArrows;
+        EventManager.Instance.onArrowShoot += DecreaseNumberOfArrows;
+        EventManager.Instance.onArrowShoot += DisplayNumberOfArrows;
     }
 
     void Start()
     {
         DisplayNumberOfLives();
+        DisplayNumberOfArrows();
         StartCoroutine(DelayStart());
     }
 
@@ -176,7 +188,21 @@ public class GameManager : Singleton<GameManager>
 
     void DisplayNumberOfLives()
     {
-        numberOfLivesText.GetComponent<TextMeshProUGUI>().text = "Lives: " + numberOfLives;
+        numberOfLivesText.text = "Lives: " + numberOfLives;
+    }
+    void DisplayNumberOfArrows()
+    {
+        numberOfArrowsText.text = "Arrows: " + numberOfArrows;
+    }
+
+    void IncreaseNumberOfArrows()
+    {
+        numberOfArrows++;
+    }
+
+    void DecreaseNumberOfArrows()
+    {
+        numberOfArrows--;
     }
 
     //Power Ups
