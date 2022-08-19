@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7504094504372343881}
   - component: {fileID: 2027735095854342914}
   - component: {fileID: 4549679610703706369}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Shield
   m_TagString: PowerUp
   m_Icon: {fileID: 0}
@@ -171,7 +171,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 129879372846360405}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Invisibility_PowerUp
   m_TagString: PowerUp
   m_Icon: {fileID: 0}

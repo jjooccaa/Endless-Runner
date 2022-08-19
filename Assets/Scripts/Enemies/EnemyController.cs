@@ -22,8 +22,8 @@ public class EnemyController : MonoBehaviour
         currentPosition = transform.position;
         axis = transform.right;
 
-        Physics.IgnoreLayerCollision(7, 8); // Ignore collision with obstacles
-        Physics.IgnoreLayerCollision(8, 9); // Ignore collision with pick up arrows
+        Physics.IgnoreLayerCollision(8, 7); // Ignore collision with obstacles
+        Physics.IgnoreLayerCollision(8, 9); // Ignore collision with pick ups
     }
 
     void Update()
