@@ -4,16 +4,21 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    [HideInInspector]public Enemy enemy;
+    public Enemy enemy;
 
     bool movementDisabled = false;
     float magnitude = 4.0f; // Size of sine movement
     Vector3 currentPosition;
     Vector3 axis;
 
+    Animator animator;
+
+    const string ATTACK_TRIG = "Attack_trig";
+
     private void OnEnable()
     {
         EventManager.Instance.onGameOver += DisableMovement;
+        EventManager.Instance.onPlayerCrash += PlayAttackAnimation;
     }
 
     void Start()
@@ -21,6 +26,8 @@ public class EnemyController : MonoBehaviour
         transform.localScale *= enemy.scale;
         currentPosition = transform.position;
         axis = transform.right;
+
+        animator = gameObject.GetComponent<Animator>();
 
         Physics.IgnoreLayerCollision(8, 7); // Ignore collision with obstacles
         Physics.IgnoreLayerCollision(8, 9); // Ignore collision with pick ups
@@ -43,7 +50,7 @@ public class EnemyController : MonoBehaviour
         } 
         else
         {
-            transform.Translate(Vector3.back * Time.deltaTime * (enemy.speed * GameManager.Instance.MovementSpeed));
+            transform.Translate(Vector3.forward * Time.deltaTime * (enemy.speed * GameManager.Instance.MovementSpeed));
         }
     }
 
@@ -64,5 +71,13 @@ public class EnemyController : MonoBehaviour
     void DisableMovement()
     {
         movementDisabled = true;
+    }
+
+    void PlayAttackAnimation()
+    {
+        if (gameObject.activeInHierarchy)
+        {
+            animator.SetTrigger(ATTACK_TRIG);
+        }
     }
 }

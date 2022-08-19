@@ -157,7 +157,7 @@ RectTransform:
   - {fileID: 1821272406}
   - {fileID: 2052669990}
   m_Father: {fileID: 1670204312}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -252,11 +252,8 @@ MonoBehaviour:
   obstaclesSpawnPos: {x: 0, y: 0, z: 227}
   powerUpMinSpawnPos: {x: -4, y: 0.5, z: 1}
   powerUpMaxSpawnPos: {x: 4, y: 3, z: 227}
-  enemyLeftSpawnPos: {x: -3, y: 1.5, z: 130}
-  enemyRightSpawnPos: {x: 3, y: 1.5, z: 130}
-  amountOfCoinsToSpawn: 10
-  coinsMinSpawnPos: {x: -4, y: 0.5, z: 1}
-  coinsMaxSpawnPos: {x: -4, y: 3.5, z: 227}
+  enemyLeftSpawnPos: {x: -3, y: 0, z: 130}
+  enemyRightSpawnPos: {x: 3, y: 0, z: 130}
   amountOfPickUpArrowsToSpawn: 4
   pickUpArrowsMinSpawnPos: {x: -4, y: 1.3, z: 1}
   pickUpArrowsMaxSpawnPos: {x: 4, y: 1.3, z: 227}
@@ -297,7 +294,7 @@ MonoBehaviour:
   pooledPowerUps: []
   numberOfEnemiesToPool: 9
   enemyPrefabs:
-  - {fileID: 6762465741581040279, guid: 5a438aeadcf95934cb4a10c65c263b5d, type: 3}
+  - {fileID: 6051621654184818829, guid: 7c5fc0dc24fd0b54fa638b8691f4a248, type: 3}
   pooledEnemies: []
   numberOfCoinsToPool: 30
   coinPrefabs:
@@ -531,7 +528,7 @@ RectTransform:
   - {fileID: 989046886}
   - {fileID: 1787064289}
   m_Father: {fileID: 1670204312}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1503,7 +1500,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1670204312}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1644,7 +1641,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1115724954
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1658,7 +1655,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1670204312}
-  m_RootOrder: 6
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -2195,10 +2192,10 @@ RectTransform:
   - {fileID: 1796812754}
   - {fileID: 837779227}
   - {fileID: 973199715}
+  - {fileID: 1115724954}
   - {fileID: 173521006}
   - {fileID: 708512985}
   - {fileID: 1068180059}
-  - {fileID: 1115724954}
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
