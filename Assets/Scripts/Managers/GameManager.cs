@@ -13,6 +13,7 @@ public class GameManager : Singleton<GameManager>
     [Header("UI")]
     [SerializeField] TextMeshProUGUI numberOfLivesText;
     [SerializeField] TextMeshProUGUI numberOfArrowsText;
+    [SerializeField] TextMeshProUGUI numberOfCoinsText;
     [SerializeField] GameObject gameOverScreen;
     [SerializeField] GameObject pauseScreen;
     [SerializeField] GameObject countDownText;
@@ -41,6 +42,7 @@ public class GameManager : Singleton<GameManager>
         get { return numberOfArrows; }
     }
 
+    int numberOfCoins = 0;
     float difficultyIncreaser = 1;
     float increaseDifficultyAfter = 10;
     float scoreCounter = 0;
@@ -54,12 +56,15 @@ public class GameManager : Singleton<GameManager>
         EventManager.Instance.onArrowPickUp += DisplayNumberOfArrows;
         EventManager.Instance.onArrowShoot += DecreaseNumberOfArrows;
         EventManager.Instance.onArrowShoot += DisplayNumberOfArrows;
+        EventManager.Instance.onCoinPickUp += IncreaseNumberOfCoins;
+        EventManager.Instance.onCoinPickUp += DisplayNumberOfCoins;
     }
 
     void Start()
     {
         DisplayNumberOfLives();
         DisplayNumberOfArrows();
+        DisplayNumberOfCoins();
         StartCoroutine(DelayStart());
     }
 
@@ -190,9 +195,15 @@ public class GameManager : Singleton<GameManager>
     {
         numberOfLivesText.text = "Lives: " + numberOfLives;
     }
+
     void DisplayNumberOfArrows()
     {
         numberOfArrowsText.text = "Arrows: " + numberOfArrows;
+    }
+
+    void DisplayNumberOfCoins()
+    {
+        numberOfCoinsText.text = "Coins: " + numberOfCoins;
     }
 
     void IncreaseNumberOfArrows()
@@ -203,6 +214,16 @@ public class GameManager : Singleton<GameManager>
     void DecreaseNumberOfArrows()
     {
         numberOfArrows--;
+    }
+
+    void IncreaseNumberOfCoins()
+    {
+        numberOfCoins++;
+    }
+
+    void DecreaseNumberOfCoins()
+    {
+        numberOfCoins--;
     }
 
     //Power Ups

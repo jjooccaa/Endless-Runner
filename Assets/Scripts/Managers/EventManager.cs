@@ -18,4 +18,5 @@ public class EventManager : Singleton<EventManager>
     public UnityAction<GameObject> onArrowHit;
     public UnityAction onArrowPickUp;
     public UnityAction onArrowShoot;
+    public UnityAction onCoinPickUp;
 }

@@ -82,12 +82,6 @@ public class SpawnManager : Singleton<SpawnManager>
         GetPooledPowerUp(GetRandomPosition(powerUpMinSpawnPos, powerUpMaxSpawnPos));
     }
 
-    void SpawnNextShootingArrow(Vector3 pos)
-    {
-        GetPooledShootingArrow(pos);
-        EventManager.Instance.onShoot?.Invoke(pooledShootingArrow);
-    }
-
     void SpawnNextPickUpArrows()
     {
         previousPickUpArrows.AddRange(pooledPickApArrows);
@@ -96,6 +90,12 @@ public class SpawnManager : Singleton<SpawnManager>
         {
             GetPooledPickUpArrow(GetRandomPosition(pickUpArrowsMinSpawnPos,pickUpArrowsMaxSpawnPos));
         }
+    }
+
+    void SpawnNextShootingArrow(Vector3 pos)
+    {
+        GetPooledShootingArrow(pos);
+        EventManager.Instance.onShoot?.Invoke(pooledShootingArrow);
     }
 
     void GetPooledRoad(Vector3 newPos)
