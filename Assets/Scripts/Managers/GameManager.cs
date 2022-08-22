@@ -23,24 +23,17 @@ public class GameManager : Singleton<GameManager>
     //Gameplay
     float movementSpeed = 10;
     public float MovementSpeed 
-    { 
-        get { return movementSpeed; } 
-    }
+    { get { return movementSpeed; } }
 
     bool gameOver = false;
     public bool IsGameOver 
-    { 
-        get { return gameOver; } 
-    }
+    { get { return gameOver; } }
 
     bool isGamePaused = false;
     int numberOfLives = 1;
-
     int numberOfArrows = 0;
     public int NumberOfArrows
-    {
-        get { return numberOfArrows; }
-    }
+    { get { return numberOfArrows; }}
 
     int numberOfCoins = 0;
     float difficultyIncreaser = 1;
@@ -96,7 +89,6 @@ public class GameManager : Singleton<GameManager>
                     countDownText.GetComponent<TextMeshProUGUI>().text = i.ToString();
                 }
             }
-
             UnpauseMovement();
         }
     }
@@ -166,7 +158,10 @@ public class GameManager : Singleton<GameManager>
     {
         movementSpeed = 0;
         gameOver = true;
-        gameOverScreen.SetActive(true);
+        if (gameOverScreen != null)
+        {
+            gameOverScreen.SetActive(true);
+        }
     }
 
     void TakeLife()

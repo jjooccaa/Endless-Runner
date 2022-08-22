@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-
     [SerializeField] float turnSpeed;
     [SerializeField] float jumpForce;
     [SerializeField] float horizontalInput;

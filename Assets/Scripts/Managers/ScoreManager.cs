@@ -11,6 +11,9 @@ public class ScoreManager : Singleton<ScoreManager>
     public const string HIGH_SCORE = "highScore";
 
     float score = 0;
+    public float Score
+    { get { return score; }}
+
     float highScore;
 
     private void Start()
@@ -54,13 +57,5 @@ public class ScoreManager : Singleton<ScoreManager>
     public void RestartScore()
     {
         score = 0;
-    }
-
-    public float Score
-    {
-        get
-        {
-            return score;
-        }
     }
 }
