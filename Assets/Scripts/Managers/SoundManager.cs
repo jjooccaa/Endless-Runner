@@ -10,6 +10,7 @@ public class SoundManager : Singleton<SoundManager>
     AudioSource audioSource;
     private void OnEnable()
     {
+        EventManager.Instance.onJump += PlayJumpSound;
         EventManager.Instance.onPlayerCrash += PlayCrashSound;
     }
 
@@ -20,11 +21,17 @@ public class SoundManager : Singleton<SoundManager>
 
     public void PlayJumpSound()
     {
-        audioSource.PlayOneShot(jumpSound);
+        if (audioSource != null)
+        {
+            audioSource.PlayOneShot(jumpSound);
+        }
     }
 
     public void PlayCrashSound()
     {
-        audioSource.PlayOneShot(crashSound);
+        if (audioSource != null)
+        {
+            audioSource.PlayOneShot(crashSound);
+        }
     }
 }

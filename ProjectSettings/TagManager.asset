@@ -12,6 +12,7 @@ TagManager:
   - Enemy
   - Coin
   - Arrow
+  - TutorialTrigger
   layers:
   - Default
   - TransparentFX

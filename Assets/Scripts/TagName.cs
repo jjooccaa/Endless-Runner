@@ -13,4 +13,5 @@ public class TagName
     public const string ENEMY_TAG = "Enemy";
     public const string COIN_TAG = "Coin";
     public const string ARROW_TAG = "Arrow";
+    public const string TUTORIAL_TRIGGER_TAG = "TutorialTrigger";
 }

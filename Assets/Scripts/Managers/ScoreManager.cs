@@ -36,7 +36,10 @@ public class ScoreManager : Singleton<ScoreManager>
 
     void DisplayScore()
     {
-        scoreText.SetText("Score: " + score);
+        if (scoreText != null)
+        {
+            scoreText.SetText("Score: " + score);
+        }
     }
 
     void SaveHighScore()

@@ -58,6 +58,7 @@ public class GameManager : Singleton<GameManager>
         EventManager.Instance.onArrowShoot += DisplayNumberOfArrows;
         EventManager.Instance.onCoinPickUp += IncreaseNumberOfCoins;
         EventManager.Instance.onCoinPickUp += DisplayNumberOfCoins;
+        EventManager.Instance.onTutorialTrigger += PauseMovement;
     }
 
     void Start()
@@ -77,24 +78,27 @@ public class GameManager : Singleton<GameManager>
 
     IEnumerator DelayStart()
     {
-        PauseMovement();
-
-        countDownText.SetActive(true);
-        for (int i = startDelayer; i >= 0; i--)
+        if (countDownText != null)
         {
-            yield return new WaitForSecondsRealtime(1);
+            PauseMovement();
 
-            if (i == 0)
+            countDownText.SetActive(true);
+            for (int i = startDelayer; i >= 0; i--)
             {
-                countDownText.GetComponent<TextMeshProUGUI>().text = "GO!!!";
+                yield return new WaitForSecondsRealtime(1);
+
+                if (i == 0)
+                {
+                    countDownText.GetComponent<TextMeshProUGUI>().text = "GO!!!";
+                }
+                else
+                {
+                    countDownText.GetComponent<TextMeshProUGUI>().text = i.ToString();
+                }
             }
-            else
-            {
-                countDownText.GetComponent<TextMeshProUGUI>().text = i.ToString();
-            }
+
+            UnpauseMovement();
         }
-
-        UnpauseMovement();
     }
 
     void IncreaseDifficultyOverTime(float increaseDifficultyAfter)
@@ -147,7 +151,7 @@ public class GameManager : Singleton<GameManager>
         Time.timeScale = 0;
     }
 
-    void UnpauseMovement()
+    public void UnpauseMovement()
     {
         Time.timeScale = 1;
     }
@@ -193,17 +197,26 @@ public class GameManager : Singleton<GameManager>
 
     void DisplayNumberOfLives()
     {
-        numberOfLivesText.text = "Lives: " + numberOfLives;
+        if (numberOfLivesText != null)
+        {
+            numberOfLivesText.text = "Lives: " + numberOfLives;
+        }
     }
 
     void DisplayNumberOfArrows()
     {
-        numberOfArrowsText.text = "Arrows: " + numberOfArrows;
+        if (numberOfArrowsText != null)
+        {
+            numberOfArrowsText.text = "Arrows: " + numberOfArrows;
+        }
     }
 
     void DisplayNumberOfCoins()
     {
-        numberOfCoinsText.text = "Coins: " + numberOfCoins;
+        if (numberOfCoinsText != null)
+        {
+            numberOfCoinsText.text = "Coins: " + numberOfCoins;
+        }
     }
 
     void IncreaseNumberOfArrows()

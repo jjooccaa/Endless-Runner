@@ -28,6 +28,12 @@ public class MenuController : MonoBehaviour
         }
     }
 
+    // When yes has been pressed in Tutorial dialogue. Load tutorial.
+    public void TutorialDialogueYes()
+    {
+        SceneManager.LoadScene(SceneName.TUTORIAL);
+    }
+
     // When yes has been pressed in new game dialogue. Load new game.
     public void NewGameDialogueYes()
     {

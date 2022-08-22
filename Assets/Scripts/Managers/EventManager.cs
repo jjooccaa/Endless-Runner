@@ -8,6 +8,7 @@ public class EventManager : Singleton<EventManager>
 {
     public UnityAction onPlayerCrash;
     public UnityAction onGameOver;
+    public UnityAction onJump;
     public UnityAction<GameObject, int> onPowerUpPickUp;
     public UnityAction onIncreasedDifficulty;
     public UnityAction<float> onMovementSpeedChange;
@@ -19,4 +20,5 @@ public class EventManager : Singleton<EventManager>
     public UnityAction onArrowPickUp;
     public UnityAction onArrowShoot;
     public UnityAction onCoinPickUp;
+    public UnityAction onTutorialTrigger;
 }

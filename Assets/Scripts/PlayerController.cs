@@ -84,6 +84,10 @@ public class PlayerController : MonoBehaviour
         {
             EventManager.Instance.onRemoveTrigger?.Invoke();
         }
+        if (other.gameObject.CompareTag(TagName.TUTORIAL_TRIGGER_TAG))
+        {
+            EventManager.Instance.onTutorialTrigger?.Invoke();
+        }
     }
 
     void ReturnWhenReachBoundaries()
@@ -107,7 +111,7 @@ public class PlayerController : MonoBehaviour
 
     void JumpOnPressedKey(KeyCode key)
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isOnGround)
+        if (Input.GetKeyDown(key) && isOnGround)
         {
             Jump();
         }
@@ -117,7 +121,7 @@ public class PlayerController : MonoBehaviour
     {
         if (canJump)
         {
-            SoundManager.Instance.PlayJumpSound();
+            EventManager.Instance.onJump?.Invoke();
             rigidBody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isOnGround = false;
             animator.SetTrigger(JUMP_ANIM_TRIG);
