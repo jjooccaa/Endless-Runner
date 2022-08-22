@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SpawnManager : Singleton<SpawnManager>
 {
@@ -61,17 +62,23 @@ public class SpawnManager : Singleton<SpawnManager>
     }
 
     void Start()
-    {
-        GetPooledRoad(Vector3.zero);
-        GetPooledCity(Vector3.zero);
-        GetPooledObstacles(Vector3.zero);
-        GetPooledPowerUp(GetRandomPosition(powerUpMinSpawnPos, powerUpMaxSpawnPos));
-        SpawnNextPickUpArrows();
+    { 
+        if (SceneManager.GetSceneByName(SceneName.ENDLESS_RUNNER_GAME).isLoaded)
+        {
+            GetPooledRoad(Vector3.zero);
+            GetPooledCity(Vector3.zero);
+            GetPooledObstacles(Vector3.zero);
+            GetPooledPowerUp(GetRandomPosition(powerUpMinSpawnPos, powerUpMaxSpawnPos));
+            SpawnNextPickUpArrows();
+        }
     }
 
     void SpawnNextEnemy()
     {
-        GetPooledEnemy(GetRandomPosition(enemyLeftSpawnPos, enemyRightSpawnPos));
+        if (SceneManager.GetSceneByName(SceneName.ENDLESS_RUNNER_GAME).isLoaded)
+        {
+            GetPooledEnemy(GetRandomPosition(enemyLeftSpawnPos, enemyRightSpawnPos));
+        }
     }
 
     void SpawnNextMapObstaclesAndPowerUps()
@@ -125,15 +132,19 @@ public class SpawnManager : Singleton<SpawnManager>
 
     void GetPooledPickUpArrow(Vector3 newPos)
     {
-        pooledPickApArrows.Add(pooledPickUpArrow);
-        pooledPickUpArrow = ObjectPooler.Instance.GetPooledObject(ObjectType.PickUpArrow);
-        pooledPickUpArrow.SetActive(true);
-        if (previousPickUpArrows.Count > 0) 
+        if (pooledPickUpArrow != null)
         {
-            pooledPickUpArrow.transform.position = new Vector3(newPos.x, newPos.y, newPos.z + zOffset);
-        } else
-        {
-            pooledPickUpArrow.transform.position = newPos;
+            pooledPickApArrows.Add(pooledPickUpArrow);
+            pooledPickUpArrow = ObjectPooler.Instance.GetPooledObject(ObjectType.PickUpArrow);
+            pooledPickUpArrow.SetActive(true);
+            if (previousPickUpArrows.Count > 0)
+            {
+                pooledPickUpArrow.transform.position = new Vector3(newPos.x, newPos.y, newPos.z + zOffset);
+            }
+            else
+            {
+                pooledPickUpArrow.transform.position = newPos;
+            }
         }
     }
 
