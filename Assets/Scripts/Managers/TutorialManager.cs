@@ -32,6 +32,7 @@ public class TutorialManager : MonoBehaviour
         if (tutorialCounter == tutorialScreens.Length - 1)
         {
             tutorialScreens[tutorialCounter].gameObject.SetActive(true);
+            inputDisabled = true;
         }
         else
         {

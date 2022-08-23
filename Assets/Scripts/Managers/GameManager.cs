@@ -17,8 +17,9 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] GameObject gameOverScreen;
     [SerializeField] GameObject pauseScreen;
     [SerializeField] GameObject countDownText;
-    
+
     [SerializeField] int startDelayer = 3;
+    [SerializeField] int targetFrameRate = 60;
 
     //Gameplay
     float movementSpeed = 10;
@@ -56,6 +57,8 @@ public class GameManager : Singleton<GameManager>
 
     void Start()
     {
+        LimitFPS();
+
         DisplayNumberOfLives();
         DisplayNumberOfArrows();
         DisplayNumberOfCoins();
@@ -67,6 +70,12 @@ public class GameManager : Singleton<GameManager>
         IncreaseDifficultyOverTime(increaseDifficultyAfter);
 
         PauseOrUnpauseGame();
+    }
+
+    void LimitFPS()
+    {
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = targetFrameRate;
     }
 
     IEnumerator DelayStart()

@@ -19,6 +19,15 @@ public class SoundManager : Singleton<SoundManager>
     void Start()
     {
         audioSource = GameObject.Find("AudioSource").GetComponent<AudioSource>();
+        PlayBackgroundMusic();
+    }
+
+    void PlayBackgroundMusic()
+    {
+        if (audioSource != null)
+        {
+            audioSource.Play();
+        }
     }
 
     public void PlayJumpSound()
