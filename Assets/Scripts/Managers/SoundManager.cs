@@ -6,8 +6,10 @@ public class SoundManager : Singleton<SoundManager>
 {
     [SerializeField] AudioClip jumpSound;
     [SerializeField] AudioClip crashSound;
+    [SerializeField] AudioClip buttonClickedSound;
 
     AudioSource audioSource;
+
     private void OnEnable()
     {
         EventManager.Instance.onJump += PlayJumpSound;
@@ -32,6 +34,14 @@ public class SoundManager : Singleton<SoundManager>
         if (audioSource != null)
         {
             audioSource.PlayOneShot(crashSound);
+        }
+    }
+
+    public void PlayClickedButtonSound()
+    {
+        if (audioSource != null)
+        {
+            audioSource.PlayOneShot(buttonClickedSound);
         }
     }
 }
