@@ -15,8 +15,8 @@ public class SpawnManager : Singleton<SpawnManager>
     [SerializeField] Vector3 obstaclesSpawnPos;
 
     [Header("Power Ups")]
-    [SerializeField] Vector3 powerUpMinSpawnPos = new(-4, 0.5f, 20);
-    [SerializeField] Vector3 powerUpMaxSpawnPos = new(4, 3, 150);
+    [SerializeField] Vector3 powerUpMinSpawnPos;
+    [SerializeField] Vector3 powerUpMaxSpawnPos;
 
     [Header("Enemies")]
     [SerializeField] Vector3 enemyLeftSpawnPos;
@@ -46,6 +46,7 @@ public class SpawnManager : Singleton<SpawnManager>
     GameObject previousEnemy;
 
     GameObject pooledShootingArrow;
+
     List<GameObject> pooledPickApArrows = new List<GameObject>();
     List<GameObject> previousPickUpArrows = new List<GameObject>();
     GameObject pooledPickUpArrow;
@@ -73,14 +74,6 @@ public class SpawnManager : Singleton<SpawnManager>
         }
     }
 
-    void SpawnNextEnemy()
-    {
-        if (SceneManager.GetSceneByName(SceneName.ENDLESS_RUNNER_GAME).isLoaded)
-        {
-            GetPooledEnemy(GetRandomPosition(enemyLeftSpawnPos, enemyRightSpawnPos));
-        }
-    }
-
     void SpawnNextMapObstaclesAndPowerUps()
     {
         GetPooledRoad(roadSpawnPos);
@@ -94,6 +87,14 @@ public class SpawnManager : Singleton<SpawnManager>
         if (!ChallengeMode.IsEasyModeActive && !ChallengeMode.IsMediumModeActive)
         {
             GetPooledPowerUp(GetRandomPosition(powerUpMinSpawnPos, powerUpMaxSpawnPos));
+        }
+    }
+
+    void SpawnNextEnemy()
+    {
+        if (SceneManager.GetSceneByName(SceneName.ENDLESS_RUNNER_GAME).isLoaded)
+        {
+            GetPooledEnemy(GetRandomPosition(enemyLeftSpawnPos, enemyRightSpawnPos));
         }
     }
 
@@ -141,6 +142,11 @@ public class SpawnManager : Singleton<SpawnManager>
         GetPooledObject(ObjectType.Enemy, ref pooledEnemy, ref previousEnemy, newPos);
     }
 
+    void GetPooledShootingArrow(Vector3 newPos)
+    {
+        GetPooledObject(ObjectType.ShootingArrow, ref pooledShootingArrow, newPos);
+    }
+
     void GetPooledPickUpArrow(Vector3 newPos)
     {
         pooledPickApArrows.Add(pooledPickUpArrow);
@@ -154,13 +160,6 @@ public class SpawnManager : Singleton<SpawnManager>
         {
             pooledPickUpArrow.transform.position = newPos;
         }
-        
-    }
-
-    void GetPooledShootingArrow(Vector3 newPos)
-    {
-        GetPooledObject(ObjectType.ShootingArrow, ref pooledShootingArrow, newPos);
-        pooledShootingArrow.transform.position = newPos + shootingArrrowOffset;
     }
 
     void GetPooledObject(ObjectType objType, ref GameObject pooledObject, ref GameObject previousObject, Vector3 newPos)
@@ -199,9 +198,13 @@ public class SpawnManager : Singleton<SpawnManager>
                 pooledObj.transform.position += newPos;
             }
         }
-        else if (objType == ObjectType.Enemy || objType == ObjectType.ShootingArrow)
+        else if (objType == ObjectType.Enemy)
         {
             pooledObj.transform.position = newPos;
+        }
+        else if (objType == ObjectType.ShootingArrow)
+        {
+            pooledObj.transform.position = newPos + shootingArrrowOffset; 
         }
         else
         {

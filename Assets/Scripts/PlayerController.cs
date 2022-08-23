@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float horizontalInput;
     [SerializeField] float leftBoundary = -4.8f;
     [SerializeField] float rightBoundary = 4.8f;
+
     bool isOnGround;
     bool movementDisabled = false;
 

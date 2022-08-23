@@ -252,18 +252,6 @@ public class GameManager : Singleton<GameManager>
         powerUp.SetActive(false);
     }
 
-    void ActivateExtraLife()
-    {
-        Debug.Log("Extra life power up activated");
-        numberOfLives++;
-        DisplayNumberOfLives();
-    }
-
-    void ActivateFlyPowerUp()
-    {
-        // Third power up. In progress
-    }
-
     void ActivateInvisibility(int duration)
     {
         Debug.Log("Invisibility activated");
@@ -282,6 +270,18 @@ public class GameManager : Singleton<GameManager>
         Physics.IgnoreLayerCollision(6, 7, false);
         Physics.IgnoreLayerCollision(6, 8, false);
         player.GetComponent<PlayerController>().StopSmokeParticle();
+    }
+
+    void ActivateExtraLife()
+    {
+        Debug.Log("Extra life power up activated");
+        numberOfLives++;
+        DisplayNumberOfLives();
+    }
+
+    void ActivateFlyPowerUp()
+    {
+        // Fly power up. In progress
     }
 
 }
