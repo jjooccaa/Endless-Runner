@@ -254,7 +254,7 @@ MonoBehaviour:
   powerUpMaxSpawnPos: {x: 4, y: 3, z: 227}
   enemyLeftSpawnPos: {x: -3, y: 0, z: 130}
   enemyRightSpawnPos: {x: 3, y: 0, z: 130}
-  amountOfPickUpArrowsToSpawn: 4
+  amountOfPickUpArrowsToSpawn: 5
   pickUpArrowsMinSpawnPos: {x: -4, y: 1.3, z: 1}
   pickUpArrowsMaxSpawnPos: {x: 4, y: 1.3, z: 227}
   shootingArrrowOffset: {x: 0, y: 3, z: 0.2}
@@ -384,6 +384,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpSound: {fileID: 8300000, guid: 777febe7c39431040b007ae437e76cff, type: 3}
   crashSound: {fileID: 8300000, guid: cdc8c2bebf6f25449be30f2161c7162b, type: 3}
+  buttonClickedSound: {fileID: 0}
 --- !u!4 &526689544
 Transform:
   m_ObjectHideFlags: 0

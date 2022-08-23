@@ -68,7 +68,7 @@ public class SpawnManager : Singleton<SpawnManager>
             GetPooledRoad(Vector3.zero);
             GetPooledCity(Vector3.zero);
             GetPooledObstacles(Vector3.zero);
-            GetPooledPowerUp(GetRandomPosition(powerUpMinSpawnPos, powerUpMaxSpawnPos));
+            SpawnNextPowerUp();
             SpawnNextPickUpArrows();
         }
     }
@@ -86,16 +86,27 @@ public class SpawnManager : Singleton<SpawnManager>
         GetPooledRoad(roadSpawnPos);
         GetPooledCity(citySpawnPos);
         GetPooledObstacles(obstaclesSpawnPos);
-        GetPooledPowerUp(GetRandomPosition(powerUpMinSpawnPos, powerUpMaxSpawnPos));
+        SpawnNextPowerUp();
+    }
+
+    void SpawnNextPowerUp()
+    {
+        if (!ChallengeMode.IsEasyModeActive && !ChallengeMode.IsMediumModeActive)
+        {
+            GetPooledPowerUp(GetRandomPosition(powerUpMinSpawnPos, powerUpMaxSpawnPos));
+        }
     }
 
     void SpawnNextPickUpArrows()
     {
-        previousPickUpArrows.AddRange(pooledPickApArrows);
-        pooledPickApArrows.Clear();
-        for (int i = 0; i < amountOfPickUpArrowsToSpawn; i++)
+        if (!ChallengeMode.IsMediumModeActive)
         {
-            GetPooledPickUpArrow(GetRandomPosition(pickUpArrowsMinSpawnPos,pickUpArrowsMaxSpawnPos));
+            previousPickUpArrows.AddRange(pooledPickApArrows);
+            pooledPickApArrows.Clear();
+            for (int i = 0; i < amountOfPickUpArrowsToSpawn; i++)
+            {
+                GetPooledPickUpArrow(GetRandomPosition(pickUpArrowsMinSpawnPos, pickUpArrowsMaxSpawnPos));
+            }
         }
     }
 
@@ -132,20 +143,18 @@ public class SpawnManager : Singleton<SpawnManager>
 
     void GetPooledPickUpArrow(Vector3 newPos)
     {
-        if (pooledPickUpArrow != null)
+        pooledPickApArrows.Add(pooledPickUpArrow);
+        pooledPickUpArrow = ObjectPooler.Instance.GetPooledObject(ObjectType.PickUpArrow);
+        pooledPickUpArrow.SetActive(true);
+        if (previousPickUpArrows.Count > 0)
         {
-            pooledPickApArrows.Add(pooledPickUpArrow);
-            pooledPickUpArrow = ObjectPooler.Instance.GetPooledObject(ObjectType.PickUpArrow);
-            pooledPickUpArrow.SetActive(true);
-            if (previousPickUpArrows.Count > 0)
-            {
-                pooledPickUpArrow.transform.position = new Vector3(newPos.x, newPos.y, newPos.z + zOffset);
-            }
-            else
-            {
-                pooledPickUpArrow.transform.position = newPos;
-            }
+            pooledPickUpArrow.transform.position = new Vector3(newPos.x, newPos.y, newPos.z + zOffset);
         }
+        else
+        {
+            pooledPickUpArrow.transform.position = newPos;
+        }
+        
     }
 
     void GetPooledShootingArrow(Vector3 newPos)
