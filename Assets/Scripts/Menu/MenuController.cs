@@ -7,6 +7,15 @@ using TMPro;
 
 public class MenuController : MonoBehaviour
 {
+    [Header("Login informations")]
+    [SerializeField] GameObject loginScreen;
+    [SerializeField] TMP_InputField emailInput;
+    [SerializeField] TMP_InputField passwordInput;
+    [SerializeField] TMP_Text infoMessage;
+
+    [Header("Main Menu")]
+    [SerializeField] GameObject mainMenu;
+
     [Header("Graphics Settings")]
     [SerializeField] public Slider brightnessSlider;
     [SerializeField] TMP_Text brightnessValueText;
@@ -20,11 +29,26 @@ public class MenuController : MonoBehaviour
     [SerializeField] TMP_Text masterVolumeValue;
     [SerializeField] float defaultVolume = 5;
 
-    [SerializeField] public TextMeshProUGUI highScoreText;
+    [SerializeField] public TMP_Text leaderboardText;
+    [SerializeField] public TMP_Text highScoreText;
+
+    static bool isLogged = false;
+
+    private void OnEnable()
+    {
+        EventManager.Instance.onLoginInfoChange += DisplayLoginInfoText;
+        EventManager.Instance.onLoginSuccess += Loggedin;
+        EventManager.Instance.onLoginSuccess += DeactivateLoginScreen;
+    }
 
     private void Awake()
     {
         ClearChallengeModes();
+        if(isLogged)
+        {
+            DeactivateLoginScreen();
+            ActivateMainMenu();
+        }
     }
 
     void ClearChallengeModes()
@@ -32,6 +56,42 @@ public class MenuController : MonoBehaviour
         ChallengeMode.IsEasyModeActive = false;
         ChallengeMode.IsMediumModeActive = false;
         ChallengeMode.IsHardModeActive = false;
+    }
+    void Loggedin()
+    {
+        isLogged = true;
+        ActivateMainMenu();
+    }
+
+    void ActivateMainMenu()
+    {
+        mainMenu.gameObject.SetActive(true);
+    }
+
+    void DeactivateLoginScreen()
+    {
+        loginScreen.gameObject.SetActive(false);
+    }
+
+    // User login logic
+    public void RegisterAndLoginButton()
+    {
+        EventManager.Instance.onRegisterAndLogin?.Invoke(emailInput.text, passwordInput.text);
+    }
+
+    public void LoginButton()
+    {
+        EventManager.Instance.onLogin?.Invoke(emailInput.text, passwordInput.text);
+    }
+
+    public void ResetPasswordButton()
+    {
+        EventManager.Instance.onResetPassword?.Invoke(emailInput.text);
+    }
+
+    void DisplayLoginInfoText(string message)
+    {
+        infoMessage.text = message;
     }
 
     // When yes has been pressed in Tutorial dialogue. Load tutorial.
