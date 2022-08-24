@@ -200,4 +200,12 @@ public class MenuController : MonoBehaviour
         texts[1].text = name;
         texts[2].text = score;
     }
+
+    public void ClearLaderboard()
+    {
+        foreach (Transform item in rowsParent)
+        {
+            Destroy(item.gameObject);
+        }
+    }
 }
