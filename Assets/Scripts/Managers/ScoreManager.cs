@@ -10,8 +10,8 @@ public class ScoreManager : Singleton<ScoreManager>
 
     public const string HIGH_SCORE = "highScore";
 
-    float score = 0;
-    public float Score
+    int score = 0;
+    public int Score
     { get { return score; }}
 
     float highScore;

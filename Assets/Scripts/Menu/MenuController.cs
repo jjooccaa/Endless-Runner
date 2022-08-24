@@ -29,7 +29,10 @@ public class MenuController : MonoBehaviour
     [SerializeField] TMP_Text masterVolumeValue;
     [SerializeField] float defaultVolume = 5;
 
-    [SerializeField] public TMP_Text leaderboardText;
+    [Header("Leaderboard")]
+    [SerializeField] GameObject rowPrefab;
+    [SerializeField] Transform rowsParent;
+    
     [SerializeField] public TMP_Text highScoreText;
 
     static bool isLogged = false;
@@ -39,6 +42,7 @@ public class MenuController : MonoBehaviour
         EventManager.Instance.onLoginInfoChange += DisplayLoginInfoText;
         EventManager.Instance.onLoginSuccess += Loggedin;
         EventManager.Instance.onLoginSuccess += DeactivateLoginScreen;
+        EventManager.Instance.onLeaderboardGet += GenerateLeaderboardRow;
     }
 
     private void Awake()
@@ -185,5 +189,15 @@ public class MenuController : MonoBehaviour
         masterVolumeSlider.value = defaultVolume;
         masterVolumeValue.text = defaultVolume.ToString();
         SaveVolumeSettings();
+    }
+
+    // Leaderboard
+    void GenerateLeaderboardRow(string position, string name, string score)
+    {
+        GameObject row = Instantiate(rowPrefab, rowsParent);
+        TMP_Text[] texts = row.GetComponentsInChildren<TMP_Text>();
+        texts[0].text = position;
+        texts[1].text = name;
+        texts[2].text = score;
     }
 }

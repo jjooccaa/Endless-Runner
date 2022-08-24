@@ -171,6 +171,7 @@ public class GameManager : Singleton<GameManager>
         {
             gameOverScreen.SetActive(true);
         }
+        PlayFabManager.Instance.SendLeaderboard(ScoreManager.Instance.Score);
     }
 
     void TakeLife()
