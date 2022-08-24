@@ -433,6 +433,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57bb96e3d1daef2449c2bcf853ad4963, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  backgroundMusic: {fileID: 0}
   jumpSound: {fileID: 8300000, guid: 777febe7c39431040b007ae437e76cff, type: 3}
   crashSound: {fileID: 8300000, guid: cdc8c2bebf6f25449be30f2161c7162b, type: 3}
   buttonClickedSound: {fileID: 0}
@@ -1963,11 +1964,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 1b1c27b2f197ec846a82bff24fb8e72e, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

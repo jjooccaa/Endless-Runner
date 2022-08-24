@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SoundManager : Singleton<SoundManager>
 {
+    [SerializeField] AudioClip backgroundMusic;
     [SerializeField] AudioClip jumpSound;
     [SerializeField] AudioClip crashSound;
     [SerializeField] AudioClip buttonClickedSound;
@@ -24,8 +25,9 @@ public class SoundManager : Singleton<SoundManager>
 
     void PlayBackgroundMusic()
     {
-        if (audioSource != null)
+        if (audioSource != null && backgroundMusic !=  null)
         {
+            audioSource.clip = backgroundMusic;
             audioSource.Play();
         }
     }
