@@ -21,7 +21,7 @@ public class EventManager : Singleton<EventManager>
     public UnityAction onArrowShoot;
     public UnityAction onCoinPickUp;
     public UnityAction onTutorialTrigger;
-    public UnityAction<string, string> onRegisterAndLogin;
+    public UnityAction<string, string> onRegister;
     public UnityAction<string, string> onLogin;
     public UnityAction<string> onResetPassword;
     public UnityAction onLoginSuccess;

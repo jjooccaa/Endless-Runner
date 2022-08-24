@@ -10,12 +10,12 @@ public class PlayFabManager : Singleton<PlayFabManager>
 
     private void OnEnable()
     {
-        EventManager.Instance.onRegisterAndLogin += RegisterAndLogin;
+        EventManager.Instance.onRegister += Register;
         EventManager.Instance.onLogin += Login;
         EventManager.Instance.onResetPassword += ResetPassword;
     }
 
-    void RegisterAndLogin(string email, string password)
+    void Register(string email, string password)
     {
         var request = new RegisterPlayFabUserRequest
         {
@@ -24,8 +24,6 @@ public class PlayFabManager : Singleton<PlayFabManager>
             RequireBothUsernameAndEmail = false
         };
         PlayFabClientAPI.RegisterPlayFabUser(request, OnRegisterSuccess, OnLoginOrRegisterError);
-
-        Login(email, password);
     }
 
     void OnRegisterSuccess(RegisterPlayFabUserResult result)
@@ -61,7 +59,7 @@ public class PlayFabManager : Singleton<PlayFabManager>
 
     void OnPasswordReset(SendAccountRecoveryEmailResult result)
     {
-        EventManager.Instance.onLoginInfoChange?.Invoke("Pasword successfully reseted");
+        EventManager.Instance.onLoginInfoChange?.Invoke("Pasword successfully reseted. Check your email");
     }
 
     void OnLoginOrRegisterError(PlayFabError error)

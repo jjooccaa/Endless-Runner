@@ -74,9 +74,9 @@ public class MenuController : MonoBehaviour
     }
 
     // User login logic
-    public void RegisterAndLoginButton()
+    public void RegisterButton()
     {
-        EventManager.Instance.onRegisterAndLogin?.Invoke(emailInput.text, passwordInput.text);
+        EventManager.Instance.onRegister?.Invoke(emailInput.text, passwordInput.text);
     }
 
     public void LoginButton()
