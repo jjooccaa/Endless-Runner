@@ -16,6 +16,9 @@ public class MenuController : MonoBehaviour
     [Header("Main Menu")]
     [SerializeField] GameObject mainMenu;
 
+    [Header("Daily Rewards")]
+    [SerializeField] GameObject dailyRewardsPanel;
+
     [Header("Graphics Settings")]
     [SerializeField] public Slider brightnessSlider;
     [SerializeField] TMP_Text brightnessValueText;
@@ -64,17 +67,23 @@ public class MenuController : MonoBehaviour
     void Loggedin()
     {
         isLogged = true;
+        ActivateDailyRewardsPanel();
         ActivateMainMenu();
+    }
+
+    void ActivateDailyRewardsPanel()
+    {
+        dailyRewardsPanel.SetActive(true);
     }
 
     void ActivateMainMenu()
     {
-        mainMenu.gameObject.SetActive(true);
+        mainMenu.SetActive(true);
     }
 
     void DeactivateLoginScreen()
     {
-        loginScreen.gameObject.SetActive(false);
+        loginScreen.SetActive(false);
     }
 
     // User login logic
