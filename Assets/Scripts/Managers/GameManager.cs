@@ -172,6 +172,9 @@ public class GameManager : Singleton<GameManager>
             gameOverScreen.SetActive(true);
         }
         PlayFabManager.Instance.SendLeaderboard(ScoreManager.Instance.Score);
+        PlayFabManager.Instance.GrantCoins(numberOfCoins);
+        //EventManager.Instance.onSendLeaderboard?.Invoke(ScoreManager.Instance.Score);
+        //EventManager.Instance.onGrantCoins?.Invoke(numberOfCoins);
     }
 
     void TakeLife()
@@ -237,11 +240,6 @@ public class GameManager : Singleton<GameManager>
     void IncreaseNumberOfCoins()
     {
         numberOfCoins++;
-    }
-
-    void DecreaseNumberOfCoins()
-    {
-        numberOfCoins--;
     }
 
     //Power Ups

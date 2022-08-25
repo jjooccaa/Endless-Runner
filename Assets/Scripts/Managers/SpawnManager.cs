@@ -157,14 +157,14 @@ public class SpawnManager : Singleton<SpawnManager>
 
     void GetPooledCoin(Vector3 newPos) 
     {
-        pooledCoins.Add(pooledCoin);
         GetPooledObject(ObjectType.Coin, ref pooledCoin, previousCoins, newPos);
+        pooledCoins.Add(pooledCoin);
     }
 
     void GetPooledPickUpArrow(Vector3 newPos)
     {
-        pooledPickApArrows.Add(pooledPickUpArrow);
         GetPooledObject(ObjectType.PickUpArrow, ref pooledPickUpArrow, previousPickUpArrows, newPos);
+        pooledPickApArrows.Add(pooledPickUpArrow);
     }
 
     void GetPooledShootingArrow(Vector3 newPos)

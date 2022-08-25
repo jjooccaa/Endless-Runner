@@ -26,5 +26,8 @@ public class EventManager : Singleton<EventManager>
     public UnityAction<string> onResetPassword;
     public UnityAction onLoginSuccess;
     public UnityAction<string> onLoginInfoChange;
+    public UnityAction<int> onSendLeaderboard;
     public UnityAction<int, string, string> onLeaderboardGet;
+    public UnityAction<int> onGrantCoins;
+    public UnityAction<int, int> onGetCurrency;
 }

@@ -35,6 +35,10 @@ public class MenuController : MonoBehaviour
     [Header("Leaderboard")]
     [SerializeField] GameObject rowPrefab;
     [SerializeField] Transform rowsParent;
+
+    [Header("Currencies")]
+    [SerializeField] TMP_Text coinsText;
+    [SerializeField] TMP_Text gemsText;
     
     [SerializeField] public TMP_Text highScoreText;
 
@@ -46,6 +50,7 @@ public class MenuController : MonoBehaviour
         EventManager.Instance.onLoginSuccess += Loggedin;
         EventManager.Instance.onLoginSuccess += DeactivateLoginScreen;
         EventManager.Instance.onLeaderboardGet += GenerateLeaderboardRow;
+        EventManager.Instance.onGetCurrency += DisplayCurrencies;
     }
 
     private void Awake()
@@ -216,5 +221,12 @@ public class MenuController : MonoBehaviour
         {
             Destroy(item.gameObject);
         }
+    }
+
+    // Currencies
+    void DisplayCurrencies(int coins, int gems)
+    {
+        coinsText.text = coins.ToString();
+        gemsText.text = gems.ToString();
     }
 }
