@@ -26,6 +26,5 @@ public class EventManager : Singleton<EventManager>
     public UnityAction<string> onResetPassword;
     public UnityAction onLoginSuccess;
     public UnityAction<string> onLoginInfoChange;
-
-    public UnityAction<string, string, string> onLeaderboardGet;
+    public UnityAction<int, string, string> onLeaderboardGet;
 }

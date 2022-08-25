@@ -192,11 +192,11 @@ public class MenuController : MonoBehaviour
     }
 
     // Leaderboard
-    void GenerateLeaderboardRow(string position, string name, string score)
+    void GenerateLeaderboardRow(int position, string name, string score)
     {
         GameObject row = Instantiate(rowPrefab, rowsParent);
         TMP_Text[] texts = row.GetComponentsInChildren<TMP_Text>();
-        texts[0].text = position;
+        texts[0].text = (position + 1).ToString();
         texts[1].text = name;
         texts[2].text = score;
     }

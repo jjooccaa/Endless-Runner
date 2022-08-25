@@ -103,7 +103,7 @@ public class PlayFabManager : Singleton<PlayFabManager>
     {
         foreach (var item in result.Leaderboard)
         {
-            EventManager.Instance.onLeaderboardGet?.Invoke(item.Position.ToString(), item.PlayFabId, item.StatValue.ToString());
+            EventManager.Instance.onLeaderboardGet?.Invoke(item.Position, item.PlayFabId, item.StatValue.ToString());
         }
     }
 
