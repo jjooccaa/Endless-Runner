@@ -7,57 +7,57 @@ public class SpawnManager : Singleton<SpawnManager>
 {
     [Header("Road")]
     [SerializeField] Vector3 roadSpawnPos;
+    GameObject pooledRoad;
+    GameObject previousRoad;
 
     [Header("City")]
     [SerializeField] Vector3 citySpawnPos;
+    GameObject pooledCity;
+    GameObject previousCity;
 
     [Header("Obstacles")]
     [SerializeField] Vector3 obstaclesSpawnPos;
+    GameObject pooledObstacles;
+    GameObject previousObstacles;
 
     [Header("Power Ups")]
     [SerializeField] Vector3 powerUpMinSpawnPos;
     [SerializeField] Vector3 powerUpMaxSpawnPos;
+    GameObject pooledPowerUp;
+    GameObject previousPowerUp;
 
     [Header("Enemies")]
     [SerializeField] Vector3 enemyLeftSpawnPos;
     [SerializeField] Vector3 enemyRightSpawnPos;
+    GameObject pooledEnemy;
+    GameObject previousEnemy;
+
+    [Header("Coins")]
+    [SerializeField] int amountOfCoinsToSpawn = 3;
+    [SerializeField] Vector3 coinsMinSpawnPos;
+    [SerializeField] Vector3 coinsMaxSpawnPos;
+    GameObject pooledCoin;
+    List<GameObject> pooledCoins = new List<GameObject>();
+    List<GameObject> previousCoins = new List<GameObject>();
 
     [Header("Arrows")]
     [SerializeField] int amountOfPickUpArrowsToSpawn = 5;
     [SerializeField] Vector3 pickUpArrowsMinSpawnPos;
     [SerializeField] Vector3 pickUpArrowsMaxSpawnPos;
-    [SerializeField] Vector3 shootingArrrowOffset;
-
-    float zOffset = 167;
-
-    GameObject pooledRoad;
-    GameObject previousRoad;
-
-    GameObject pooledCity;
-    GameObject previousCity;
-
-    GameObject pooledObstacles;
-    GameObject previousObstacles;
-
-    GameObject pooledPowerUp;
-    GameObject previousPowerUp;
-
-    GameObject pooledEnemy;
-    GameObject previousEnemy;
-
-    GameObject pooledShootingArrow;
-
+    GameObject pooledPickUpArrow;
     List<GameObject> pooledPickApArrows = new List<GameObject>();
     List<GameObject> previousPickUpArrows = new List<GameObject>();
-    GameObject pooledPickUpArrow;
+
+    [SerializeField] Vector3 shootingArrrowOffset;
+    GameObject pooledShootingArrow;
+
+    float zOffset = 167;
 
     private void OnEnable()
     {
         EventManager.Instance.onIncreasedDifficulty += SpawnNextEnemy;
-        EventManager.Instance.onSpawnTrigger += SpawnNextMapObstaclesAndPowerUps;
-        EventManager.Instance.onSpawnTrigger += SpawnNextPickUpArrows;
-        EventManager.Instance.onRemoveTrigger += DeactivatePreviousMapAndObstacles;
-        EventManager.Instance.onRemoveTrigger += DeactivatePreviousPickUpArrows;
+        EventManager.Instance.onSpawnTrigger += SpawnNextObjects;
+        EventManager.Instance.onRemoveTrigger += DeactivatePreviousObjects;
         EventManager.Instance.onSpawnShootingArrow = SpawnNextShootingArrow;
         EventManager.Instance.onArrowHit += DeactivateObject;
     }
@@ -70,16 +70,19 @@ public class SpawnManager : Singleton<SpawnManager>
             GetPooledCity(Vector3.zero);
             GetPooledObstacles(Vector3.zero);
             SpawnNextPowerUp();
+            SpawnNextCoins();
             SpawnNextPickUpArrows();
         }
     }
 
-    void SpawnNextMapObstaclesAndPowerUps()
+    void SpawnNextObjects()
     {
         GetPooledRoad(roadSpawnPos);
         GetPooledCity(citySpawnPos);
         GetPooledObstacles(obstaclesSpawnPos);
         SpawnNextPowerUp();
+        SpawnNextCoins();
+        SpawnNextPickUpArrows();
     }
 
     void SpawnNextPowerUp()
@@ -95,6 +98,16 @@ public class SpawnManager : Singleton<SpawnManager>
         if (SceneManager.GetSceneByName(SceneName.ENDLESS_RUNNER_GAME).isLoaded)
         {
             GetPooledEnemy(GetRandomPosition(enemyLeftSpawnPos, enemyRightSpawnPos));
+        }
+    }
+
+    void SpawnNextCoins()
+    {
+        previousCoins.AddRange(pooledCoins);
+        pooledCoins.Clear();
+        for (int i = 0; i < amountOfCoinsToSpawn; i++)
+        {
+            GetPooledCoin(GetRandomPosition(coinsMinSpawnPos, coinsMaxSpawnPos));
         }
     }
 
@@ -142,24 +155,21 @@ public class SpawnManager : Singleton<SpawnManager>
         GetPooledObject(ObjectType.Enemy, ref pooledEnemy, ref previousEnemy, newPos);
     }
 
-    void GetPooledShootingArrow(Vector3 newPos)
+    void GetPooledCoin(Vector3 newPos) 
     {
-        GetPooledObject(ObjectType.ShootingArrow, ref pooledShootingArrow, newPos);
+        pooledCoins.Add(pooledCoin);
+        GetPooledObject(ObjectType.Coin, ref pooledCoin, previousCoins, newPos);
     }
 
     void GetPooledPickUpArrow(Vector3 newPos)
     {
         pooledPickApArrows.Add(pooledPickUpArrow);
-        pooledPickUpArrow = ObjectPooler.Instance.GetPooledObject(ObjectType.PickUpArrow);
-        pooledPickUpArrow.SetActive(true);
-        if (previousPickUpArrows.Count > 0)
-        {
-            pooledPickUpArrow.transform.position = new Vector3(newPos.x, newPos.y, newPos.z + zOffset);
-        }
-        else
-        {
-            pooledPickUpArrow.transform.position = newPos;
-        }
+        GetPooledObject(ObjectType.PickUpArrow, ref pooledPickUpArrow, previousPickUpArrows, newPos);
+    }
+
+    void GetPooledShootingArrow(Vector3 newPos)
+    {
+        GetPooledObject(ObjectType.ShootingArrow, ref pooledShootingArrow, newPos);
     }
 
     void GetPooledObject(ObjectType objType, ref GameObject pooledObject, ref GameObject previousObject, Vector3 newPos)
@@ -175,6 +185,13 @@ public class SpawnManager : Singleton<SpawnManager>
         pooledObject = ObjectPooler.Instance.GetPooledObject(objType);
         pooledObject.SetActive(true);
         PositionPooledObject(objType, pooledObject, null, newPos);
+    }
+
+    void GetPooledObject(ObjectType objType, ref GameObject pooledObject, List<GameObject> previousObjects, Vector3 newPos)
+    {
+        pooledObject = ObjectPooler.Instance.GetPooledObject(objType);
+        pooledObject.SetActive(true);
+        PositionPooledObjectInList(previousObjects, pooledObject, newPos);
     }
 
     void AssignPreviousObject(ref GameObject pooledObj, ref GameObject previousObj)
@@ -214,6 +231,18 @@ public class SpawnManager : Singleton<SpawnManager>
         }
     }
 
+    void PositionPooledObjectInList(List<GameObject> previousObjects, GameObject pooledObj, Vector3 newPos)
+    {
+        if (previousObjects.Count > 0)
+        {
+            pooledObj.transform.position = new Vector3(newPos.x, newPos.y, newPos.z + zOffset);
+        }
+        else
+        {
+            pooledObj.transform.position = newPos;
+        }
+    }
+
     Vector3 GetRandomPosition(Vector3 minSpawnPos, Vector3 maxSpawnPos)
     {
         float xPos = Random.Range(minSpawnPos.x, maxSpawnPos.x);
@@ -223,21 +252,14 @@ public class SpawnManager : Singleton<SpawnManager>
         return new Vector3(xPos, yPos, zPos);
     }
 
-    void DeactivatePreviousMapAndObstacles()
+    void DeactivatePreviousObjects()
     {
         DeactivateObject(previousRoad);
         DeactivateObject(previousCity);
         DeactivateObject(previousObstacles);
         DeactivateObject(previousPowerUp);
-    }
-
-    void DeactivatePreviousPickUpArrows()
-    {
-        foreach(GameObject obj in previousPickUpArrows)
-        {
-            DeactivateObject(obj);
-        }
-        previousPickUpArrows.Clear();
+        DeactivateObjects(previousCoins);
+        DeactivateObjects(previousPickUpArrows);
     }
 
     void DeactivateObject(GameObject obj)
@@ -246,5 +268,14 @@ public class SpawnManager : Singleton<SpawnManager>
         {
             obj.SetActive(false);
         }
+    }
+
+    void DeactivateObjects(List<GameObject> objects)
+    {
+        foreach (GameObject obj in objects)
+        {
+            DeactivateObject(obj);
+        }
+        objects.Clear();
     }
 }

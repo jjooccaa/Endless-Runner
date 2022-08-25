@@ -14,12 +14,12 @@ public class EventManager : Singleton<EventManager>
     public UnityAction<float> onMovementSpeedChange;
     public UnityAction onSpawnTrigger;
     public UnityAction onRemoveTrigger;
+    public UnityAction onCoinPickUp;
     public UnityAction<Vector3> onSpawnShootingArrow;
     public UnityAction<GameObject> onShoot;
     public UnityAction<GameObject> onArrowHit;
     public UnityAction onArrowPickUp;
     public UnityAction onArrowShoot;
-    public UnityAction onCoinPickUp;
     public UnityAction onTutorialTrigger;
     public UnityAction<string, string> onRegister;
     public UnityAction<string, string> onLogin;

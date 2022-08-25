@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShootingArrow : Arrow
+public class ShootingArrow : PickUps
 {
     private void OnCollisionEnter(Collision collision)
     {

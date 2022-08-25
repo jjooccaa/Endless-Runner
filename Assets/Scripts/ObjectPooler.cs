@@ -66,6 +66,7 @@ public class ObjectPooler : Singleton<ObjectPooler>
         PoolObjects(powerUpPrefabs, pooledPowerUps, numberOfPowerUpsToPool);
         PoolObjects(enemyPrefabs, pooledEnemies, numberOfEnemiesToPool);
         AssignEnemyAttributes();
+        PoolObjects(coinPrefabs, pooledCoins, numberOfCoinsToPool);
         PoolObjects(shootingArrowPrefabs, pooledShootingArrows, numberOfShootingArrowsToPool);
         PoolObjects(pickUpArrowPrefabs, pooledPickUpArrows, numberOfPickUpArrowsToPool);
     }
