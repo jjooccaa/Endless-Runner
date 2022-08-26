@@ -215,7 +215,7 @@ public class GameManager : Singleton<GameManager>
     {
         if (numberOfArrowsText != null)
         {
-            numberOfArrowsText.text = "Arrows: " + numberOfArrows;
+            numberOfArrowsText.text = numberOfArrows.ToString();
         }
     }
 
@@ -223,7 +223,7 @@ public class GameManager : Singleton<GameManager>
     {
         if (numberOfCoinsText != null)
         {
-            numberOfCoinsText.text = "Coins: " + numberOfCoins;
+            numberOfCoinsText.text = numberOfCoins.ToString();
         }
     }
 

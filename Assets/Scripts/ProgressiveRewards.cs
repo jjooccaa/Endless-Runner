@@ -35,7 +35,6 @@ public class ProgressiveRewards : MonoBehaviour
 		var serializer = PluginManager.GetPlugin<ISerializerPlugin>(PluginContract.PlayFab_Serializer);
 		List<ItemInstance> grantedItems = serializer.DeserializeObject<List<ItemInstance>>(result.FunctionResult.ToString());
 
-
 		if (grantedItems != null && grantedItems.Count > 0)
 		{
 			Debug.Log(string.Format("You were granted {0} items:", grantedItems.Count));
