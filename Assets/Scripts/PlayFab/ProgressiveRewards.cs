@@ -59,15 +59,15 @@ public class ProgressiveRewards : MonoBehaviour
 		}
 	}
 	
-	void OnApiCallError(PlayFabError err)
+	void OnApiCallError(PlayFabError error)
 	{
-		string http = string.Format("HTTP:{0}", err.HttpCode);
-		string message = string.Format("ERROR:{0} -- {1}", err.Error, err.ErrorMessage);
+		string http = string.Format("HTTP:{0}", error.HttpCode);
+		string message = string.Format("ERROR:{0} -- {1}", error.Error, error.ErrorMessage);
 		string details = string.Empty;
 		
-		if(err.ErrorDetails != null)
+		if(error.ErrorDetails != null)
 		{
-			foreach(var detail in err.ErrorDetails)
+			foreach(var detail in error.ErrorDetails)
 			{
 				details += string.Format("{0} \n", detail.ToString());
 			}
