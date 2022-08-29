@@ -19,6 +19,10 @@ public class MenuController : MonoBehaviour
     [Header("Daily Rewards")]
     [SerializeField] GameObject dailyRewardsPanel;
 
+    [Header("Daily Task")]
+    [SerializeField] GameObject dailyTaskPanel;
+    [SerializeField] TMP_Text dailyTaskText;
+
     [Header("Graphics Settings")]
     [SerializeField] public Slider brightnessSlider;
     [SerializeField] TMP_Text brightnessValueText;
@@ -51,6 +55,7 @@ public class MenuController : MonoBehaviour
         EventManager.Instance.onLoginSuccess += DeactivateLoginScreen;
         EventManager.Instance.onLeaderboardGet += GenerateLeaderboardRow;
         EventManager.Instance.onGetCurrency += DisplayCurrencies;
+        EventManager.Instance.onGetDailyTaskChange += DisplayDailyTaskText;
     }
 
     private void Awake()
@@ -59,6 +64,7 @@ public class MenuController : MonoBehaviour
         if(isLogged)
         {
             DeactivateLoginScreen();
+            ActivateDailyTaskPanel();
             ActivateMainMenu();
         }
     }
@@ -69,16 +75,23 @@ public class MenuController : MonoBehaviour
         ChallengeMode.IsMediumModeActive = false;
         ChallengeMode.IsHardModeActive = false;
     }
+
     void Loggedin()
     {
         isLogged = true;
         ActivateDailyRewardsPanel();
+        ActivateDailyTaskPanel();
         ActivateMainMenu();
     }
 
     void ActivateDailyRewardsPanel()
     {
         dailyRewardsPanel.SetActive(true);
+    }
+
+    void ActivateDailyTaskPanel()
+    {
+        dailyTaskPanel.SetActive(true);
     }
 
     void ActivateMainMenu()
@@ -110,6 +123,11 @@ public class MenuController : MonoBehaviour
     void DisplayLoginInfoText(string message)
     {
         infoMessage.text = message;
+    }
+
+    void DisplayDailyTaskText(string task)
+    {
+        dailyTaskText.text = task;
     }
 
     // When yes has been pressed in Tutorial dialogue. Load tutorial.

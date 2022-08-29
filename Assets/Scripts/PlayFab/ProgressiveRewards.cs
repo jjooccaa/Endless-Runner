@@ -1,10 +1,8 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using System;
 using System.Collections.Generic;
 using PlayFab;
 using PlayFab.ClientModels;
-using TMPro;
 
 public class ProgressiveRewards : MonoBehaviour 
 {
@@ -24,31 +22,31 @@ public class ProgressiveRewards : MonoBehaviour
 	void OnCheckInCallback(ExecuteCloudScriptResult result)
 	{
 		// output any errors that happend within cloud script
-		if(result.Error != null)
+		if (result.Error != null)
 		{
 			Debug.LogError(string.Format("{0} -- {1}", result.Error, result.Error.Message));
 			return;
-		}	
+		}
 
 		Debug.Log("CheckIn Results:");
-;
+
 		var serializer = PluginManager.GetPlugin<ISerializerPlugin>(PluginContract.PlayFab_Serializer);
 		List<ItemInstance> grantedItems = serializer.DeserializeObject<List<ItemInstance>>(result.FunctionResult.ToString());
 
 		if (grantedItems != null && grantedItems.Count > 0)
 		{
 			Debug.Log(string.Format("You were granted {0} items:", grantedItems.Count));
-			
+
 			string output = string.Empty;
-			foreach(var item in grantedItems)
+			foreach (var item in grantedItems)
 			{
 				output += string.Format("\t {0}: {1}\n", item.ItemId, item.Annotation);
 			}
 			Debug.Log(output);
 		}
-		else if(result.Logs.Count > 0)
+		else if (result.Logs.Count > 0)
 		{
-			foreach(var statement in result.Logs)
+			foreach (var statement in result.Logs)
 			{
 				Debug.Log(statement.Message);
 			}

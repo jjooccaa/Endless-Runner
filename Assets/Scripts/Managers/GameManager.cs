@@ -36,6 +36,7 @@ public class GameManager : Singleton<GameManager>
     public int NumberOfArrows
     { get { return numberOfArrows; }}
 
+    int numberOfEnemiesKilled = 0;
     int numberOfCoins = 0;
     float difficultyIncreaser = 1;
     float increaseDifficultyAfter = 10;
@@ -171,10 +172,14 @@ public class GameManager : Singleton<GameManager>
         {
             gameOverScreen.SetActive(true);
         }
-        PlayFabManager.Instance.SendLeaderboard(ScoreManager.Instance.Score);
-        PlayFabManager.Instance.GrantCoins(numberOfCoins);
-        //EventManager.Instance.onSendLeaderboard?.Invoke(ScoreManager.Instance.Score);
-        //EventManager.Instance.onGrantCoins?.Invoke(numberOfCoins);
+        if (SceneManager.GetSceneByName(SceneName.ENDLESS_RUNNER_GAME).isLoaded)
+        {
+            PlayFabManager.Instance.SendLeaderboard(ScoreManager.Instance.Score);
+            PlayFabManager.Instance.GrantCoins(numberOfCoins);
+            DailyTasks.Instance.CheckTaskProgress(numberOfEnemiesKilled);
+            //EventManager.Instance.onSendLeaderboard?.Invoke(ScoreManager.Instance.Score);
+            //EventManager.Instance.onGrantCoins?.Invoke(numberOfCoins);
+        }
     }
 
     void TakeLife()
@@ -237,6 +242,11 @@ public class GameManager : Singleton<GameManager>
         numberOfArrows--;
     }
 
+    public void IncreaseNumberOfEnemiesKilled()
+    {
+        numberOfEnemiesKilled++;
+    }
+
     void IncreaseNumberOfCoins()
     {
         numberOfCoins++;
@@ -291,5 +301,4 @@ public class GameManager : Singleton<GameManager>
     {
         // Fly power up. In progress
     }
-
 }

@@ -31,6 +31,7 @@ public class EnemyController : MonoBehaviour
 
         Physics.IgnoreLayerCollision(8, 7); // Ignore collision with obstacles
         Physics.IgnoreLayerCollision(8, 9); // Ignore collision with pick ups
+        Physics.IgnoreLayerCollision(8, 8); // Ignore collision with other enemies
     }
 
     void Update()
