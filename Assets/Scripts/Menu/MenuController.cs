@@ -21,7 +21,7 @@ public class MenuController : MonoBehaviour
 
     [Header("Daily Task")]
     [SerializeField] GameObject dailyTaskPanel;
-    [SerializeField] TMP_Text dailyTaskText;
+    [SerializeField] TMP_Text dailyTaskInfo;
 
     [Header("Graphics Settings")]
     [SerializeField] public Slider brightnessSlider;
@@ -55,7 +55,7 @@ public class MenuController : MonoBehaviour
         EventManager.Instance.onLoginSuccess += DeactivateLoginScreen;
         EventManager.Instance.onLeaderboardGet += GenerateLeaderboardRow;
         EventManager.Instance.onGetCurrency += DisplayCurrencies;
-        EventManager.Instance.onGetDailyTaskChange += DisplayDailyTaskText;
+        EventManager.Instance.onGetDailyTaskChange += DisplayDailyTaskInfo;
     }
 
     private void Awake()
@@ -125,9 +125,9 @@ public class MenuController : MonoBehaviour
         infoMessage.text = message;
     }
 
-    void DisplayDailyTaskText(string task)
+    void DisplayDailyTaskInfo(string taskInfo)
     {
-        dailyTaskText.text = task;
+        dailyTaskInfo.text = taskInfo;
     }
 
     // When yes has been pressed in Tutorial dialogue. Load tutorial.

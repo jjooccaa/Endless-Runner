@@ -46,8 +46,8 @@ public class DailyTasks : Singleton<DailyTasks>
         if (result != null)
         {
             taskInfo = result.FunctionResult.ToString();
+            RefreshTaskInfo();
         }
-        CheckTaskInfo();
     }
 
     public void CheckTaskProgress(int enemiesKilled)
@@ -86,10 +86,9 @@ public class DailyTasks : Singleton<DailyTasks>
         }
     }
 
-    public void CheckTaskInfo()
+    public void RefreshTaskInfo()
     {
         EventManager.Instance.onGetDailyTaskChange?.Invoke(taskInfo);
-        Debug.Log(taskInfo + " taskInfo called");
     }
 
     void OnApiCallError(PlayFabError error)
