@@ -8,8 +8,8 @@ public class PlayFabManager : Singleton<PlayFabManager>
 {
     const string TITLE_ID = "26DA0";
     const string HIGHSCORE_LEADERBOARD_NAME = "HighScoreLeaderboard";
-    const string COINS_CODE = "CO";
-    const string GEMS_CODE = "GM";
+    public const string COINS_CODE = "CO";
+    public const string GEMS_CODE = "GM";
 
     private void OnEnable()
     {
@@ -50,6 +50,7 @@ public class PlayFabManager : Singleton<PlayFabManager>
     {
         EventManager.Instance.onLoginInfoChange?.Invoke("Logged in");
         EventManager.Instance.onLoginSuccess?.Invoke();
+        StoreManager.Instance.GetCatalog();
     }
 
     void ResetPassword(string email)
@@ -140,9 +141,21 @@ public class PlayFabManager : Singleton<PlayFabManager>
         Debug.Log("Coins granted!");
     }
 
-    void OnError(PlayFabError error)
+    public void OnError(PlayFabError error)
     {
-        Debug.LogError(error.GenerateErrorReport());
+        string http = string.Format("HTTP:{0}", error.HttpCode);
+        string message = string.Format("ERROR:{0} -- {1}", error.Error, error.ErrorMessage);
+        string details = string.Empty;
+
+        if (error.ErrorDetails != null)
+        {
+            foreach (var detail in error.ErrorDetails)
+            {
+                details += string.Format("{0} \n", detail.ToString());
+            }
+        }
+
+        Debug.LogError(string.Format("{0}\n {1}\n {2}\n", http, message, details));
     }
 }
 

@@ -41,6 +41,8 @@ public class GameManager : Singleton<GameManager>
     float difficultyIncreaser = 1;
     float increaseDifficultyAfter = 10;
     float scoreCounter = 0;
+    bool hasHealthPotion;
+    bool hasBackpack;
 
     private void OnEnable()
     {
@@ -60,6 +62,8 @@ public class GameManager : Singleton<GameManager>
     {
         LimitFPS();
 
+        CheckIfPlayerHasItems();
+
         DisplayNumberOfLives();
         DisplayNumberOfArrows();
         DisplayNumberOfCoins();
@@ -71,6 +75,34 @@ public class GameManager : Singleton<GameManager>
         IncreaseDifficultyOverTime(increaseDifficultyAfter);
 
         PauseOrUnpauseGame();
+    }
+
+    void CheckIfPlayerHasItems()
+    {
+        if (SceneManager.GetSceneByName(SceneName.ENDLESS_RUNNER_GAME).isLoaded)
+        {
+            for (int i = 0; i < StoreManager.inventory.Count; i++)
+            {
+                if (StoreManager.inventory[i].newName == Item.HEALTH_POTION_NAME)
+                {
+                    ActivateHealthPotion();
+                }
+                else if (StoreManager.inventory[i].newName == Item.BACKPACK_NAME)
+                {
+                    ActivateBackpack();
+                }
+            }
+        }
+    }
+
+    void ActivateHealthPotion()
+    {
+        numberOfLives++;
+    }
+
+    void ActivateBackpack()
+    {
+        numberOfArrows += 5;
     }
 
     void LimitFPS()
@@ -177,8 +209,8 @@ public class GameManager : Singleton<GameManager>
             PlayFabManager.Instance.SendLeaderboard(ScoreManager.Instance.Score);
             PlayFabManager.Instance.GrantCoins(numberOfCoins);
             DailyTasks.Instance.CheckTaskProgress(numberOfEnemiesKilled);
-            //EventManager.Instance.onSendLeaderboard?.Invoke(ScoreManager.Instance.Score);
-            //EventManager.Instance.onGrantCoins?.Invoke(numberOfCoins);
+            //EventManager.Instance.onSendLeaderboard?.Invoke(ScoreManager.Instance.Score); //FIXME: Not working
+            //EventManager.Instance.onGrantCoins?.Invoke(numberOfCoins); //FIXME: Not working
         }
     }
 
