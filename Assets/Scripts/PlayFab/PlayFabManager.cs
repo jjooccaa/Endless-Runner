@@ -10,6 +10,7 @@ public class PlayFabManager : Singleton<PlayFabManager>
     const string HIGHSCORE_LEADERBOARD_NAME = "HighScoreLeaderboard";
     public const string COINS_CODE = "CO";
     public const string GEMS_CODE = "GM";
+    const string CHECKIN_FUNCTION = "CheckIn";
 
     private void OnEnable()
     {
@@ -139,6 +140,56 @@ public class PlayFabManager : Singleton<PlayFabManager>
     void OnGrantCoinsSuccess(ModifyUserVirtualCurrencyResult result)
     {
         Debug.Log("Coins granted!");
+    }
+
+    // Progressive Rewards
+    public void CheckIn()
+    {
+        Debug.Log("Checking-in with Server...");
+        ExecuteCloudScriptRequest request = new ExecuteCloudScriptRequest()
+        {
+            FunctionName = CHECKIN_FUNCTION,
+        };
+
+        PlayFabClientAPI.ExecuteCloudScript(request, OnCheckInCallback, OnError);
+    }
+
+    void OnCheckInCallback(ExecuteCloudScriptResult result)
+    {
+        // output any errors that happend within cloud script
+        if (result.Error != null)
+        {
+            Debug.LogError(string.Format("{0} -- {1}", result.Error, result.Error.Message));
+            return;
+        }
+
+        Debug.Log("CheckIn Results:");
+
+        var serializer = PluginManager.GetPlugin<ISerializerPlugin>(PluginContract.PlayFab_Serializer);
+        List<ItemInstance> grantedItems = serializer.DeserializeObject<List<ItemInstance>>(result.FunctionResult.ToString());
+
+        if (grantedItems != null && grantedItems.Count > 0)
+        {
+            Debug.Log(string.Format("You were granted {0} items:", grantedItems.Count));
+
+            string output = string.Empty;
+            foreach (var item in grantedItems)
+            {
+                output += string.Format("\t {0}: {1}\n", item.ItemId, item.Annotation);
+            }
+            Debug.Log(output);
+        }
+        else if (result.Logs.Count > 0)
+        {
+            foreach (var statement in result.Logs)
+            {
+                Debug.Log(statement.Message);
+            }
+        }
+        else
+        {
+            Debug.Log("CheckIn Successful! No items granted.");
+        }
     }
 
     public void OnError(PlayFabError error)

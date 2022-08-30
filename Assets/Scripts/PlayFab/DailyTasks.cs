@@ -50,6 +50,11 @@ public class DailyTasks : Singleton<DailyTasks>
         }
     }
 
+    public void RefreshTaskInfo()
+    {
+        EventManager.Instance.onGetDailyTaskChange?.Invoke(taskInfo);
+    }
+
     public void CheckTaskProgress(int enemiesKilled)
     {
         var request = new ExecuteCloudScriptRequest
@@ -84,10 +89,5 @@ public class DailyTasks : Singleton<DailyTasks>
         {
             taskInfo = result.FunctionResult.ToString();
         }
-    }
-
-    public void RefreshTaskInfo()
-    {
-        EventManager.Instance.onGetDailyTaskChange?.Invoke(taskInfo);
     }
 }
