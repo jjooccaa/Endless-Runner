@@ -41,8 +41,6 @@ public class GameManager : Singleton<GameManager>
     float difficultyIncreaser = 1;
     float increaseDifficultyAfter = 10;
     float scoreCounter = 0;
-    bool hasHealthPotion;
-    bool hasBackpack;
 
     private void OnEnable()
     {
