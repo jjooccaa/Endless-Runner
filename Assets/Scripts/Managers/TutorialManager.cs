@@ -12,7 +12,7 @@ public class TutorialManager : MonoBehaviour
 
     [SerializeField] GameObject startTutorialTrigger;
 
-    bool inputDisabled = false;
+    bool inputDisabled = true;
 
     int tutorialCounter = 0;
     int delay = 2;

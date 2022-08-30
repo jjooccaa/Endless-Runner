@@ -43,7 +43,8 @@ public class MenuController : MonoBehaviour
     [Header("Currencies")]
     [SerializeField] TMP_Text coinsText;
     [SerializeField] TMP_Text gemsText;
-    
+
+    [Header("High Score")]
     [SerializeField] public TMP_Text highScoreText;
 
     static bool isLogged = false;

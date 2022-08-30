@@ -13,7 +13,7 @@ public class DailyTasks : Singleton<DailyTasks>
 
     private void OnEnable()
     {
-        EventManager.Instance.onLoginSuccess = GetDailyTask;
+        EventManager.Instance.onLoginSuccess += GetDailyTask;
     }
 
     public void GetDailyTask()
@@ -23,7 +23,7 @@ public class DailyTasks : Singleton<DailyTasks>
             FunctionName = GET_DAILY_TASK_FUNCTION
         };
 
-        PlayFabClientAPI.ExecuteCloudScript(request, OnGetDailyTaskCallback, OnApiCallError);
+        PlayFabClientAPI.ExecuteCloudScript(request, OnGetDailyTaskCallback, PlayFabManager.Instance.OnError);
     }
 
     void OnGetDailyTaskCallback(ExecuteCloudScriptResult result)
@@ -61,7 +61,7 @@ public class DailyTasks : Singleton<DailyTasks>
             }
         };
 
-        PlayFabClientAPI.ExecuteCloudScript(request, OnCheckTaskCallback, OnApiCallError);
+        PlayFabClientAPI.ExecuteCloudScript(request, OnCheckTaskCallback, PlayFabManager.Instance.OnError);
     }
 
     void OnCheckTaskCallback(ExecuteCloudScriptResult result)
@@ -89,22 +89,5 @@ public class DailyTasks : Singleton<DailyTasks>
     public void RefreshTaskInfo()
     {
         EventManager.Instance.onGetDailyTaskChange?.Invoke(taskInfo);
-    }
-
-    void OnApiCallError(PlayFabError error)
-    {
-        string http = string.Format("HTTP:{0}", error.HttpCode);
-        string message = string.Format("ERROR:{0} -- {1}", error.Error, error.ErrorMessage);
-        string details = string.Empty;
-
-        if (error.ErrorDetails != null)
-        {
-            foreach (var detail in error.ErrorDetails)
-            {
-                details += string.Format("{0} \n", detail.ToString());
-            }
-        }
-
-        Debug.LogError(string.Format("{0}\n {1}\n {2}\n", http, message, details));
     }
 }
