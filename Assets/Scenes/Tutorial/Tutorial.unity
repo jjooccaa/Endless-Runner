@@ -3404,6 +3404,9 @@ MonoBehaviour:
   powerUpMaxSpawnPos: {x: 4, y: 3, z: 150}
   enemyLeftSpawnPos: {x: 0, y: 0, z: 0}
   enemyRightSpawnPos: {x: 0, y: 0, z: 0}
+  amountOfCoinsToSpawn: 3
+  coinsMinSpawnPos: {x: 0, y: 0, z: 0}
+  coinsMaxSpawnPos: {x: 0, y: 0, z: 0}
   amountOfPickUpArrowsToSpawn: 5
   pickUpArrowsMinSpawnPos: {x: 0, y: 0, z: 0}
   pickUpArrowsMaxSpawnPos: {x: 0, y: 0, z: 0}

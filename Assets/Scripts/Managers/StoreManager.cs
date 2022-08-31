@@ -23,7 +23,8 @@ public class StoreManager : Singleton<StoreManager>
 
     private void OnEnable()
     {
-        //EventManager.Instance.onLoginSuccess += GetCatalog; // FIXME: Not working for some reason. 
+        EventManager.Instance.onLoginSuccess += GetCatalog; // FIXME: Not working for some reason. 
+        EventManager.Instance.onLoginSuccess += DisplayStoreItems;
     }
 
     public void GetCatalog()
@@ -51,7 +52,6 @@ public class StoreManager : Singleton<StoreManager>
                 }
             }
         }
-        DisplayStoreItems();
         GetInventory();
     }
 
@@ -97,6 +97,7 @@ public class StoreManager : Singleton<StoreManager>
 
     void ClearInventory()
     {
+        inventory.Clear();
         foreach(GameObject gameObject in inventoryObjects)
         {
             Destroy(gameObject);
