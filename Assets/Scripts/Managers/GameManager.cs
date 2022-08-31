@@ -81,11 +81,11 @@ public class GameManager : Singleton<GameManager>
         {
             for (int i = 0; i < StoreManager.inventory.Count; i++)
             {
-                if (StoreManager.inventory[i].newName == Item.HEALTH_POTION_NAME)
+                if (StoreManager.inventory[i].name == Item.HEALTH_POTION_NAME)
                 {
                     ActivateHealthPotion();
                 }
-                else if (StoreManager.inventory[i].newName == Item.BACKPACK_NAME)
+                else if (StoreManager.inventory[i].name == Item.BACKPACK_NAME)
                 {
                     ActivateBackpack();
                 }

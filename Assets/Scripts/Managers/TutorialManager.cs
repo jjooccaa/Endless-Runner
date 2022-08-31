@@ -10,10 +10,10 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] GameObject[] tutorialScreens;
     [SerializeField] TextMeshProUGUI continueText;
 
+    [Header("Trigger")]
     [SerializeField] GameObject startTutorialTrigger;
 
     bool inputDisabled = true;
-
     int tutorialCounter = 0;
     int delay = 2;
 

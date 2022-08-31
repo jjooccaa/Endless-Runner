@@ -51,7 +51,7 @@ public class EnemyController : MonoBehaviour
         } 
         else
         {
-            transform.Translate(Vector3.forward * Time.deltaTime * (enemy.speed * GameManager.Instance.MovementSpeed));
+            MoveStraight();
         }
     }
 
@@ -59,6 +59,11 @@ public class EnemyController : MonoBehaviour
     {
         currentPosition += Vector3.back * Time.deltaTime * (enemy.speed * GameManager.Instance.MovementSpeed);
         transform.position = currentPosition + axis * Mathf.Sin(Time.time * enemy.sidewaysSpeed) * magnitude;
+    }
+
+    void MoveStraight()
+    {
+        transform.Translate(Vector3.forward * Time.deltaTime * (enemy.speed * GameManager.Instance.MovementSpeed));
     }
 
     void DeactivateOnOutOfBounds()

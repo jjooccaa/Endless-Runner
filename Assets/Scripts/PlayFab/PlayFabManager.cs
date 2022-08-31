@@ -51,7 +51,6 @@ public class PlayFabManager : Singleton<PlayFabManager>
     {
         EventManager.Instance.onLoginInfoChange?.Invoke("Logged in");
         EventManager.Instance.onLoginSuccess?.Invoke();
-        StoreManager.Instance.GetCatalog();
     }
 
     void ResetPassword(string email)

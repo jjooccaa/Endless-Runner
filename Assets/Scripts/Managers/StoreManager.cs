@@ -41,11 +41,13 @@ public class StoreManager : Singleton<StoreManager>
         foreach (CatalogItem catalogItem in catalogItems)
         {
             uint cost = catalogItem.VirtualCurrencyPrices[PlayFabManager.GEMS_CODE];
+            string description = catalogItem.Description;
+
             foreach (Item storeItem in store)
             {
-                if (storeItem.newName == catalogItem.ItemId)
+                if (storeItem.iD == catalogItem.ItemId)
                 {
-                    storeItem.AssignItemInfo((int)cost);
+                    storeItem.AssignItemInfo((int)cost, description);
                 }
             }
         }
@@ -107,7 +109,8 @@ public class StoreManager : Singleton<StoreManager>
         inventory.Add(item);
 
         GameObject gameObject = Instantiate(itemButton, inventoryContentArea.transform.position, Quaternion.identity);
-        gameObject.transform.GetChild(0).GetComponent<TMP_Text>().text = item.newName;
+        gameObject.transform.GetChild(0).GetComponent<TMP_Text>().text = item.name;
+        gameObject.transform.GetChild(1).GetComponent<TMP_Text>().text = item.description;
         gameObject.GetComponent<Image>().sprite = item.GetComponent<SpriteRenderer>().sprite;
         gameObject.GetComponent<Image>().preserveAspect = true;
         gameObject.transform.SetParent(inventoryContentArea.transform);
@@ -119,7 +122,7 @@ public class StoreManager : Singleton<StoreManager>
         foreach (Item item in store)
         {
             GameObject gameObject = Instantiate(itemButton, storeContentArea.transform.position, Quaternion.identity);
-            gameObject.transform.GetChild(0).GetComponent<TMP_Text>().text = item.newName;
+            gameObject.transform.GetChild(0).GetComponent<TMP_Text>().text = item.name;
             gameObject.transform.GetChild(1).GetComponent<TMP_Text>().text = string.Format("{0} Gems", item.cost);
             gameObject.GetComponent<Image>().sprite = item.GetComponent<SpriteRenderer>().sprite;
             gameObject.GetComponent<Image>().preserveAspect = true;

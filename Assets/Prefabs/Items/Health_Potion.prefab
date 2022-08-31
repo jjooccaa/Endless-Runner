@@ -98,5 +98,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iD: Health_Potion
-  newName: Health Potion
+  name: Health Potion
   cost: 20

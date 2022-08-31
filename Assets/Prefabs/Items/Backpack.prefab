@@ -98,5 +98,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iD: Backpack
-  newName: Backpack
+  name: Backpack
   cost: 25
