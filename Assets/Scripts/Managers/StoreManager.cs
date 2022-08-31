@@ -23,7 +23,7 @@ public class StoreManager : Singleton<StoreManager>
 
     private void OnEnable()
     {
-        EventManager.Instance.onLoginSuccess += GetCatalog; // FIXME: Not working for some reason. 
+        EventManager.Instance.onLoginSuccess += GetCatalog;
         EventManager.Instance.onLoginSuccess += DisplayStoreItems;
     }
 

@@ -204,11 +204,9 @@ public class GameManager : Singleton<GameManager>
         }
         if (SceneManager.GetSceneByName(SceneName.ENDLESS_RUNNER_GAME).isLoaded)
         {
-            //PlayFabManager.Instance.SendLeaderboard(ScoreManager.Instance.Score);
-            //PlayFabManager.Instance.GrantCoins(numberOfCoins);
             DailyTasks.Instance.CheckTaskProgress(numberOfEnemiesKilled);
-            EventManager.Instance.onSendLeaderboard?.Invoke(ScoreManager.Instance.Score); //FIXME: Not working
-            EventManager.Instance.onGrantCoins?.Invoke(numberOfCoins); //FIXME: Not working
+            EventManager.Instance.onSendLeaderboard?.Invoke(ScoreManager.Instance.Score); 
+            EventManager.Instance.onGrantCoins?.Invoke(numberOfCoins); 
         }
     }
 
