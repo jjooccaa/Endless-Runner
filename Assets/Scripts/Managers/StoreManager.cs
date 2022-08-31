@@ -24,7 +24,6 @@ public class StoreManager : Singleton<StoreManager>
     private void OnEnable()
     {
         EventManager.Instance.onLoginSuccess += GetCatalog;
-        EventManager.Instance.onLoginSuccess += DisplayStoreItems;
     }
 
     public void GetCatalog()
@@ -118,7 +117,7 @@ public class StoreManager : Singleton<StoreManager>
         inventoryObjects.Add(gameObject);
     }
 
-    void DisplayStoreItems()
+    public void DisplayStoreItems()
     {
         foreach (Item item in store)
         {
