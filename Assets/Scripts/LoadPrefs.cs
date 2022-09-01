@@ -8,6 +8,7 @@ public class LoadPrefs : MonoBehaviour
 {
     [SerializeField] bool canUse = false;
     [SerializeField] MenuController menuController;
+    [SerializeField] BackgroundManager backgroundManager;
 
     public const string MASTER_VOLUME = "masterVolume";
     public const string MASTER_BRIGHTNESS = "masterBrightness";
@@ -17,10 +18,19 @@ public class LoadPrefs : MonoBehaviour
     {
         if (canUse && menuController != null)
         {
+            LoadBackground();
             LoadHighScore();
             LoadMasterVolume();
             LoadMasterBrightness();
             LoadMasterFullScreen();
+        }
+    }
+
+    void LoadBackground()
+    {
+        if (PlayerPrefs.HasKey(BackgroundManager.BACKGROUND))
+        {
+            backgroundManager.SetBackground(PlayerPrefs.GetInt(BackgroundManager.BACKGROUND));
         }
     }
 
