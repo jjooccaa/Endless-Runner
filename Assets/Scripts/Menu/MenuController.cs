@@ -7,11 +7,13 @@ using TMPro;
 
 public class MenuController : MonoBehaviour
 {
-    [Header("Login informations")]
+    [Header("Login screen")]
     [SerializeField] GameObject loginScreen;
     [SerializeField] TMP_InputField emailInput;
     [SerializeField] TMP_InputField passwordInput;
     [SerializeField] TMP_Text infoMessage;
+    [SerializeField] GameObject displayNamePanel;
+    [SerializeField] TMP_InputField displayNameInput;
 
     [Header("Main Menu")]
     [SerializeField] GameObject mainMenu;
@@ -52,6 +54,8 @@ public class MenuController : MonoBehaviour
     private void OnEnable()
     {
         EventManager.Instance.onLoginInfoChange += DisplayLoginInfoText;
+        EventManager.Instance.onRegisterSuccess += ActivateDisplayNamePanel;
+        EventManager.Instance.onUpdateDisplayNameSuccess += DeactivateDisplayNamePane;
         EventManager.Instance.onLoginSuccess += Loggedin;
         EventManager.Instance.onLoginSuccess += DeactivateLoginScreen;
         EventManager.Instance.onLeaderboardGet += GenerateLeaderboardRow;
@@ -111,6 +115,16 @@ public class MenuController : MonoBehaviour
         EventManager.Instance.onRegister?.Invoke(emailInput.text, passwordInput.text);
     }
 
+    void ActivateDisplayNamePanel()
+    {
+        displayNamePanel.gameObject.SetActive(true);
+    }
+
+    void DeactivateDisplayNamePane()
+    {
+        displayNamePanel.gameObject.SetActive(false);
+    }
+
     public void LoginButton()
     {
         EventManager.Instance.onLogin?.Invoke(emailInput.text, passwordInput.text);
@@ -119,6 +133,11 @@ public class MenuController : MonoBehaviour
     public void ResetPasswordButton()
     {
         EventManager.Instance.onResetPassword?.Invoke(emailInput.text);
+    }
+
+    public void SaveDisplayNameButton()
+    {
+        EventManager.Instance.onSaveDisplayName?.Invoke(displayNameInput.text);
     }
 
     void DisplayLoginInfoText(string message)

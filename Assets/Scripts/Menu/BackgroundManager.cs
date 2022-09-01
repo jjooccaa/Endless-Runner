@@ -11,7 +11,6 @@ public class BackgroundManager : MonoBehaviour
     [SerializeField] GameObject currentBackground;
 
     private AsyncOperationHandle<Sprite> currentBackgroundOperationHandle;
-
     int backgroundIndex = 0;
 
     public const string BACKGROUND = "backgroundIndex";
@@ -54,7 +53,7 @@ public class BackgroundManager : MonoBehaviour
         var backgroundReference = backgrounds[backgroundIndex];
         currentBackgroundOperationHandle = backgroundReference.LoadAssetAsync<Sprite>();
         yield return currentBackgroundOperationHandle;
-        Debug.Log(currentBackgroundOperationHandle.Result);
+        Debug.Log("Background set: " + currentBackgroundOperationHandle.Result);
         currentBackground.GetComponent<Image>().sprite = currentBackgroundOperationHandle.Result;
     }
 }

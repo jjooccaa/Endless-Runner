@@ -27,6 +27,9 @@ public class EventManager : Singleton<EventManager>
     public UnityAction<int, int> onGetCurrency;
     // Playfab
     public UnityAction<string, string> onRegister;
+    public UnityAction onRegisterSuccess;
+    public UnityAction<string> onSaveDisplayName;
+    public UnityAction onUpdateDisplayNameSuccess;
     public UnityAction<string, string> onLogin;
     public UnityAction<string> onResetPassword;
     public UnityAction onLoginSuccess;

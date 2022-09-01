@@ -15,6 +15,7 @@ public class PlayFabManager : Singleton<PlayFabManager>
     private void OnEnable()
     {
         EventManager.Instance.onRegister += Register;
+        EventManager.Instance.onSaveDisplayName += UpdateDisplayName;
         EventManager.Instance.onLogin += Login;
         EventManager.Instance.onResetPassword += ResetPassword;
         EventManager.Instance.onSendLeaderboard += SendLeaderboard;
@@ -35,6 +36,21 @@ public class PlayFabManager : Singleton<PlayFabManager>
     void OnRegisterSuccess(RegisterPlayFabUserResult result)
     {
         EventManager.Instance.onLoginInfoChange?.Invoke("Successful registration");
+        EventManager.Instance.onRegisterSuccess?.Invoke();
+    }
+
+    void UpdateDisplayName(string displayName)
+    {
+        var request = new UpdateUserTitleDisplayNameRequest
+        {
+            DisplayName = displayName
+        };
+        PlayFabClientAPI.UpdateUserTitleDisplayName(request, OnUpdateDisplayNameSuccess, OnError);
+    }
+
+    void OnUpdateDisplayNameSuccess(UpdateUserTitleDisplayNameResult result)
+    {
+        EventManager.Instance.onUpdateDisplayNameSuccess?.Invoke();
     }
 
     void Login(string email, string password)
@@ -70,6 +86,7 @@ public class PlayFabManager : Singleton<PlayFabManager>
 
     void OnLoginOrRegisterError(PlayFabError error)
     {
+        OnError(error);
         EventManager.Instance.onLoginInfoChange?.Invoke(error.ErrorMessage);
     }
 
@@ -109,7 +126,7 @@ public class PlayFabManager : Singleton<PlayFabManager>
     {
         foreach (var item in result.Leaderboard)
         {
-            EventManager.Instance.onLeaderboardGet?.Invoke(item.Position, item.PlayFabId, item.StatValue.ToString());
+            EventManager.Instance.onLeaderboardGet?.Invoke(item.Position, item.DisplayName, item.StatValue.ToString());
         }
     }
 
