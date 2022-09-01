@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2701043261500249092}
+  - component: {fileID: 2233976798869417714}
   m_Layer: 9
   m_Name: Fly_PowerUp
   m_TagString: PowerUp
@@ -32,6 +33,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!114 &2233976798869417714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2701043261500249095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6139037991ea6a47a9d931ed86b4363, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2701043261955948022
 GameObject:
   m_ObjectHideFlags: 0
@@ -44,7 +57,6 @@ GameObject:
   - component: {fileID: 2701043261955948021}
   - component: {fileID: 2701043261955948020}
   - component: {fileID: 2881513476118887122}
-  - component: {fileID: 3465319029340259960}
   - component: {fileID: 6195938576021996545}
   m_Layer: 9
   m_Name: powerup multi
@@ -131,18 +143,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.017919816, y: 0.017919816, z: 0.0058251903}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3465319029340259960
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2701043261955948022}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6139037991ea6a47a9d931ed86b4363, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6195938576021996545
 MonoBehaviour:
   m_ObjectHideFlags: 0
