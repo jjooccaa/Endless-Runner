@@ -14,19 +14,20 @@ public class EnemyController : MonoBehaviour
     Animator animator;
 
     const string ATTACK_TRIG = "Attack_trig";
+    const string IDLE_TRIG = "Idle_trig";
 
     private void OnEnable()
     {
-        EventManager.Instance.onGameOver += DisableMovement;
         EventManager.Instance.onPlayerCrash += PlayAttackAnimation;
+        EventManager.Instance.onEnemySpawn += SetPosition;
+        EventManager.Instance.onGameOver += DisableMovement;
+        EventManager.Instance.onGameOver += PlayIdleAnimation;
     }
 
     void Start()
     {
         transform.localScale *= enemy.scale;
-        currentPosition = transform.position;
-        axis = transform.right;
-
+        SetPosition();
         animator = gameObject.GetComponent<Animator>();
 
         Physics.IgnoreLayerCollision(8, 7); // Ignore collision with obstacles
@@ -41,6 +42,12 @@ public class EnemyController : MonoBehaviour
             Move();
         }
         DeactivateOnOutOfBounds();
+    }
+
+    void SetPosition()
+    {
+        currentPosition = transform.position;
+        axis = transform.right;
     }
 
     void Move()
@@ -84,6 +91,14 @@ public class EnemyController : MonoBehaviour
         if (gameObject.activeInHierarchy)
         {
             animator.SetTrigger(ATTACK_TRIG);
+        }
+    }
+
+    void PlayIdleAnimation()
+    {
+        if (gameObject.activeInHierarchy)
+        {
+            animator.SetTrigger(IDLE_TRIG);
         }
     }
 }

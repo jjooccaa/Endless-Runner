@@ -58,8 +58,8 @@ public class SpawnManager : Singleton<SpawnManager>
         EventManager.Instance.onIncreasedDifficulty += SpawnNextEnemy;
         EventManager.Instance.onSpawnTrigger += SpawnNextObjects;
         EventManager.Instance.onRemoveTrigger += DeactivatePreviousObjects;
-        EventManager.Instance.onSpawnShootingArrow = SpawnNextShootingArrow;
-        EventManager.Instance.onArrowHit += DeactivateObject;
+        EventManager.Instance.onSpawnShootingArrow += SpawnNextShootingArrow;
+        EventManager.Instance.onArrowHitEnemy += DeactivateObject;
     }
 
     void Start()
@@ -97,7 +97,9 @@ public class SpawnManager : Singleton<SpawnManager>
     {
         if (SceneManager.GetSceneByName(SceneName.ENDLESS_RUNNER_GAME).isLoaded)
         {
+            Vector3 spawnPos = GetRandomPosition(enemyLeftSpawnPos, enemyRightSpawnPos);
             GetPooledEnemy(GetRandomPosition(enemyLeftSpawnPos, enemyRightSpawnPos));
+            EventManager.Instance.onEnemySpawn?.Invoke();
         }
     }
 

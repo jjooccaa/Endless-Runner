@@ -9,7 +9,7 @@ public class ShootingArrow : PickUps
         if (collision.gameObject.CompareTag(TagName.ENEMY_TAG))
         {
             Deactivate();
-            EventManager.Instance.onArrowHit?.Invoke(collision.gameObject);
+            EventManager.Instance.onArrowHitEnemy?.Invoke(collision.gameObject);
             GameManager.Instance.IncreaseNumberOfEnemiesKilled(); // Testing solution
         }
         else
