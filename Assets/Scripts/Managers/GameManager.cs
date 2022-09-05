@@ -76,6 +76,12 @@ public class GameManager : Singleton<GameManager>
         PauseOrUnpauseGame();
     }
 
+    void LimitFPS()
+    {
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = targetFrameRate;
+    }
+
     void CheckIfPlayerHasItems()
     {
         if (SceneManager.GetSceneByName(SceneName.ENDLESS_RUNNER_GAME).isLoaded)
@@ -102,12 +108,6 @@ public class GameManager : Singleton<GameManager>
     void ActivateBackpack()
     {
         numberOfArrows += 5;
-    }
-
-    void LimitFPS()
-    {
-        QualitySettings.vSyncCount = 0;
-        Application.targetFrameRate = targetFrameRate;
     }
 
     IEnumerator DelayStart()
@@ -281,7 +281,7 @@ public class GameManager : Singleton<GameManager>
         numberOfCoins++;
     }
 
-    //Power Ups
+    #region Powerups
     public void ActivatePowerUp(GameObject powerUp, int powerUpID)
     {
         switch (powerUpID)
@@ -330,4 +330,5 @@ public class GameManager : Singleton<GameManager>
     {
         // Fly power up. In progress
     }
+    #endregion
 }

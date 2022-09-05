@@ -16,7 +16,7 @@ public class DailyTasks : Singleton<DailyTasks>
         EventManager.Instance.onLoginSuccess += GetDailyTask;
     }
 
-    public void GetDailyTask()
+    void GetDailyTask()
     {
         var request = new ExecuteCloudScriptRequest
         {

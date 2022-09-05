@@ -109,7 +109,7 @@ public class MenuController : MonoBehaviour
         loginScreen.SetActive(false);
     }
 
-    // User login logic
+    #region User Login logic
     public void RegisterButton()
     {
         EventManager.Instance.onRegister?.Invoke(emailInput.text, passwordInput.text);
@@ -144,6 +144,7 @@ public class MenuController : MonoBehaviour
     {
         infoMessage.text = message;
     }
+    #endregion
 
     void DisplayDailyTaskInfo(string taskInfo)
     {
@@ -191,7 +192,7 @@ public class MenuController : MonoBehaviour
         Application.Quit();
     }
 
-    // Graphics settings
+    #region Graphic Settings
     public void ApplyBrightness(float brightness)
     {
         brightnessLevel = brightness;
@@ -222,8 +223,9 @@ public class MenuController : MonoBehaviour
         Screen.fullScreen = true;
         SaveGraphicsSettings();
     }
+    #endregion
 
-    // Sound settings
+    #region Sound Settings
     public void ApplyMasterVolume(float volume)
     {
         AudioListener.volume = volume;
@@ -242,8 +244,9 @@ public class MenuController : MonoBehaviour
         masterVolumeValue.text = defaultVolume.ToString();
         SaveVolumeSettings();
     }
+    #endregion
 
-    // Leaderboard
+    #region Leaderboard
     void GenerateLeaderboardRow(int position, string name, string score)
     {
         GameObject row = Instantiate(rowPrefab, rowsParent);
@@ -260,8 +263,8 @@ public class MenuController : MonoBehaviour
             Destroy(item.gameObject);
         }
     }
+    #endregion
 
-    // Currencies
     void DisplayCurrencies(int coins, int gems)
     {
         coinsText.text = coins.ToString();

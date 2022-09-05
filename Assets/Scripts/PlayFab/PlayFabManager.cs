@@ -22,6 +22,7 @@ public class PlayFabManager : Singleton<PlayFabManager>
         EventManager.Instance.onGrantCoins += GrantCoins;
     }
 
+    #region Login(Register)
     void Register(string email, string password)
     {
         var request = new RegisterPlayFabUserRequest
@@ -89,7 +90,9 @@ public class PlayFabManager : Singleton<PlayFabManager>
         OnError(error);
         EventManager.Instance.onLoginInfoChange?.Invoke(error.ErrorMessage);
     }
+    #endregion
 
+    #region Leaderboard
     public void SendLeaderboard(int score)
     {
         var request = new UpdatePlayerStatisticsRequest
@@ -129,7 +132,9 @@ public class PlayFabManager : Singleton<PlayFabManager>
             EventManager.Instance.onLeaderboardGet?.Invoke(item.Position, item.DisplayName, item.StatValue.ToString());
         }
     }
+    #endregion
 
+    #region Currencies
     public void GetVirtualCurrency()
     {
         PlayFabClientAPI.GetUserInventory(new GetUserInventoryRequest(), OnGetUserInventorySuccess, OnError);
@@ -157,8 +162,9 @@ public class PlayFabManager : Singleton<PlayFabManager>
     {
         Debug.Log("Coins granted!");
     }
+    #endregion
 
-    // Progressive Rewards
+    #region Progressive rewards
     public void CheckIn()
     {
         Debug.Log("Checking-in with Server...");
@@ -207,6 +213,7 @@ public class PlayFabManager : Singleton<PlayFabManager>
             Debug.Log("CheckIn Successful! No items granted.");
         }
     }
+    #endregion
 
     public void OnError(PlayFabError error)
     {

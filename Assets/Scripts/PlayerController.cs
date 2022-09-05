@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] ParticleSystem smokeParticle;
+    Rigidbody rigidBody;
+    Animator animator;
+
+    [Header("Player stats")]
     [SerializeField] float turnSpeed;
     [SerializeField] float jumpForce;
     [SerializeField] float horizontalInput;
@@ -18,10 +23,6 @@ public class PlayerController : MonoBehaviour
 
     bool canShoot = true;
     float shootWaiter = 0.5f;
-
-    [SerializeField] ParticleSystem smokeParticle;
-    Rigidbody rigidBody;
-    Animator animator;
 
     private const string HORIZONTAL = "Horizontal";
     private const string JUMP_ANIM_TRIG = "Jump_trig";
