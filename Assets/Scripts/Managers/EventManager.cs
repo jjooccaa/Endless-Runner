@@ -21,6 +21,7 @@ public class EventManager : Singleton<EventManager>
     public UnityAction<Vector3> onSpawnShootingArrow;
     public UnityAction<GameObject> onShoot;
     public UnityAction<GameObject> onArrowHitEnemy;
+    public UnityAction onEnemyKilled;
     public UnityAction onEnemySpawn;
     public UnityAction onArrowPickUp;
     public UnityAction onArrowShoot;

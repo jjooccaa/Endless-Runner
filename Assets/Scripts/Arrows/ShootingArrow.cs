@@ -10,7 +10,7 @@ public class ShootingArrow : PickUps
         {
             Deactivate();
             EventManager.Instance.onArrowHitEnemy?.Invoke(collision.gameObject);
-            GameManager.Instance.IncreaseNumberOfEnemiesKilled(); // Testing solution
+            EventManager.Instance.onEnemyKilled?.Invoke();
         }
         else
         {

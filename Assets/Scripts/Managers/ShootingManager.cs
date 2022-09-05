@@ -17,6 +17,5 @@ public class ShootingManager : Singleton<ShootingManager>
         {
             arrow.GetComponent<Rigidbody>().AddForce(Vector3.forward * launchVelocity, ForceMode.Impulse);
         }
-        
     }
 }

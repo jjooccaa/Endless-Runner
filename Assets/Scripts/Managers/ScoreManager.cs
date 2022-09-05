@@ -8,13 +8,13 @@ public class ScoreManager : Singleton<ScoreManager>
 {
     [SerializeField] TextMeshProUGUI scoreText;
 
-    public const string HIGH_SCORE = "highScore";
-
     int score = 0;
     public int Score
     { get { return score; }}
 
     float highScore;
+
+    public const string HIGH_SCORE = "highScore";
 
     private void Start()
     {

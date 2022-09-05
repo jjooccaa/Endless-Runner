@@ -55,7 +55,6 @@ public class ObjectPooler : Singleton<ObjectPooler>
     [SerializeField] GameObject[] pickUpArrowPrefabs;
     [SerializeField] List<GameObject> pooledPickUpArrows = new List<GameObject>();
 
-
     protected override void Awake()
     {
         base.Awake();

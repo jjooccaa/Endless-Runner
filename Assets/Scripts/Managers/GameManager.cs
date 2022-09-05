@@ -51,6 +51,7 @@ public class GameManager : Singleton<GameManager>
         EventManager.Instance.onArrowPickUp += DisplayNumberOfArrows;
         EventManager.Instance.onArrowShoot += DecreaseNumberOfArrows;
         EventManager.Instance.onArrowShoot += DisplayNumberOfArrows;
+        EventManager.Instance.onEnemyKilled += IncreaseNumberOfEnemiesKilled;
         EventManager.Instance.onCoinPickUp += IncreaseNumberOfCoins;
         EventManager.Instance.onCoinPickUp += DisplayNumberOfCoins;
         EventManager.Instance.onTutorialTrigger += PauseMovement;

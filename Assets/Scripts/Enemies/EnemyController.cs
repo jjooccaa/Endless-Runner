@@ -5,13 +5,12 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     public Enemy enemy;
+    Animator animator;
 
     bool movementDisabled = false;
     float magnitude = 4.0f; // Size of sine movement
     Vector3 currentPosition;
     Vector3 axis;
-
-    Animator animator;
 
     const string ATTACK_TRIG = "Attack_trig";
     const string IDLE_TRIG = "Idle_trig";
@@ -26,9 +25,10 @@ public class EnemyController : MonoBehaviour
 
     void Start()
     {
+        animator = gameObject.GetComponent<Animator>();
+
         transform.localScale *= enemy.scale;
         SetPosition();
-        animator = gameObject.GetComponent<Animator>();
 
         Physics.IgnoreLayerCollision(8, 7); // Ignore collision with obstacles
         Physics.IgnoreLayerCollision(8, 9); // Ignore collision with pick ups

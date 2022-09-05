@@ -30,17 +30,17 @@ public class BackgroundManager : MonoBehaviour
         StartCoroutine(SetBackgroundInternal(backgroundIndex));
     }
 
+    void SaveBackground()
+    {
+        PlayerPrefs.SetInt(BACKGROUND, backgroundIndex);
+    }
+
     public void SetBackground(int index)
     {
         if (index <= backgrounds.Count - 1)
         {
             StartCoroutine(SetBackgroundInternal(index));
         }
-    }
-
-    void SaveBackground()
-    {
-        PlayerPrefs.SetInt(BACKGROUND, backgroundIndex);
     }
 
     IEnumerator SetBackgroundInternal(int backgroundIndex)
