@@ -205,7 +205,7 @@ public class GameManager : Singleton<GameManager>
         }
         if (SceneManager.GetSceneByName(SceneName.ENDLESS_RUNNER_GAME).isLoaded)
         {
-            DailyTasks.Instance.CheckTaskProgress(numberOfEnemiesKilled);
+            PlayFabManager.Instance.CheckTaskProgress(numberOfEnemiesKilled);
             EventManager.Instance.onSendLeaderboard?.Invoke(ScoreManager.Instance.Score); 
             EventManager.Instance.onGrantCoins?.Invoke(numberOfCoins); 
         }

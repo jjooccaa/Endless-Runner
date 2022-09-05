@@ -9806,8 +9806,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 181121145}
-        m_TargetAssemblyTypeName: DailyTasks, Assembly-CSharp
+      - m_Target: {fileID: 181121142}
+        m_TargetAssemblyTypeName: PlayFabManager, Assembly-CSharp
         m_MethodName: RefreshTaskInfo
         m_Mode: 1
         m_Arguments:

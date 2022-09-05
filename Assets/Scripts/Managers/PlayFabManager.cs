@@ -11,6 +11,10 @@ public class PlayFabManager : Singleton<PlayFabManager>
     public const string COINS_CODE = "CO";
     public const string GEMS_CODE = "GM";
     const string CHECKIN_FUNCTION = "CheckIn";
+    const string GET_DAILY_TASK_FUNCTION = "GetDailyTask";
+    const string CHECK_TASK_FUNCTION = "CheckTask";
+
+    static string taskInfo;
 
     private void OnEnable()
     {
@@ -20,6 +24,7 @@ public class PlayFabManager : Singleton<PlayFabManager>
         EventManager.Instance.onResetPassword += ResetPassword;
         EventManager.Instance.onSendLeaderboard += SendLeaderboard;
         EventManager.Instance.onGrantCoins += GrantCoins;
+        EventManager.Instance.onLoginSuccess += GetDailyTask;
     }
 
     #region Login(Register)
@@ -162,6 +167,83 @@ public class PlayFabManager : Singleton<PlayFabManager>
     {
         Debug.Log("Coins granted!");
     }
+    #endregion
+
+    #region Daily task
+    public void GetDailyTask()
+    {
+        var request = new ExecuteCloudScriptRequest
+        {
+            FunctionName = GET_DAILY_TASK_FUNCTION
+        };
+
+        PlayFabClientAPI.ExecuteCloudScript(request, OnGetDailyTaskCallback, OnError);
+    }
+
+    void OnGetDailyTaskCallback(ExecuteCloudScriptResult result)
+    {
+        if (result.Logs.Count > 0)
+        {
+            foreach (var statement in result.Logs)
+            {
+                Debug.Log(statement.Message);
+            }
+        }
+
+        // output any errors that happend within cloud script
+        if (result.Error != null)
+        {
+            Debug.LogError(string.Format("{0} -- {1}", result.Error, result.Error.Message));
+            return;
+        }
+
+        if (result != null)
+        {
+            taskInfo = result.FunctionResult.ToString();
+            RefreshTaskInfo();
+        }
+    }
+
+    public void RefreshTaskInfo()
+    {
+        EventManager.Instance.onGetDailyTaskChange?.Invoke(taskInfo);
+    }
+
+    public void CheckTaskProgress(int enemiesKilled)
+    {
+        var request = new ExecuteCloudScriptRequest
+        {
+            FunctionName = CHECK_TASK_FUNCTION,
+            FunctionParameter = new
+            {
+                enemies = enemiesKilled
+            }
+        };
+
+        PlayFabClientAPI.ExecuteCloudScript(request, OnCheckTaskCallback, OnError);
+    }
+
+    void OnCheckTaskCallback(ExecuteCloudScriptResult result)
+    {
+        if (result.Logs.Count > 0)
+        {
+            foreach (var statement in result.Logs)
+            {
+                Debug.Log(statement.Message);
+            }
+        }
+        // output any errors that happend within cloud script
+        if (result.Error != null)
+        {
+                Debug.LogError(string.Format("{0} -- {1}", result.Error, result.Error.Message));
+                return;
+            }
+
+            if (result != null)
+            {
+                taskInfo = result.FunctionResult.ToString();
+            }
+    }        
     #endregion
 
     #region Progressive rewards
